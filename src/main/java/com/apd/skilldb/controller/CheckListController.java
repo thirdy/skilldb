@@ -8,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.apd.skilldb.entity.Check;
@@ -40,16 +41,14 @@ public class CheckListController implements Serializable {
 		checkService.save(check);
 		check = new Check();
 		checks = checkService.findAll();
-		FacesContext.getCurrentInstance().addMessage
-			(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Check saved!", null));
+		addMessage("Check saved!");
 		clear();
 	}
 	
 	public void remove(Check check) {
 		checkService.remove(check);
 		checks = checkService.findAll();
-		FacesContext.getCurrentInstance().addMessage
-			(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Check removed!", null));
+		addMessage("Check removed!");
 	}
 	
 	public void clear() {
@@ -59,5 +58,26 @@ public class CheckListController implements Serializable {
 	public String viewProfile(Check check) {
 		this.check = check;
 		return "viewprofile.xhtml?faces-redirect=true";
+	}
+
+	public String editProfile(Check check) {
+		this.check = check;
+		return "editprofile.xhtml?faces-redirect=true";
+	}
+
+	public String saveEdit() {
+		checkService.save(check);
+		addMessage("Changes Saved!");
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+		return "viewprofile.xhtml?faces-redirect=true";
+	}
+
+	public String cancelEdit() {
+		return "viewprofile.xhtml?faces-redirect=true";
+	}
+	
+	private void addMessage(String message) {
+		FacesContext.getCurrentInstance().addMessage
+			(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
 	}
 }
