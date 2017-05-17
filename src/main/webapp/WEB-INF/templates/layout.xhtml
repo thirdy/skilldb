@@ -11,7 +11,7 @@
 <h:body>
 	<div id="page">
 		<p:layout fullPage="true">
-
+			<p:growl id="messages" />
 			<p:layoutUnit position="north" size="150">
 				<div id="header-container">
 					<h3>APD Skills DB</h3>
@@ -19,8 +19,8 @@
 				<div id="menu-container">
 					<h:form>
 						<p:menubar>
-							<p:menuitem value="Home" url="http://www.google.com" />
-							<p:menuitem value="Add Profile" url="http://www.hotmail.com" />
+							<p:menuitem value="Home" url="/index.xhtml" />
+							<p:menuitem value="Add Profile" url="/addprofile.xhtml" />
 							<p:menuitem value="Edit Profile" url="http://mail.yahoo.com" />
 							<p:menuitem value="Import Profile" url="http://www.youtube.com" />
 							<p:menuitem value="Export Profile" url="http://www.break.com" />
@@ -40,25 +40,16 @@
 					<ui:insert name="content">Put default content here, if any.</ui:insert>
 				</div>
 			</p:layoutUnit>
-			
-			<p:dialog widgetVar="checkDialog" closeOnEscape="true" modal="true"
-				header="check">
-				<h:form id="checkForm">
-					<p:messages />
-					<p:focus />
-					<p:panelGrid columns="2">
-						name:
-						<p:inputText value="#{checkListController.check.name}" />
-						
-						url:
-						<p:inputText value="#{checkListController.check.url}" />
-					</p:panelGrid>
-					<p:commandButton value="save"
-						action="#{checkListController.save()}"
-						update="checkForm, :checkTable"
-						oncomplete="handleDialogSubmit(args, 'checkDialog')" />
-				</h:form>
-			</p:dialog>
+
+			<h:form>
+				<p:confirmDialog global="true" closeOnEscape="true">
+					<p:commandButton value="Yes" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="No" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			</h:form>
+
 		</p:layout>
 	</div>
 </h:body>

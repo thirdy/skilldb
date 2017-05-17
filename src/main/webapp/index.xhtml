@@ -5,7 +5,6 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
-		<p:growl id="messages" />
 		<p:dataTable value="#{checkListController.checks}" var="check"
 			id="checkTable">
 			<p:column headerText="name">
@@ -16,32 +15,24 @@
 			</p:column>
 			<p:column headerText="operations">
 				<h:form>
-					<p:commandButton value="edit"
-						action="#{checkListController.setCheck(check)}"
-						update=":checkForm" resetValues="true"
-						oncomplete="PF('checkDialog').show()" />
+					<p:commandButton value="open"
+						action="#{checkListController.viewProfile(check)}" />
 					<p:commandButton value="remove"
 						action="#{checkListController.remove(check)}"
-						update=":checkTable, :messages" />
+						update=":checkTable, :messages">
+						<p:confirm header="Confirmation" message="Are you sure?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
 				</h:form>
 			</p:column>
 		</p:dataTable>
 
 		<br />
-		<h:form>
-			<p:commandButton value="add check"
-				action="#{checkListController.clear()}" update=":checkForm"
-				oncomplete="PF('checkDialog').show()" resetValues="true" />
-		</h:form>
-
-		<h:form>
-			<p:confirmDialog global="true" closeOnEscape="true">
-				<p:commandButton value="Yes" type="button"
-					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-				<p:commandButton value="No" type="button"
-					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-			</p:confirmDialog>
-		</h:form>
+		<!-- 		<h:form> -->
+		<!-- 			<p:commandButton value="add check" -->
+		<!-- 				action="#{checkListController.clear()}" update=":checkForm" -->
+		<!-- 				oncomplete="PF('checkDialog').show()" resetValues="true" /> -->
+		<!-- 		</h:form> -->
 
 
 		<script type="text/javascript">

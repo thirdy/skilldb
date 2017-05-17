@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.apd.skilldb.entity.Check;
@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class CheckListController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -42,6 +42,7 @@ public class CheckListController implements Serializable {
 		checks = checkService.findAll();
 		FacesContext.getCurrentInstance().addMessage
 			(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Check saved!", null));
+		clear();
 	}
 	
 	public void remove(Check check) {
@@ -55,4 +56,8 @@ public class CheckListController implements Serializable {
 		check = new Check();
 	}
 
+	public String viewProfile(Check check) {
+		this.check = check;
+		return "viewprofile.xhtml?faces-redirect=true";
+	}
 }

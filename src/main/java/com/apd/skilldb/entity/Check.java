@@ -23,7 +23,7 @@ public class Check {
 	private String name;
 
 	@Size(min = 1, message = "URL cannot be empty!")
-	@URL(message="Invalid url!")
+//	@URL(message="Invalid url!")
 	private String url;
 
 }
