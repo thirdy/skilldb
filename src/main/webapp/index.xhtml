@@ -1,17 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<h:html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<ui:composition template="WEB-INF/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
-<h:head></h:head>
-<h:body>
-	<ui:composition template="templates/layout.xhtml">
-		<ui:define name="content">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+		<p:growl id="messages" />
+		<p:dataTable value="#{checkListController.checks}" var="check"
+			id="checkTable">
+			<p:column headerText="name">
+					#{check.name}
+				</p:column>
+			<p:column headerText="url">
+				<a href="#{check.url}" target="_blank"> #{check.url} </a>
+			</p:column>
+			<p:column headerText="operations">
+				<h:form>
+					<p:commandButton value="edit"
+						action="#{checkListController.setCheck(check)}"
+						update=":checkForm" resetValues="true"
+						oncomplete="PF('checkDialog').show()" />
+					<p:commandButton value="remove"
+						action="#{checkListController.remove(check)}"
+						update=":checkTable, :messages" />
+				</h:form>
+			</p:column>
+		</p:dataTable>
 
-			<p>What is your name?</p>
+		<br />
+		<h:form>
+			<p:commandButton value="add check"
+				action="#{checkListController.clear()}" update=":checkForm"
+				oncomplete="PF('checkDialog').show()" resetValues="true" />
+		</h:form>
 
-		</ui:define>
-	</ui:composition>
-</h:body>
-</h:html>
+		<h:form>
+			<p:confirmDialog global="true" closeOnEscape="true">
+				<p:commandButton value="Yes" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</h:form>
+
+
+		<script type="text/javascript">
+			    function handleDialogSubmit(args, dialogName) {
+			        if (!args.validationFailed) {
+			            PF(dialogName).hide();
+			        }
+			    }
+		</script>
+	</ui:define>
+</ui:composition>
+
+
