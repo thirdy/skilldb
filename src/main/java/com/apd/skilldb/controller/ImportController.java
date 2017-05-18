@@ -39,5 +39,11 @@ public class ImportController implements Serializable {
 	public void handleFileUpload(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
 		logger.info("File: " + file.getFileName());
+		addMessage("Successfully mported 100 records.");
+	}
+	
+	private void addMessage(String message) {
+		FacesContext.getCurrentInstance().addMessage
+			(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
 	}
 }

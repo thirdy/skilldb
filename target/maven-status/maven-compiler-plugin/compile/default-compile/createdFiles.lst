@@ -1,8 +1,0 @@
-com\apd\skilldb\controller\CheckListController.class
-com\apd\skilldb\MyWebAppInitializer.class
-com\apd\skilldb\repository\CheckRepository.class
-com\apd\skilldb\SpringConfiguration.class
-com\apd\skilldb\entity\Check.class
-com\apd\skilldb\service\HelloSpringService.class
-com\apd\skilldb\service\InitDbService.class
-com\apd\skilldb\service\CheckService.class

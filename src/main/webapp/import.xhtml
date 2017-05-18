@@ -5,33 +5,28 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
-	
 
-	
-	
-		<h4>Import Profile(s)</h4>
-		<h:form id="checkForm">
-<!-- 			<p:messages /> -->
-			<p:focus />
-			<h:form enctype="multipart/form-data">
-<!-- 				<p:fileUpload value="#{importController.file}" mode="simple"/> -->
-				<p:fileUpload fileUploadListener="#{importController.handleFileUpload}" />
-				<p:commandButton value="Submit"/>
+		<div style="margin: 10px; margin-right: 50%">
+			<h4>Import Profile(s)</h4>
+			<h:form id="uploadform" enctype="multipart/form-data">
+				<p:messages />
+				<p:focus />
+				<p:fileUpload
+					fileUploadListener="#{importController.handleFileUpload}"
+					multiple="true" 
+					allowTypes="/(\.|\/)(csv)$/"
+					update="uploadform"/>
 			</h:form>
-<!-- 			<p:panelGrid columns="2"> -->
-<!-- 						name: -->
-<!-- 						<p:inputText value="#{checkListController.check.name}" /> -->
-						
-<!-- 						url: -->
-<!-- 						<p:inputText value="#{checkListController.check.url}" /> -->
-<!-- 			</p:panelGrid> -->
-<!-- 			<p:commandButton value="Submit"  -->
-<!-- 				action="#{checkListController.saveEdit()}" -->
-<!-- 				update="checkForm, :messages" /> -->
-<!-- 			<p:commandButton value="Cancel"  -->
-<!-- 				action="#{checkListController.cancelEdit()}" -->
-<!-- 				update="checkForm, :messages" /> -->
-		</h:form>
+			<p>
+				Notes:
+				<br/>
+					<ol>
+						<li>You can choose multiple files.</li>
+						<li>Only *.csv files are allowed.</li>
+					</ol>
+			</p>
+		</div>
+
 	</ui:define>
 </ui:composition>
 
