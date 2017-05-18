@@ -1,0 +1,38 @@
+<ui:composition template="WEB-INF/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+	
+
+	
+	
+		<h4>Import Profile(s)</h4>
+		<h:form id="checkForm">
+<!-- 			<p:messages /> -->
+			<p:focus />
+			<h:form enctype="multipart/form-data">
+<!-- 				<p:fileUpload value="#{importController.file}" mode="simple"/> -->
+				<p:fileUpload fileUploadListener="#{importController.handleFileUpload}" />
+				<p:commandButton value="Submit"/>
+			</h:form>
+<!-- 			<p:panelGrid columns="2"> -->
+<!-- 						name: -->
+<!-- 						<p:inputText value="#{checkListController.check.name}" /> -->
+						
+<!-- 						url: -->
+<!-- 						<p:inputText value="#{checkListController.check.url}" /> -->
+<!-- 			</p:panelGrid> -->
+<!-- 			<p:commandButton value="Submit"  -->
+<!-- 				action="#{checkListController.saveEdit()}" -->
+<!-- 				update="checkForm, :messages" /> -->
+<!-- 			<p:commandButton value="Cancel"  -->
+<!-- 				action="#{checkListController.cancelEdit()}" -->
+<!-- 				update="checkForm, :messages" /> -->
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+
