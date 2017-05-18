@@ -14,7 +14,7 @@
 				<p:fileUpload
 					fileUploadListener="#{importController.handleFileUpload}"
 					multiple="true" 
-					allowTypes="/(\.|\/)(csv)$/"
+					allowTypes="/(\.|\/)(xlsx)$/"
 					update="uploadform"/>
 			</h:form>
 			<p>
@@ -22,7 +22,7 @@
 				<br/>
 					<ol>
 						<li>You can choose multiple files.</li>
-						<li>Only *.csv files are allowed.</li>
+						<li>Only *.xlsx files are allowed.</li>
 					</ol>
 			</p>
 		</div>
