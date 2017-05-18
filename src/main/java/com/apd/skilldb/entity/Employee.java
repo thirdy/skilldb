@@ -7,17 +7,25 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.transaction.Transactional;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Employee.findSkills", query = "select es from EmployeeSkill es"
+    		 + " where es.employee.employeeId = ?1 ")})
 @Getter
 @Setter
 public class Employee {
+
+	
 	@Id
 	private int employeeId;
 	
@@ -50,6 +58,16 @@ public class Employee {
 	@Column
 	private String officeLocation;
 	
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-	private List<EmployeeSkill> employeeSkills;
+	
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)	
+	private List<EmployeeSkill> skills;
+	
+	@Transactional
+	public List<EmployeeSkill> getSkills(){
+		return skills;
+	}
+	
+	public void setSkills(List<EmployeeSkill> skills){
+		this.skills = skills;
+	}
 }

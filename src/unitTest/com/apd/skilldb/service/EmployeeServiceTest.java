@@ -1,5 +1,12 @@
 package com.apd.skilldb.service;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.apd.skilldb.MyWebAppInitializer;
 import com.apd.skilldb.SpringConfiguration;
 import com.apd.skilldb.entity.Employee;
-import com.apd.skilldb.service.EmployeeService;
+import com.apd.skilldb.entity.EmployeeSkill;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,21 +29,44 @@ public class EmployeeServiceTest {
 		 Employee emp = new Employee();
 		 emp.setFirstName("firstName");
 		 emp.setEmployeeId(123);
-		 //emp.setEmployeeSkills(employeeSkills);
+		 emp.setSkills(createEmployeeSkills(emp));
 		 emp.setLastName("lastName");
 		 emp.setMiddleName("MiddleName");
 		 emp.setOfficeLocation("officeLocation");
 		 emp.setRole("role");
-		 emp.setYearsOfWorkExperience("20100203");
+		 emp.setYearsOfWorkExperience("7");
+		 
+		 Calendar c1 = GregorianCalendar.getInstance();
+		 c1.set(2000, 0, 30);  //January 30th 2000
+		 emp.setDateHired(c1.getTime());
 		 
 		 return emp;
 	 }
+	 
+	 private List<EmployeeSkill> createEmployeeSkills(Employee emp){
+		 List<EmployeeSkill> empSkills = new ArrayList<EmployeeSkill>();
+		 EmployeeSkill skill1 = new EmployeeSkill();
+		 skill1.setEmployee(emp);
+		 skill1.setLevel("advance");
+		 skill1.setCertified(false);
+		 skill1.setTypeOfCertification(null);
+		 skill1.setComment("comment");
+		 Calendar c1 = GregorianCalendar.getInstance();
+		 c1.set(2011, 0, 30);  //January 30th 2011
+		 skill1.setDateOfCertification(c1.getTime());
+		 empSkills.add(skill1);	 
+		 
+		 return empSkills;
+	 }	 
 	 
 	  @Test
 	  public void addEmployee(){
 		  Employee emp = createEmployee();
 		  
+		  employeeService.delete(emp);
 		  employeeService.add(emp);
-		  System.out.println("Add");
+		  Employee empResult  = employeeService.find(123);
+		  assertEquals(emp.getLastName(), empResult.getLastName());
+		  assertEquals(emp.getSkills().size(), employeeService.findSkills(emp.getEmployeeId()).size());
 	  }
 }
