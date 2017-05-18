@@ -9,17 +9,17 @@ import org.springframework.stereotype.Service;
 
 import com.apd.skilldb.entity.Employee;
 import com.apd.skilldb.entity.EmployeeSkill;
-import com.apd.skilldb.repository.EmployeeDao;
+import com.apd.skilldb.repository.EmployeeRepository;
 
 @Service
 public class EmployeeService {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	EmployeeDao employeeDao;
+	EmployeeRepository employeeRepo;
 	
 	public void add(Employee employee){
-		employeeDao.save(employee);
+		employeeRepo.save(employee);
 	}	
 	
 	public Employee find(int employeeId){
@@ -27,7 +27,7 @@ public class EmployeeService {
 			logger.debug(String.format("Find Employee Id %s", employeeId));
 		}
 		
-		return employeeDao.findOne(employeeId);
+		return employeeRepo.findOne(employeeId);
 	}	
 	
 	public List<EmployeeSkill> findSkills(int employeeId){
@@ -35,7 +35,7 @@ public class EmployeeService {
 			logger.debug(String.format("Find Skills Employee Id %s", employeeId));
 		}
 		
-		return employeeDao.findSkills(employeeId);
+		return employeeRepo.findSkills(employeeId);
 	}	
 	
 	public void delete(Employee employee){
@@ -43,6 +43,6 @@ public class EmployeeService {
 			logger.debug(String.format("Delete Employee Id %s", employee.getEmployeeId()));
 		}
 
-		employeeDao.delete(employee);
+		employeeRepo.delete(employee);
 	}	
 }
