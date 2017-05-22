@@ -1,25 +1,25 @@
 package com.apd.skilldb.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import com.apd.skilldb.entity.Check;
-import com.apd.skilldb.service.CheckService;
-
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.apd.skilldb.service.CheckService;
+import com.apd.skilldb.service.ImportService;
+import com.apd.skilldb.service.ImportService.ImportServiceException;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Getter
 @Setter
@@ -31,15 +31,21 @@ public class ImportController implements Serializable {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@ManagedProperty("#{checkService}")
-	private CheckService checkService;
+	@ManagedProperty("#{importService}")
+	private ImportService importService;
 
 	private UploadedFile file;
 
 	public void handleFileUpload(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
-		logger.info("File: " + file.getFileName());
-		addMessage("Successfully mported 100 records.");
+		try {
+			importService.parseAndSave(file.getInputstream(), file.getFileName());
+		} catch (ImportServiceException e) {
+			addMessage(e.getMessage());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		addMessage("Successfully imported: " + file.getFileName());
 	}
 	
 	private void addMessage(String message) {

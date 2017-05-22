@@ -51,6 +51,7 @@ public class SpringConfiguration {
 	@Bean
 	public DataSource dataSource() {
 		HikariDataSource dataSource = new HikariDataSource();
+//		dataSource.setJdbcUrl("jdbc:hsqldb:file:skillsdb");
 		dataSource.setJdbcUrl("jdbc:hsqldb:mem:test");
 		dataSource.setUsername("sa");
 		dataSource.setPassword("");
