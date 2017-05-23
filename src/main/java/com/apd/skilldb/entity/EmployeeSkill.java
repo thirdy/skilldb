@@ -21,7 +21,7 @@ public class EmployeeSkill {
 	@Id
 	@GeneratedValue
 	private int id;
-	
+
 	private String yearsOfExperience;
 	private String level;
 	private boolean certified;
@@ -36,6 +36,15 @@ public class EmployeeSkill {
 	private Employee employee;
 	
 	@ManyToOne
-	@JoinColumn(name = "skillCode")
+	@JoinColumn(name = "skillId")
 	private Skill skill;
+	
+	public EmployeeSkill() {
+	}
+	
+	public EmployeeSkill(String yearsOfExperience, String level, boolean certified) {
+		this.yearsOfExperience = yearsOfExperience;
+		this.level = level;
+		this.certified = certified;
+	}
 }

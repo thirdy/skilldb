@@ -1,5 +1,6 @@
 package com.apd.skilldb.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -69,5 +70,10 @@ public class Employee {
 	
 	public void setSkills(List<EmployeeSkill> skills){
 		this.skills = skills;
+	}
+
+	public void addSkill(EmployeeSkill employeeSkill) {
+		if (getSkills() == null) skills = new ArrayList<>();
+		getSkills().add(employeeSkill);
 	}
 }
