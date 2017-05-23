@@ -18,8 +18,9 @@ public class EmployeeService {
 	@Autowired
 	EmployeeRepository employeeRepo;
 	
-	public void add(Employee employee){
-		employeeRepo.save(employee);
+	public int add(Employee employee){
+		Employee emp =  employeeRepo.save(employee);
+		return emp.getEmployeeId();
 	}	
 	
 	public Employee find(int employeeId){

@@ -28,14 +28,13 @@ public class EmployeeServiceTest {
 	 private Employee createEmployee(){
 		 Employee emp = new Employee();
 		 emp.setFirstName("firstName");
-		 emp.setEmployeeId(123);
 		 emp.setSkills(createEmployeeSkills(emp));
 		 emp.setLastName("lastName");
-		 emp.setMiddleName("MiddleName");
-		 emp.setOfficeLocation("officeLocation");
+		 emp.setManager("Manager");
+		 emp.setCountry("country");
 		 emp.setRole("role");
+		 emp.setEmail("role");
 		 emp.setYearsOfWorkExperience("7");
-		 
 		 Calendar c1 = GregorianCalendar.getInstance();
 		 c1.set(2000, 0, 30);  //January 30th 2000
 		 emp.setDateHired(c1.getTime());
@@ -64,8 +63,8 @@ public class EmployeeServiceTest {
 		  Employee emp = createEmployee();
 		  
 		  employeeService.delete(emp);
-		  employeeService.add(emp);
-		  Employee empResult  = employeeService.find(123);
+		  int employeeId = employeeService.add(emp);
+		  Employee empResult  = employeeService.find(employeeId);
 		  assertEquals(emp.getLastName(), empResult.getLastName());
 		  assertEquals(emp.getSkills().size(), employeeService.findSkills(emp.getEmployeeId()).size());
 	  }

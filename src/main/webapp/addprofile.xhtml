@@ -5,19 +5,95 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
-		<h:form id="checkForm">
-<!-- 			<p:messages /> -->
+		<h:form id="profileForm">
+ 			
 			<p:focus />
-			<p:panelGrid columns="2">
-						name:
-						<p:inputText value="#{checkListController.check.name}" />
-						
-						url:
-						<p:inputText value="#{checkListController.check.url}" />
-			</p:panelGrid>
+			<h3 style="margin-top: 0">Add profile</h3>
+			<div class="ui-grid">
+			    <div class="ui-grid-col-2">First Name</div>
+			    <div class="ui-grid-col-2">Last Name</div>
+			    <div class="ui-grid-col-2">Middle Name</div>
+			</div>
+		    <div class="ui-grid">
+			    <div class="ui-grid-col-2"><p:inputText value="#{profileController.firstName}" /></div>
+			    <div class="ui-grid-col-2"><p:inputText value="#{profileController.lastName}" /></div>
+			    <div class="ui-grid-col-2"><p:inputText value="#{profileController.middleName}" /></div>
+			</div>
+			<div class="ui-grid">
+			    <div class="ui-grid-col-2">Role</div>
+			    <div class="ui-grid-col-1">Date Employed</div>
+			    <div class="ui-grid-col-1">APD Office</div>
+			    <div class="ui-grid-col-2">Years of working experience</div>
+			</div>
+		    <div class="ui-grid">
+			    <div class="ui-grid-col-2"><p:inputText value="#{profileController.role}" /></div>
+			    <div class="ui-grid-col-1"><p:calendar id="popup" value="#{profileController.dateHired}" pattern="dd-MM-yyyy" mask="true" size="10"  /></div>
+			    <div class="ui-grid-col-1">
+			    <p:selectOneMenu id="office" value="#{profileController.officeLocation}" style="width:125px">
+		            <f:selectItem itemLabel="APD Office" itemValue="" />
+		            <f:selectItem itemLabel="Australia" itemValue="Australia" />
+		            <f:selectItem itemLabel="Manila" itemValue="Manila" />
+		            <f:selectItem itemLabel="Malaysia" itemValue="Malaysia" />
+		            <f:selectItem itemLabel="New Zealand" itemValue="New Zealand" />
+		        </p:selectOneMenu>
+				</div>
+			    <div class="ui-grid-col-1"><p:inputText value="#{profileController.yearsOfWorkExperience}" size="2" /></div>
+			</div>
+			
+			<h3 style="margin-top: 0">Skills</h3>
+			<div class="ui-grid">
+			    <div class="ui-grid-col-2">Skills Category</div>
+			    <div class="ui-grid-col-2">Name</div>
+			    <div class="ui-grid-col-1">Years of Experience</div>
+			    <div class="ui-grid-col-1">Level</div>
+			    <div class="ui-grid-col-1">Certified</div>
+			    <div class="ui-grid-col-2">Type</div>
+			    <div class="ui-grid-col-1">Date of Certification</div>
+			    <div class="ui-grid-col-2">Comments</div>
+			</div>	
+			
+			<ui:repeat var="skill" value="#{profileController.skills}" varStatus="status">		
+			<div class="ui-grid">
+			    <div class="ui-grid-col-2"><p:inputText value="#{skill.skill.skillCategory}" /></div>
+			    <div class="ui-grid-col-2"><p:inputText value="#{skill.skill.skillName}" /></div>
+			    <div class="ui-grid-col-1">
+			    <p:selectOneMenu id="yearsOfExperience"  style="width:125px">
+		            <f:selectItem itemLabel="Years of Experience" itemValue="" />
+		            <f:selectItem itemLabel="less than a year" itemValue="less than a year" />
+		            <f:selectItem itemLabel="1 - 2 years" itemValue="1 - 2 years" />
+					<f:selectItem itemLabel="2 - 4 years" itemValue="2 - 4 years" />
+					<f:selectItem itemLabel="4 - 6 years" itemValue="4 - 6 years" />
+					<f:selectItem itemLabel="6+ years" itemValue="6+ years" />
+		            
+
+		        </p:selectOneMenu>
+			    </div>
+			    <div class="ui-grid-col-1">
+				<p:selectOneMenu id="level"  style="width:125px" value="#{skill.level}">
+		            <f:selectItem itemLabel="Level" itemValue="" />
+					<f:selectItem itemLabel="Expert" itemValue="Expert" />
+					<f:selectItem itemLabel="Senior" itemValue="Senior" />
+					<f:selectItem itemLabel="Mid Level" itemValue="Mid Level" />
+					<f:selectItem itemLabel="Junior" itemValue="Junior" />
+		        </p:selectOneMenu>
+				</div>
+			    <div class="ui-grid-col-1">
+			    <p:selectOneMenu id="certified" value="#{skill.certified}" style="width:125px">
+		            <f:selectItem itemLabel="Certified" itemValue="" />
+		            <f:selectItem itemLabel="Yes" itemValue="Yes" />
+		            <f:selectItem itemLabel="No" itemValue="No" />
+
+		        </p:selectOneMenu>
+			    </div>
+			    <div class="ui-grid-col-2"><p:inputText value="#{skill.typeOfCertification}" /></div>
+			    <div class="ui-grid-col-1"><p:calendar id="certificationDate" value="#{skill.dateOfCertification}" pattern="dd-MM-yyyy" mask="true" size="10"  /></div>
+			    <div class="ui-grid-col-2"><p:inputText value="#{skill.comment}"  /></div>
+			</div>
+          	</ui:repeat>
+          	
 			<p:commandButton value="save" 
-				action="#{checkListController.save()}"
-				update="checkForm, :messages" />
+				action="#{profileController.save()}"
+				update="profileForm, :messages" />
 		</h:form>
 	</ui:define>
 </ui:composition>
