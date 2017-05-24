@@ -38,8 +38,8 @@ public class AddProfileController {
 	@ManagedProperty("#{employeeService}")
 	private EmployeeService employeeService;
 	
-	@ManagedProperty("#{viewProfileController}")
-	private ViewProfileController viewProfileController;
+	@ManagedProperty("#{viewEditProfileController}")
+	private ViewEditProfileController viewEditProfileController;
 	
 	
 	@PostConstruct
@@ -69,7 +69,7 @@ public class AddProfileController {
 		employee.setSkills(empSkills);		
 		employeeService.add(employee);
 		
-		viewProfileController.setEmployeeId(employee.getEmployeeId());
+		viewEditProfileController.setEmployeeId(employee.getEmployeeId());
 		
 		return "viewprofile?faces-redirect=true";
 	}

@@ -7,7 +7,8 @@
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 	
 	<ui:define name="content">
-			<h3 style="margin-top: 0">Add profile</h3>
+	<h:form id="profileForm">
+			<h3 style="margin-top: 0">View profile</h3>
 			<div class="ui-grid">
 			    <div class="ui-grid-col-2">First Name</div>
 			    <div class="ui-grid-col-2">Last Name</div>
@@ -18,8 +19,8 @@
 			    <div class="ui-grid-col-2">
 			    <b>
 			    <c:choose>
-			    	<c:when test="#{viewProfileController.employee.firstName != ''}">
-				    <h:outputText value="#{viewProfileController.employee.firstName}" />  
+			    	<c:when test="#{viewEditProfileController.employee.firstName != ''}">
+				    <h:outputText value="#{viewEditProfileController.employee.firstName}" />  
 				    </c:when>
 				    <c:otherwise>-</c:otherwise>
 			    </c:choose>
@@ -29,8 +30,8 @@
 			    <div class="ui-grid-col-2">
 			    <b>
 			    <c:choose>
-			    	<c:when test="#{viewProfileController.employee.lastName != ''}">
-				    <h:outputText value="#{viewProfileController.employee.lastName}" />  
+			    	<c:when test="#{viewEditProfileController.employee.lastName != ''}">
+				    <h:outputText value="#{viewEditProfileController.employee.lastName}" />  
 				    </c:when>
 				    <c:otherwise>-</c:otherwise>
 			    </c:choose>
@@ -40,8 +41,8 @@
 			    <div class="ui-grid-col-2">
 			    <b>
 			    <c:choose>
-			    	<c:when test="#{viewProfileController.employee.email != ''}">
-				    <h:outputText value="#{viewProfileController.employee.email}" />  
+			    	<c:when test="#{viewEditProfileController.employee.email != ''}">
+				    <h:outputText value="#{viewEditProfileController.employee.email}" />  
 				    </c:when>
 				    <c:otherwise>-</c:otherwise>
 			    </c:choose>
@@ -50,8 +51,8 @@
 			    <div class="ui-grid-col-2">
 		        <b>
 			    <c:choose>
-			    	<c:when test="#{viewProfileController.employee.manager != ''}">
-				    <h:outputText value="#{viewProfileController.employee.manager}" />  
+			    	<c:when test="#{viewEditProfileController.employee.manager != ''}">
+				    <h:outputText value="#{viewEditProfileController.employee.manager}" />  
 				    </c:when>
 				    <c:otherwise>-</c:otherwise>
 			    </c:choose>
@@ -69,8 +70,8 @@
 		   		<div class="ui-grid-col-1">
 			    <b>
 			    <c:choose>
-			    	<c:when test="#{viewProfileController.employee.gender != ''}">
-				    <h:outputText value="#{viewProfileController.employee.gender}" />  
+			    	<c:when test="#{viewEditProfileController.employee.gender != ''}">
+				    <h:outputText value="#{viewEditProfileController.employee.gender}" />  
 				    </c:when>
 				    <c:otherwise>-</c:otherwise>
 			    </c:choose>
@@ -79,8 +80,8 @@
 			    <div class="ui-grid-col-2">
 			    <b>
 			    <c:choose>
-			    	<c:when test="#{viewProfileController.employee.role != ''}">
-				    <h:outputText value="#{viewProfileController.employee.role}" />  
+			    	<c:when test="#{viewEditProfileController.employee.role != ''}">
+				    <h:outputText value="#{viewEditProfileController.employee.role}" />  
 				    </c:when>
 				    <c:otherwise>-</c:otherwise>
 			    </c:choose>
@@ -89,8 +90,8 @@
 			    <div class="ui-grid-col-1">
 			    <b>
 			    <c:choose>
-			    	<c:when test="#{viewProfileController.employee.dateHired != ''}">
-				    <h:outputText value="#{viewProfileController.employee.dateHired}">
+			    	<c:when test="#{viewEditProfileController.employee.dateHired != ''}">
+				    <h:outputText value="#{viewEditProfileController.employee.dateHired}">
 				    <f:convertDateTime pattern="dd-MM-yyyy" /></h:outputText>				    
 				    </c:when>
 				    <c:otherwise>-</c:otherwise>
@@ -100,8 +101,8 @@
 			    <div class="ui-grid-col-1">
 			    <b>
 			    <c:choose>
-			    	<c:when test="#{viewProfileController.employee.country != ''}">
-				    <h:outputText value="#{viewProfileController.employee.country}" />  
+			    	<c:when test="#{viewEditProfileController.employee.country != ''}">
+				    <h:outputText value="#{viewEditProfileController.employee.country}" />  
 				    </c:when>
 				    <c:otherwise>-</c:otherwise>
 			    </c:choose>
@@ -110,8 +111,8 @@
 			    <div class="ui-grid-col-1">
 			    <b>
 			    <c:choose>
-			    	<c:when test="#{viewProfileController.employee.yearsOfWorkExperience != ''}">
-				    <h:outputText value="#{viewProfileController.employee.yearsOfWorkExperience}" />  
+			    	<c:when test="#{viewEditProfileController.employee.yearsOfWorkExperience != ''}">
+				    <h:outputText value="#{viewEditProfileController.employee.yearsOfWorkExperience}" />  
 				    </c:when>
 				    <c:otherwise>-</c:otherwise>
 			    </c:choose>
@@ -122,7 +123,7 @@
 			<br />
 			<h3 style="margin-top: 0">Skills</h3>
 			
-			<p:dataTable var="skill" value="#{viewProfileController.employee.skills}">
+			<p:dataTable var="skill" value="#{viewEditProfileController.employee.skills}">
 			    <p:column headerText="Skill Category" width="250">
 			        <h:outputText value="#{skill.skill.skillCategory}" />
 			    </p:column>
@@ -151,6 +152,10 @@
 			        <h:outputText value="#{skill.comment}" />
 			    </p:column>
 			</p:dataTable>
+			
+			<p:commandButton value="edit" 
+				action="#{viewEditProfileController.edit()}" />
+	</h:form>
 	</ui:define>
 </ui:composition>
 

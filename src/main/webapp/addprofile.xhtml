@@ -52,53 +52,53 @@
 			</div>
 			
 			<h3 style="margin-top: 0">Skills</h3>
-			<div class="ui-grid">
-			    <div class="ui-grid-col-2">Skills Category</div>
-			    <div class="ui-grid-col-3">Name</div>
-			    <div class="ui-grid-col-1">Years of Experience</div>
-			    <div class="ui-grid-col-1">Level</div>
-			    <div class="ui-grid-col-1">Certified</div>
-			    <div class="ui-grid-col-1">Type</div>
-			    <div class="ui-grid-col-1">Date of Certification</div>
-			    <div class="ui-grid-col-2">Comments</div>
-			</div>	
-			
-			<ui:repeat var="skill" value="#{addProfileController.skills}" varStatus="status">		
-			<div class="ui-grid">
-			    <div class="ui-grid-col-2"><h:outputText value="#{skill.skill.skillCategory}" /></div>
-			    <div class="ui-grid-col-3"><h:outputText value="#{skill.skill.skillName}" /></div>
-			    <div class="ui-grid-col-1">
-			    <p:selectOneMenu id="yearsOfExperience"  style="width:125px" value="#{skill.yearsOfExperience}" >
-		            <f:selectItem itemLabel="Years of Experience" itemValue=""  />
-		            <f:selectItem itemLabel="less than a year" itemValue="less than a year" />
-		            <f:selectItem itemLabel="1 - 2 years" itemValue="1 - 2 years" />
-					<f:selectItem itemLabel="2 - 4 years" itemValue="2 - 4 years" />
-					<f:selectItem itemLabel="4 - 6 years" itemValue="4 - 6 years" />
-					<f:selectItem itemLabel="6+ years" itemValue="6+ years" />
-		        </p:selectOneMenu>
-			    </div>
-			    <div class="ui-grid-col-1">
-				<p:selectOneMenu id="level"  style="width:125px" value="#{skill.level}">
-		            <f:selectItem itemLabel="Level" itemValue="" />
-					<f:selectItem itemLabel="Expert" itemValue="Expert" />
-					<f:selectItem itemLabel="Senior" itemValue="Senior" />
-					<f:selectItem itemLabel="Mid Level" itemValue="Mid Level" />
-					<f:selectItem itemLabel="Junior" itemValue="Junior" />
-		        </p:selectOneMenu>
-				</div>
-			    <div class="ui-grid-col-1">
-			    <p:selectOneMenu id="certified" value="#{skill.certified}" style="width:125px">
-		            <f:selectItem itemLabel="Certified" itemValue="" />
-		            <f:selectItem itemLabel="Yes" itemValue="Yes" />
-		            <f:selectItem itemLabel="No" itemValue="No" />
-
-		        </p:selectOneMenu>
-			    </div>
-			    <div class="ui-grid-col-1"><p:inputText value="#{skill.typeOfCertification}" size="14" /></div>
-			    <div class="ui-grid-col-1"><p:calendar id="certificationDate" value="#{skill.dateOfCertification}" pattern="dd-MM-yyyy" mask="true" size="10"  /></div>
-			    <div class="ui-grid-col-2"><p:inputText value="#{skill.comment}"  /></div>
-			</div>
-          	</ui:repeat>
+          	<p:dataTable var="skill" value="#{addProfileController.skills}">
+			    <p:column headerText="Skill Category" width="250">
+			        <h:outputText value="#{skill.skill.skillCategory}" />
+			    </p:column>
+			 
+			    <p:column headerText="Name" width="400">
+			        <h:outputText value="#{skill.skill.skillName}" />
+			    </p:column>
+			 
+			    <p:column headerText="Years of Experience" width="150">
+			        <p:selectOneMenu id="yearsOfExperience"  style="width:125px" value="#{skill.yearsOfExperience}" >
+			            <f:selectItem itemLabel="Years of Experience" itemValue=""  />
+			            <f:selectItem itemLabel="less than a year" itemValue="less than a year" />
+			            <f:selectItem itemLabel="1 - 2 years" itemValue="1 - 2 years" />
+						<f:selectItem itemLabel="2 - 4 years" itemValue="2 - 4 years" />
+						<f:selectItem itemLabel="4 - 6 years" itemValue="4 - 6 years" />
+						<f:selectItem itemLabel="6+ years" itemValue="6+ years" />
+			        </p:selectOneMenu>
+			    </p:column>
+			 
+			    <p:column headerText="Level" width="120">
+				    <p:selectOneMenu id="level"  style="width:125px" value="#{skill.level}">
+			            <f:selectItem itemLabel="Level" itemValue="" />
+						<f:selectItem itemLabel="Expert" itemValue="Expert" />
+						<f:selectItem itemLabel="Senior" itemValue="Senior" />
+						<f:selectItem itemLabel="Mid Level" itemValue="Mid Level" />
+						<f:selectItem itemLabel="Junior" itemValue="Junior" />
+			        </p:selectOneMenu>
+			    </p:column>
+			    <p:column headerText="Certified" width="120">
+				    <p:selectOneMenu id="certified" value="#{skill.certified}" style="width:125px">
+			            <f:selectItem itemLabel="Certified" itemValue="" />
+			            <f:selectItem itemLabel="Yes" itemValue="Yes" />
+			            <f:selectItem itemLabel="No" itemValue="No" />
+	
+			        </p:selectOneMenu>
+			    </p:column>
+			    <p:column headerText="Type">
+			        <p:inputText value="#{skill.typeOfCertification}" size="25" />
+			    </p:column>
+			    <p:column headerText="Date of Certification" width="118">
+			        <p:calendar id="certificationDate" value="#{skill.dateOfCertification}" pattern="dd-MM-yyyy" mask="true" size="10"  />
+			    </p:column>
+			    <p:column headerText="Comments">
+			        <p:inputText value="#{skill.comment}"  size="25"  />
+			    </p:column>
+			</p:dataTable>
           	
 			<p:commandButton value="save" 
 				action="#{addProfileController.save()}" 

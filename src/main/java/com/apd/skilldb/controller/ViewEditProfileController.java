@@ -7,13 +7,16 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 
 import lombok.Getter;
 import lombok.Setter;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
 
+import com.apd.skilldb.common.HibernateUtils;
 import com.apd.skilldb.entity.Employee;
 import com.apd.skilldb.entity.EmployeeSkill;
 import com.apd.skilldb.entity.Skill;
@@ -28,9 +31,10 @@ import com.apd.skilldb.service.SkillService;
 @Setter
 @ManagedBean
 @SessionScoped
-public class EditProfileController {
+public class ViewEditProfileController {
 
-	private Employee employee = new Employee();
+	private Employee employee;
+	private List<EmployeeSkill> allSkills;
 	private List<EmployeeSkill> skills;
 	
 	@ManagedProperty("#{skillService}")
@@ -40,24 +44,58 @@ public class EditProfileController {
 	private EmployeeService employeeService;
 	
 	@ManagedProperty("#{viewProfileController}")
-	private ViewProfileController viewProfileController;
+	private ViewEditProfileController viewProfileController;
 	
+	private int employeeId;	
 	
 	@PostConstruct
 	public void loadSkills(){
-		skills = new ArrayList<EmployeeSkill>();
+		allSkills = new ArrayList<EmployeeSkill>();
 		List<Skill> skillList = skillService.findAll();
 		
 		if(skillList != null){
-			for(Skill skill: skillList){
+			for(Skill skill : skillList){
 				EmployeeSkill empSkill = new EmployeeSkill();
 				empSkill.setSkill(skill);
-				empSkill.setEmployee(this.employee);
-				skills.add(empSkill);
+				allSkills.add(empSkill);
 			}
 		}
 	}
+	
+	private void initializeEditSkills(){
+		skills = new ArrayList<EmployeeSkill>();
+		EmployeeSkill editSkill = null;
+		for(EmployeeSkill empSkill : allSkills){
+			editSkill = new EmployeeSkill();
+			
+			Predicate guidPredicate = HibernateUtils.attributePredicateFactory(EmployeeSkill.class, "skill.id", empSkill.getSkill().getId());
+			@SuppressWarnings("unchecked")
+			List<EmployeeSkill> selectedList = (List<EmployeeSkill>) CollectionUtils.select(employee.getSkills(), guidPredicate);
+			
+			System.out.println(">>>>>>>>>>>>>>>>>>> " + selectedList.size());
+			if(selectedList.size() > 0){
+				BeanUtils.copyProperties(selectedList.get(0), editSkill);
+			}else{
+				BeanUtils.copyProperties(empSkill, editSkill);
+			}
+			
+			editSkill.setEmployee(employee);
+			skills.add(editSkill);
+		}
+	}
+	
+	public Employee getEmployee(){
+		employee = employeeService.find(employeeId);
+				
+		return employee;
+	}
+	
+	public String edit(){		
 		
+		initializeEditSkills();	
+		return "editprofile?faces-redirect=true";
+	}
+			
 	public String save(){		
 		List<EmployeeSkill> empSkills = new ArrayList<EmployeeSkill>();
 		

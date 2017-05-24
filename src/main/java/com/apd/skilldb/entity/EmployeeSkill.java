@@ -47,4 +47,15 @@ public class EmployeeSkill {
 		this.level = level;
 		this.certified = certified;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof EmployeeSkill && (id == 0 || ((EmployeeSkill)  obj).getId() == 0) 
+				&& (skill != null && ((EmployeeSkill)  obj).getSkill() != null)){
+			
+			return (skill.getId() == ((EmployeeSkill)  obj).getSkill().getId());
+		}		
+		
+		return super.equals(obj);
+	}
 }
