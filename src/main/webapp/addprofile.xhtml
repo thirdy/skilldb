@@ -19,7 +19,7 @@
 		    <div class="ui-grid">
 			    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.firstName}" size="30" /></div>
 			    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.lastName}" size="30" /></div>
-			    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.email}" size="30" /></div>
+			    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.email}" size="30" required="true" /></div>
 			    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.manager}" size="30" /></div>
 			</div>
 			<div class="ui-grid">
@@ -89,7 +89,7 @@
 	
 			        </p:selectOneMenu>
 			    </p:column>
-			    <p:column headerText="Type">
+			    <p:column headerText="Type of Certification">
 			        <p:inputText value="#{skill.typeOfCertification}" size="25" />
 			    </p:column>
 			    <p:column headerText="Date of Certification" width="118">

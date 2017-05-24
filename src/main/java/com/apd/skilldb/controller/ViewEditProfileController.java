@@ -43,9 +43,6 @@ public class ViewEditProfileController {
 	@ManagedProperty("#{employeeService}")
 	private EmployeeService employeeService;
 	
-	@ManagedProperty("#{viewProfileController}")
-	private ViewEditProfileController viewProfileController;
-	
 	private String employeeId;	
 	
 	@PostConstruct
@@ -65,7 +62,8 @@ public class ViewEditProfileController {
 	private void initializeEditSkills(){
 		skills = new ArrayList<EmployeeSkill>();
 		EmployeeSkill editSkill = null;
-		for(EmployeeSkill empSkill : allSkills){
+		for(int i = 0 ; i < allSkills.size(); i++){
+			EmployeeSkill empSkill = allSkills.get(i);
 			editSkill = new EmployeeSkill();
 			
 			Predicate guidPredicate = HibernateUtils.attributePredicateFactory(EmployeeSkill.class, "skill.id", empSkill.getSkill().getId());
@@ -73,8 +71,11 @@ public class ViewEditProfileController {
 			List<EmployeeSkill> selectedList = (List<EmployeeSkill>) CollectionUtils.select(employee.getSkills(), guidPredicate);
 			
 			System.out.println(">>>>>>>>>>>>>>>>>>> " + selectedList.size());
+			System.out.println(">>>>>>>>>>>>>>>>>>> ID  " + empSkill.getSkill().getId() + " : " + empSkill.getSkill().getSkillName());
 			if(selectedList.size() > 0){
+				System.out.println(">>>>>>>>>>>>>>>>>>> Level 1 " + selectedList.get(0).getSkill().getId());
 				BeanUtils.copyProperties(selectedList.get(0), editSkill);
+				System.out.println(">>>>>>>>>>>>>>>>>>> Level 2 " + editSkill.getYearsOfExperience());
 			}else{
 				BeanUtils.copyProperties(empSkill, editSkill);
 			}
@@ -100,15 +101,13 @@ public class ViewEditProfileController {
 		List<EmployeeSkill> empSkills = new ArrayList<EmployeeSkill>();
 		
 		for(EmployeeSkill empSkill : skills){
-			if(StringUtils.isNotBlank(empSkill.getYearsOfExperience())){
+			if(StringUtils.isNotBlank(empSkill.getYearsOfExperience()) || StringUtils.isNotBlank(empSkill.getLevel())){
 				empSkills.add(empSkill);
 			}
 		}
 		
 		employee.setSkills(empSkills);		
-		employeeService.add(employee);
-		
-		viewProfileController.setEmployeeId(employee.getEmployeeId());
+		employeeService.add(employee);		
 		
 		return "viewprofile?faces-redirect=true";
 	}

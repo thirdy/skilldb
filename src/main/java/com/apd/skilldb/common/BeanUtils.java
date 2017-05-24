@@ -88,15 +88,17 @@ public class BeanUtils {
 			while (goOn) {
 				try {
 					
-					// complex field
+					// object field
                     if(methodName.indexOf(".") > 0){
-                    	String tempMethodName = methodName;
-                    	methodName = methodName.substring(0, (methodName.indexOf(".") + 1));
+                    	String objectFieldMethodName = methodName;
+                    	methodName = methodName.substring(0, (methodName.indexOf(".")));
                     	
-                    	Method method = klass.getDeclaredMethod(methodName, paramTypes);    					
+                    	Method method = klass.getDeclaredMethod(methodName, paramTypes); 
     					methodResult = method.invoke(bean, args);
-    					
-    					methodName = BeanUtils.getterFromAttribute(tempMethodName.substring(0, methodName.length()));
+    					bean = methodResult;
+    					klass = bean.getClass();
+    					    					
+    					methodName = BeanUtils.getterFromAttribute(objectFieldMethodName.substring(methodName.length() + 1, objectFieldMethodName.length()));
                     	goOn = true;
                     	
                     }else{

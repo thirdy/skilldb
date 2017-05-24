@@ -61,12 +61,14 @@ public class AddProfileController {
 		List<EmployeeSkill> empSkills = new ArrayList<EmployeeSkill>();
 		
 		for(EmployeeSkill empSkill : skills){
-			if(StringUtils.isNotBlank(empSkill.getYearsOfExperience())){
+			if(StringUtils.isNotBlank(empSkill.getYearsOfExperience()) || StringUtils.isNotBlank(empSkill.getLevel())){
 				empSkills.add(empSkill);
 			}
 		}
 		
 		employee.setSkills(empSkills);		
+		employee.setEmployeeId(getEmployeeId(employee.getEmail()));
+		
 		employeeService.add(employee);
 		
 		viewEditProfileController.setEmployeeId(employee.getEmployeeId());
@@ -74,5 +76,11 @@ public class AddProfileController {
 		return "viewprofile?faces-redirect=true";
 	}
 	
-	
+	private String getEmployeeId(String email){
+		if(email.indexOf("@") != -1){
+			return email.substring(0, email.indexOf("@"));
+		}
+
+		return email;
+	}
 }
