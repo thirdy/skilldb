@@ -1,6 +1,7 @@
 package com.apd.skilldb.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -66,6 +67,6 @@ public class EmployeeServiceTest {
 		  int employeeId = employeeService.add(emp);
 		  Employee empResult  = employeeService.find(employeeId);
 		  assertEquals(emp.getLastName(), empResult.getLastName());
-		  assertEquals(emp.getSkills().size(), employeeService.findSkills(emp.getEmployeeId()).size());
-	  }
+		  assertEquals(emp.getSkills().size(), empResult.getSkills().size());
+	  }	  
 }

@@ -29,15 +29,7 @@ public class EmployeeService {
 		}
 		
 		return employeeRepo.findOne(employeeId);
-	}	
-	
-	public List<EmployeeSkill> findSkills(int employeeId){
-		if(logger.isDebugEnabled()){
-			logger.debug(String.format("Find Skills Employee Id %s", employeeId));
-		}
-		
-		return employeeRepo.findSkills(employeeId);
-	}	
+	}
 	
 	public void delete(Employee employee){
 		if(logger.isDebugEnabled()){

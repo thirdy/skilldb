@@ -3,35 +3,154 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+	
 	<ui:define name="content">
-
-
-		<p:layout>
-<!-- 			<p:layoutUnit position="north" size="50"> -->
-<!-- 				<h:outputText value="Top content." /> -->
-<!-- 			</p:layoutUnit> -->
-<!-- 			<p:layoutUnit position="south" size="100"> -->
-<!-- 				<h:outputText value="Bottom content." /> -->
-<!-- 			</p:layoutUnit> -->
-<!-- 			<p:layoutUnit position="west" size="300"> -->
-<!-- 				<h:outputText value="Left content" /> -->
-<!-- 			</p:layoutUnit> -->
-			<p:layoutUnit position="east" size="100" style="border: 0;">
-				<h:form>
-					<p:commandButton value="Edit"
-						action="#{checkListController.editProfile(checkListController.check)}"/>
-				</h:form>
-			</p:layoutUnit>
-			<p:layoutUnit position="center" style="border: 0;">
-				<p>Name: #{checkListController.check.name}</p>
-		
-				<br />
-		
-				<p>URL: #{checkListController.check.url}</p>
-			</p:layoutUnit>
-		</p:layout>
-
+			<h3 style="margin-top: 0">Add profile</h3>
+			<div class="ui-grid">
+			    <div class="ui-grid-col-2">First Name</div>
+			    <div class="ui-grid-col-2">Last Name</div>
+			    <div class="ui-grid-col-2">Email Address</div>
+			    <div class="ui-grid-col-2">Manager</div>
+			</div>
+		    <div class="ui-grid">
+			    <div class="ui-grid-col-2">
+			    <b>
+			    <c:choose>
+			    	<c:when test="#{viewProfileController.employee.firstName != ''}">
+				    <h:outputText value="#{viewProfileController.employee.firstName}" />  
+				    </c:when>
+				    <c:otherwise>-</c:otherwise>
+			    </c:choose>
+				</b>	
+			    
+			    </div>
+			    <div class="ui-grid-col-2">
+			    <b>
+			    <c:choose>
+			    	<c:when test="#{viewProfileController.employee.lastName != ''}">
+				    <h:outputText value="#{viewProfileController.employee.lastName}" />  
+				    </c:when>
+				    <c:otherwise>-</c:otherwise>
+			    </c:choose>
+				</b>			    
+			    
+			    </div>
+			    <div class="ui-grid-col-2">
+			    <b>
+			    <c:choose>
+			    	<c:when test="#{viewProfileController.employee.email != ''}">
+				    <h:outputText value="#{viewProfileController.employee.email}" />  
+				    </c:when>
+				    <c:otherwise>-</c:otherwise>
+			    </c:choose>
+				</b>
+			    </div>
+			    <div class="ui-grid-col-2">
+		        <b>
+			    <c:choose>
+			    	<c:when test="#{viewProfileController.employee.manager != ''}">
+				    <h:outputText value="#{viewProfileController.employee.manager}" />  
+				    </c:when>
+				    <c:otherwise>-</c:otherwise>
+			    </c:choose>
+				</b>
+				</div>
+			</div>
+			<div class="ui-grid">
+				<div class="ui-grid-col-1">Gender</div>
+			    <div class="ui-grid-col-2">Position/Role</div>
+			    <div class="ui-grid-col-1">Date Employed</div>
+			    <div class="ui-grid-col-1">Country</div>
+			    <div class="ui-grid-col-2">Years of working experience</div>
+			</div>
+		    <div class="ui-grid">
+		   		<div class="ui-grid-col-1">
+			    <b>
+			    <c:choose>
+			    	<c:when test="#{viewProfileController.employee.gender != ''}">
+				    <h:outputText value="#{viewProfileController.employee.gender}" />  
+				    </c:when>
+				    <c:otherwise>-</c:otherwise>
+			    </c:choose>
+				</b>			
+				</div>
+			    <div class="ui-grid-col-2">
+			    <b>
+			    <c:choose>
+			    	<c:when test="#{viewProfileController.employee.role != ''}">
+				    <h:outputText value="#{viewProfileController.employee.role}" />  
+				    </c:when>
+				    <c:otherwise>-</c:otherwise>
+			    </c:choose>
+				</b>	    
+			    </div>
+			    <div class="ui-grid-col-1">
+			    <b>
+			    <c:choose>
+			    	<c:when test="#{viewProfileController.employee.dateHired != ''}">
+				    <h:outputText value="#{viewProfileController.employee.dateHired}">
+				    <f:convertDateTime pattern="dd-MM-yyyy" /></h:outputText>				    
+				    </c:when>
+				    <c:otherwise>-</c:otherwise>
+			    </c:choose>
+			    </b>
+			    </div>
+			    <div class="ui-grid-col-1">
+			    <b>
+			    <c:choose>
+			    	<c:when test="#{viewProfileController.employee.country != ''}">
+				    <h:outputText value="#{viewProfileController.employee.country}" />  
+				    </c:when>
+				    <c:otherwise>-</c:otherwise>
+			    </c:choose>
+				</b>
+				</div>
+			    <div class="ui-grid-col-1">
+			    <b>
+			    <c:choose>
+			    	<c:when test="#{viewProfileController.employee.yearsOfWorkExperience != ''}">
+				    <h:outputText value="#{viewProfileController.employee.yearsOfWorkExperience}" />  
+				    </c:when>
+				    <c:otherwise>-</c:otherwise>
+			    </c:choose>
+				</b>
+				</div>
+			</div>
+			<br />
+			<br />
+			<h3 style="margin-top: 0">Skills</h3>
+			
+			<p:dataTable var="skill" value="#{viewProfileController.employee.skills}">
+			    <p:column headerText="Skill Category" width="250">
+			        <h:outputText value="#{skill.skill.skillCategory}" />
+			    </p:column>
+			 
+			    <p:column headerText="Name" width="400">
+			        <h:outputText value="#{skill.skill.skillName}" />
+			    </p:column>
+			 
+			    <p:column headerText="Years of Experience" width="150">
+			        <h:outputText value="#{skill.yearsOfExperience}" />
+			    </p:column>
+			 
+			    <p:column headerText="Level" width="100">
+			        <h:outputText value="#{skill.level}" />
+			    </p:column>
+			    <p:column headerText="Certified" width="100">
+			        <h:outputText value="#{skill.certified}" />
+			    </p:column>
+			    <p:column headerText="Type">
+			        <h:outputText value="#{skill.typeOfCertification}" />
+			    </p:column>
+			    <p:column headerText="Date of Certification" width="100">
+			        <h:outputText value="#{skill.dateOfCertification}"><f:convertDateTime pattern="dd-MM-yyyy" /></h:outputText>
+			    </p:column>
+			    <p:column headerText="Comments">
+			        <h:outputText value="#{skill.comment}" />
+			    </p:column>
+			</p:dataTable>
 	</ui:define>
 </ui:composition>
 
