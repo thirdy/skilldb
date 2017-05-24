@@ -1,110 +1,132 @@
-<ui:composition template="WEB-INF/templates/layout.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	
-	<ui:define name="content">
-		<h:form id="profileForm">
- 			
-			<p:focus />
-			<h3 style="margin-top: 0">Add profile</h3>
-			<div class="ui-grid">
-			    <div class="ui-grid-col-2">First Name</div>
-			    <div class="ui-grid-col-2">Last Name</div>
-			    <div class="ui-grid-col-2">Email Address</div>
-			    <div class="ui-grid-col-2">Manager</div>
-			</div>
-		    <div class="ui-grid">
-			    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.firstName}" size="30" /></div>
-			    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.lastName}" size="30" /></div>
-			    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.email}" size="30" required="true" /></div>
-			    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.manager}" size="30" /></div>
-			</div>
-			<div class="ui-grid">
-				<div class="ui-grid-col-1">Gender</div>
-			    <div class="ui-grid-col-2">Position/Role</div>
-			    <div class="ui-grid-col-1">Date Employed</div>
-			    <div class="ui-grid-col-1">Country</div>
-			    <div class="ui-grid-col-2">Years of working experience</div>
-			</div>
-		    <div class="ui-grid">
-		   		<div class="ui-grid-col-1">
-				<p:selectOneMenu id="gender" value="#{addProfileController.employee.gender}" style="width:125px">
-					<f:selectItem itemLabel="Gender" itemValue="" />
-					<f:selectItem itemLabel="Male" itemValue="Male" />
-					<f:selectItem itemLabel="Female" itemValue="Female" />
-			    </p:selectOneMenu>
+    <h:body>
+    	<ui:composition template="WEB-INF/templates/common/commonLayout.xhtml">
+    		<ui:define name="content">
+    		<p:layoutUnit style="border:0;">
+			<h:form id="profileForm">
+	 			
+				<p:focus />
+				
+				<div class="ui-grid" style="padding-top:5px">
+				    <div class="ui-grid-col-10"><h3 style="margin-top: 0">Add profile</h3></div>
+				    <div class="ui-grid-col-2">
+				    <p:commandButton value="Save" style="width:90px" 
+					action="#{addProfileController.save()}" 
+					update="profileForm, :messages" />
+				    </div>
 				</div>
-			    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.role}" size="30" /></div>
-			    <div class="ui-grid-col-1"><p:calendar id="popup" value="#{addProfileController.employee.dateHired}" pattern="dd-MM-yyyy" mask="true" size="10"  /></div>
-			    <div class="ui-grid-col-1">
-			    <p:selectOneMenu id="country" value="#{addProfileController.employee.country}" style="width:125px">
-		            <f:selectItem itemLabel="APD Office" itemValue="" />
-		            <f:selectItem itemLabel="Australia" itemValue="Australia" />
-		            <f:selectItem itemLabel="Philippines" itemValue="Philippines" />
-		            <f:selectItem itemLabel="Malaysia" itemValue="Malaysia" />
-		            <f:selectItem itemLabel="New Zealand" itemValue="New Zealand" />
-		        </p:selectOneMenu>
+				<div class="ui-grid">
+				    <div class="ui-grid-col-2">First Name</div>
+				    <div class="ui-grid-col-2">Last Name</div>
+				    <div class="ui-grid-col-2">Email Address</div>
+				    <div class="ui-grid-col-2">Manager</div>
 				</div>
-			    <div class="ui-grid-col-1"><p:inputText value="#{addProfileController.employee.yearsOfWorkExperience}" size="3" style="text-align:right" /></div>
-			</div>
-			
-			<h3 style="margin-top: 0">Skills</h3>
-          	<p:dataTable var="skill" value="#{addProfileController.skills}">
-			    <p:column headerText="Skill Category" width="250">
-			        <h:outputText value="#{skill.skill.skillCategory}" />
-			    </p:column>
-			 
-			    <p:column headerText="Name" width="400">
-			        <h:outputText value="#{skill.skill.skillName}" />
-			    </p:column>
-			 
-			    <p:column headerText="Years of Experience" width="150">
-			        <p:selectOneMenu id="yearsOfExperience"  style="width:125px" value="#{skill.yearsOfExperience}" >
-			            <f:selectItem itemLabel="Years of Experience" itemValue=""  />
-			            <f:selectItem itemLabel="less than a year" itemValue="less than a year" />
-			            <f:selectItem itemLabel="1 - 2 years" itemValue="1 - 2 years" />
-						<f:selectItem itemLabel="2 - 4 years" itemValue="2 - 4 years" />
-						<f:selectItem itemLabel="4 - 6 years" itemValue="4 - 6 years" />
-						<f:selectItem itemLabel="6+ years" itemValue="6+ years" />
+			    <div class="ui-grid">
+				    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.firstName}" size="30" /></div>
+				    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.lastName}" size="30" /></div>
+				    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.email}" size="30" required="true" /></div>
+				    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.manager}" size="30" /></div>
+				</div>
+				<div class="ui-grid">
+					<div class="ui-grid-col-1">Gender</div>
+				    <div class="ui-grid-col-2">Position/Role</div>
+				    <div class="ui-grid-col-1">Date Employed</div>
+				    <div class="ui-grid-col-1">Country</div>
+				    <div class="ui-grid-col-2">Years of working experience</div>
+				</div>
+			    <div class="ui-grid">
+			   		<div class="ui-grid-col-1">
+					<p:selectOneMenu id="gender" value="#{addProfileController.employee.gender}" style="width:125px">
+						<f:selectItem itemLabel="Gender" itemValue="" />
+						<f:selectItem itemLabel="Male" itemValue="Male" />
+						<f:selectItem itemLabel="Female" itemValue="Female" />
+				    </p:selectOneMenu>
+					</div>
+				    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.role}" size="30" /></div>
+				    <div class="ui-grid-col-1"><p:calendar id="popup" value="#{addProfileController.employee.dateHired}" pattern="dd-MM-yyyy" mask="true" size="10"  /></div>
+				    <div class="ui-grid-col-1">
+				    <p:selectOneMenu id="country" value="#{addProfileController.employee.country}" style="width:125px">
+			            <f:selectItem itemLabel="APD Office" itemValue="" />
+			            <f:selectItem itemLabel="Australia" itemValue="Australia" />
+			            <f:selectItem itemLabel="Philippines" itemValue="Philippines" />
+			            <f:selectItem itemLabel="Malaysia" itemValue="Malaysia" />
+			            <f:selectItem itemLabel="New Zealand" itemValue="New Zealand" />
 			        </p:selectOneMenu>
-			    </p:column>
-			 
-			    <p:column headerText="Level" width="120">
-				    <p:selectOneMenu id="level"  style="width:125px" value="#{skill.level}">
-			            <f:selectItem itemLabel="Level" itemValue="" />
-						<f:selectItem itemLabel="Expert" itemValue="Expert" />
-						<f:selectItem itemLabel="Senior" itemValue="Senior" />
-						<f:selectItem itemLabel="Mid Level" itemValue="Mid Level" />
-						<f:selectItem itemLabel="Junior" itemValue="Junior" />
-			        </p:selectOneMenu>
-			    </p:column>
-			    <p:column headerText="Certified" width="120">
-				    <p:selectOneMenu id="certified" value="#{skill.certified}" style="width:125px">
-			            <f:selectItem itemLabel="Certified" itemValue="" />
-			            <f:selectItem itemLabel="Yes" itemValue="Yes" />
-			            <f:selectItem itemLabel="No" itemValue="No" />
-	
-			        </p:selectOneMenu>
-			    </p:column>
-			    <p:column headerText="Type of Certification">
-			        <p:inputText value="#{skill.typeOfCertification}" size="25" />
-			    </p:column>
-			    <p:column headerText="Date of Certification" width="118">
-			        <p:calendar id="certificationDate" value="#{skill.dateOfCertification}" pattern="dd-MM-yyyy" mask="true" size="10"  />
-			    </p:column>
-			    <p:column headerText="Comments">
-			        <p:inputText value="#{skill.comment}"  size="25"  />
-			    </p:column>
-			</p:dataTable>
-          	
-			<p:commandButton value="save" 
-				action="#{addProfileController.save()}" 
-				update="profileForm, :messages" />
-		</h:form>
-	</ui:define>
-</ui:composition>
+					</div>
+				    <div class="ui-grid-col-1"><p:inputText value="#{addProfileController.employee.yearsOfWorkExperience}" size="3" style="text-align:right" /></div>
+				</div>
+				
+				<h3 style="margin-top: 0">Skills</h3>
+	          	<p:dataTable var="skill" value="#{addProfileController.skills}">
+				    <p:column headerText="Skill Category" width="230">
+				        <h:outputText value="#{skill.skill.skillCategory}" />
+				    </p:column>
+				 
+				    <p:column headerText="Name" width="400">
+				        <h:outputText value="#{skill.skill.skillName}" />
+				    </p:column>
+				 
+				    <p:column headerText="Years of Experience" width="150">
+				        <p:selectOneMenu id="yearsOfExperience"  style="width:125px" value="#{skill.yearsOfExperience}" >
+				            <f:selectItem itemLabel="Years of Experience" itemValue=""  />
+				            <f:selectItem itemLabel="less than a year" itemValue="less than a year" />
+				            <f:selectItem itemLabel="1 - 2 years" itemValue="1 - 2 years" />
+							<f:selectItem itemLabel="2 - 4 years" itemValue="2 - 4 years" />
+							<f:selectItem itemLabel="4 - 6 years" itemValue="4 - 6 years" />
+							<f:selectItem itemLabel="6+ years" itemValue="6+ years" />
+				        </p:selectOneMenu>
+				    </p:column>
+				 
+				    <p:column headerText="Level" width="120">
+					    <p:selectOneMenu id="level"  style="width:125px" value="#{skill.level}">
+				            <f:selectItem itemLabel="Level" itemValue="" />
+							<f:selectItem itemLabel="Expert" itemValue="Expert" />
+							<f:selectItem itemLabel="Senior" itemValue="Senior" />
+							<f:selectItem itemLabel="Mid Level" itemValue="Mid Level" />
+							<f:selectItem itemLabel="Junior" itemValue="Junior" />
+				        </p:selectOneMenu>
+				    </p:column>
+				    <p:column headerText="Certified" width="120">
+					    <p:selectOneMenu id="certified" value="#{skill.certified}" style="width:125px">
+				            <f:selectItem itemLabel="Certified" itemValue="" />
+				            <f:selectItem itemLabel="Yes" itemValue="Yes" />
+				            <f:selectItem itemLabel="No" itemValue="No" />
+		
+				        </p:selectOneMenu>
+				    </p:column>
+				    <p:column headerText="Type of Certification">
+				        <p:inputText value="#{skill.typeOfCertification}" size="25" />
+				    </p:column>
+				    <p:column headerText="Date of Certification" width="118">
+				        <p:calendar id="certificationDate" value="#{skill.dateOfCertification}" pattern="dd-MM-yyyy" mask="true" size="10"  />
+				    </p:column>
+				    <p:column headerText="Comments">
+				        <p:inputText value="#{skill.comment}"  size="25"  />
+				    </p:column>
+				</p:dataTable>	
+				<br />
+				<div class="ui-grid">
+				    <div class="ui-grid-col-11"><h3 style="margin-top: 0">Add profile</h3></div>
+				    <div class="ui-grid-col-1">
+				    <p:commandButton value="Save" 
+					action="#{addProfileController.save()}" 
+					update="profileForm, :messages" />
+				    </div>
+				</div>		
+			</h:form>
+			</p:layoutUnit>
+    		</ui:define>    		
+    	</ui:composition>
+    </h:body>
+</html>
+
+
 
 

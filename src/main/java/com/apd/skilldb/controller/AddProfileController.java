@@ -27,7 +27,7 @@ import com.apd.skilldb.service.SkillService;
 @Setter
 @ManagedBean
 @ViewScoped
-public class AddProfileController {
+public class AddProfileController{
 
 	private Employee employee = new Employee();
 	private List<EmployeeSkill> skills;

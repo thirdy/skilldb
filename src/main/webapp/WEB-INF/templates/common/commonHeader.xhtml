@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+    <body>
+	    <ui:composition>
+			<p:layoutUnit styleClass="ui-layout-pane" style="margin-bottom:4px">
+				<div id="header-container">
+					<h3>APD Skills DB</h3>
+				</div>
+				<div id="menu-container" style="margin-bottom:10px">
+					<h:form>
+						<p:menubar>
+							<p:menuitem value="Home" url="/index.xhtml" />
+							<p:menuitem value="Add Profile" url="/addprofile.xhtml" />
+<!-- 							<p:menuitem value="Edit Profile" url="http://mail.yahoo.com" /> -->
+							<p:menuitem value="Import Profile" url="/import.xhtml" />
+							<p:menuitem value="Export Profile" url="#" />
+						</p:menubar>
+					</h:form>
+				</div>
+			</p:layoutUnit>	
+			<p:growl id="messages" />			
+	    </ui:composition>
+    </body>
+</html>
+
+

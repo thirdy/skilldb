@@ -1,162 +1,178 @@
-<ui:composition template="WEB-INF/templates/layout.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-	
-	<ui:define name="content">
-	<h:form id="profileForm">
-			<h3 style="margin-top: 0">View profile</h3>
-			<div class="ui-grid">
-			    <div class="ui-grid-col-2">First Name</div>
-			    <div class="ui-grid-col-2">Last Name</div>
-			    <div class="ui-grid-col-2">Email Address</div>
-			    <div class="ui-grid-col-2">Manager</div>
-			</div>
-		    <div class="ui-grid">
-			    <div class="ui-grid-col-2">
-			    <b>
-			    <c:choose>
-			    	<c:when test="#{viewEditProfileController.employee.firstName != ''}">
-				    <h:outputText value="#{viewEditProfileController.employee.firstName}" />  
-				    </c:when>
-				    <c:otherwise>-</c:otherwise>
-			    </c:choose>
-				</b>	
-			    
-			    </div>
-			    <div class="ui-grid-col-2">
-			    <b>
-			    <c:choose>
-			    	<c:when test="#{viewEditProfileController.employee.lastName != ''}">
-				    <h:outputText value="#{viewEditProfileController.employee.lastName}" />  
-				    </c:when>
-				    <c:otherwise>-</c:otherwise>
-			    </c:choose>
-				</b>			    
-			    
-			    </div>
-			    <div class="ui-grid-col-2">
-			    <b>
-			    <c:choose>
-			    	<c:when test="#{viewEditProfileController.employee.email != ''}">
-				    <h:outputText value="#{viewEditProfileController.employee.email}" />  
-				    </c:when>
-				    <c:otherwise>-</c:otherwise>
-			    </c:choose>
-				</b>
-			    </div>
-			    <div class="ui-grid-col-2">
-		        <b>
-			    <c:choose>
-			    	<c:when test="#{viewEditProfileController.employee.manager != ''}">
-				    <h:outputText value="#{viewEditProfileController.employee.manager}" />  
-				    </c:when>
-				    <c:otherwise>-</c:otherwise>
-			    </c:choose>
-				</b>
+    <h:body>
+    	<ui:composition template="WEB-INF/templates/common/commonLayout.xhtml">
+    		<ui:define name="content">
+    		<p:layoutUnit style="border:0;">
+			<h:form id="profileForm">
+				<div class="ui-grid">
+				    <div class="ui-grid-col-11"><h3 style="margin-top: 0">View profile</h3></div>
+				    <div class="ui-grid-col-1">
+					<p:commandButton value="Edit" 
+					action="#{viewEditProfileController.edit()}" />
+				    </div>
 				</div>
-			</div>
-			<div class="ui-grid">
-				<div class="ui-grid-col-1">Gender</div>
-			    <div class="ui-grid-col-2">Position/Role</div>
-			    <div class="ui-grid-col-1">Date Employed</div>
-			    <div class="ui-grid-col-1">Country</div>
-			    <div class="ui-grid-col-2">Years of working experience</div>
-			</div>
-		    <div class="ui-grid">
-		   		<div class="ui-grid-col-1">
-			    <b>
-			    <c:choose>
-			    	<c:when test="#{viewEditProfileController.employee.gender != ''}">
-				    <h:outputText value="#{viewEditProfileController.employee.gender}" />  
-				    </c:when>
-				    <c:otherwise>-</c:otherwise>
-			    </c:choose>
-				</b>			
+				<div class="ui-grid">
+				    <div class="ui-grid-col-2">First Name</div>
+				    <div class="ui-grid-col-2">Last Name</div>
+				    <div class="ui-grid-col-2">Email Address</div>
+				    <div class="ui-grid-col-2">Manager</div>
 				</div>
-			    <div class="ui-grid-col-2">
-			    <b>
-			    <c:choose>
-			    	<c:when test="#{viewEditProfileController.employee.role != ''}">
-				    <h:outputText value="#{viewEditProfileController.employee.role}" />  
-				    </c:when>
-				    <c:otherwise>-</c:otherwise>
-			    </c:choose>
-				</b>	    
-			    </div>
-			    <div class="ui-grid-col-1">
-			    <b>
-			    <c:choose>
-			    	<c:when test="#{viewEditProfileController.employee.dateHired != ''}">
-				    <h:outputText value="#{viewEditProfileController.employee.dateHired}">
-				    <f:convertDateTime pattern="dd-MM-yyyy" /></h:outputText>				    
-				    </c:when>
-				    <c:otherwise>-</c:otherwise>
-			    </c:choose>
-			    </b>
-			    </div>
-			    <div class="ui-grid-col-1">
-			    <b>
-			    <c:choose>
-			    	<c:when test="#{viewEditProfileController.employee.country != ''}">
-				    <h:outputText value="#{viewEditProfileController.employee.country}" />  
-				    </c:when>
-				    <c:otherwise>-</c:otherwise>
-			    </c:choose>
-				</b>
+			    <div class="ui-grid">
+				    <div class="ui-grid-col-2">
+				    <b>
+				    <c:choose>
+				    	<c:when test="#{viewEditProfileController.employee.firstName != ''}">
+					    <h:outputText value="#{viewEditProfileController.employee.firstName}" />  
+					    </c:when>
+					    <c:otherwise>-</c:otherwise>
+				    </c:choose>
+					</b>	
+				    
+				    </div>
+				    <div class="ui-grid-col-2">
+				    <b>
+				    <c:choose>
+				    	<c:when test="#{viewEditProfileController.employee.lastName != ''}">
+					    <h:outputText value="#{viewEditProfileController.employee.lastName}" />  
+					    </c:when>
+					    <c:otherwise>-</c:otherwise>
+				    </c:choose>
+					</b>			    
+				    
+				    </div>
+				    <div class="ui-grid-col-2">
+				    <b>
+				    <c:choose>
+				    	<c:when test="#{viewEditProfileController.employee.email != ''}">
+					    <h:outputText value="#{viewEditProfileController.employee.email}" />  
+					    </c:when>
+					    <c:otherwise>-</c:otherwise>
+				    </c:choose>
+					</b>
+				    </div>
+				    <div class="ui-grid-col-2">
+			        <b>
+				    <c:choose>
+				    	<c:when test="#{viewEditProfileController.employee.manager != ''}">
+					    <h:outputText value="#{viewEditProfileController.employee.manager}" />  
+					    </c:when>
+					    <c:otherwise>-</c:otherwise>
+				    </c:choose>
+					</b>
+					</div>
 				</div>
-			    <div class="ui-grid-col-1">
-			    <b>
-			    <c:choose>
-			    	<c:when test="#{viewEditProfileController.employee.yearsOfWorkExperience != ''}">
-				    <h:outputText value="#{viewEditProfileController.employee.yearsOfWorkExperience}" />  
-				    </c:when>
-				    <c:otherwise>-</c:otherwise>
-			    </c:choose>
-				</b>
+				<div class="ui-grid">
+					<div class="ui-grid-col-1">Gender</div>
+				    <div class="ui-grid-col-2">Position/Role</div>
+				    <div class="ui-grid-col-1">Date Employed</div>
+				    <div class="ui-grid-col-1">Country</div>
+				    <div class="ui-grid-col-2">Years of working experience</div>
 				</div>
-			</div>
-			<br />
-			<br />
-			<h3 style="margin-top: 0">Skills</h3>
-			
-			<p:dataTable var="skill" value="#{viewEditProfileController.employee.skills}">
-			    <p:column headerText="Skill Category" width="250">
-			        <h:outputText value="#{skill.skill.skillCategory}" />
-			    </p:column>
-			 
-			    <p:column headerText="Name" width="400">
-			        <h:outputText value="#{skill.skill.skillName}" />
-			    </p:column>
-			 
-			    <p:column headerText="Years of Experience" width="150">
-			        <h:outputText value="#{skill.yearsOfExperience}" />
-			    </p:column>
-			 
-			    <p:column headerText="Level" width="100">
-			        <h:outputText value="#{skill.level}" />
-			    </p:column>
-			    <p:column headerText="Certified" width="100">
-			        <h:outputText value="#{skill.certified}" />
-			    </p:column>
-			    <p:column headerText="Type of Certification">
-			        <h:outputText value="#{skill.typeOfCertification}" />
-			    </p:column>
-			    <p:column headerText="Date of Certification" width="100">
-			        <h:outputText value="#{skill.dateOfCertification}"><f:convertDateTime pattern="dd-MM-yyyy" /></h:outputText>
-			    </p:column>
-			    <p:column headerText="Comments">
-			        <h:outputText value="#{skill.comment}" />
-			    </p:column>
-			</p:dataTable>
-			
-			<p:commandButton value="edit" 
-				action="#{viewEditProfileController.edit()}" />
-	</h:form>
-	</ui:define>
-</ui:composition>
-
-
+			    <div class="ui-grid">
+			   		<div class="ui-grid-col-1">
+				    <b>
+				    <c:choose>
+				    	<c:when test="#{viewEditProfileController.employee.gender != ''}">
+					    <h:outputText value="#{viewEditProfileController.employee.gender}" />  
+					    </c:when>
+					    <c:otherwise>-</c:otherwise>
+				    </c:choose>
+					</b>			
+					</div>
+				    <div class="ui-grid-col-2">
+				    <b>
+				    <c:choose>
+				    	<c:when test="#{viewEditProfileController.employee.role != ''}">
+					    <h:outputText value="#{viewEditProfileController.employee.role}" />  
+					    </c:when>
+					    <c:otherwise>-</c:otherwise>
+				    </c:choose>
+					</b>	    
+				    </div>
+				    <div class="ui-grid-col-1">
+				    <b>
+				    <c:choose>
+				    	<c:when test="#{viewEditProfileController.employee.dateHired != ''}">
+					    <h:outputText value="#{viewEditProfileController.employee.dateHired}">
+					    <f:convertDateTime pattern="dd-MM-yyyy" /></h:outputText>				    
+					    </c:when>
+					    <c:otherwise>-</c:otherwise>
+				    </c:choose>
+				    </b>
+				    </div>
+				    <div class="ui-grid-col-1">
+				    <b>
+				    <c:choose>
+				    	<c:when test="#{viewEditProfileController.employee.country != ''}">
+					    <h:outputText value="#{viewEditProfileController.employee.country}" />  
+					    </c:when>
+					    <c:otherwise>-</c:otherwise>
+				    </c:choose>
+					</b>
+					</div>
+				    <div class="ui-grid-col-1">
+				    <b>
+				    <c:choose>
+				    	<c:when test="#{viewEditProfileController.employee.yearsOfWorkExperience != ''}">
+					    <h:outputText value="#{viewEditProfileController.employee.yearsOfWorkExperience}" />  
+					    </c:when>
+					    <c:otherwise>-</c:otherwise>
+				    </c:choose>
+					</b>
+					</div>
+				</div>
+				<br />
+				<br />
+				<h3 style="margin-top: 0">Skills</h3>
+				
+				<p:dataTable var="skill" value="#{viewEditProfileController.employee.skills}">
+				    <p:column headerText="Skill Category" width="230">
+				        <h:outputText value="#{skill.skill.skillCategory}" />
+				    </p:column>
+				 
+				    <p:column headerText="Name" width="400">
+				        <h:outputText value="#{skill.skill.skillName}" />
+				    </p:column>
+				 
+				    <p:column headerText="Years of Experience" width="150">
+				        <h:outputText value="#{skill.yearsOfExperience}" />
+				    </p:column>
+				 
+				    <p:column headerText="Level" width="100">
+				        <h:outputText value="#{skill.level}" />
+				    </p:column>
+				    <p:column headerText="Certified" width="100">
+				        <h:outputText value="#{skill.certified}" />
+				    </p:column>
+				    <p:column headerText="Type of Certification">
+				        <h:outputText value="#{skill.typeOfCertification}" />
+				    </p:column>
+				    <p:column headerText="Date of Certification" width="100">
+				        <h:outputText value="#{skill.dateOfCertification}"><f:convertDateTime pattern="dd-MM-yyyy" /></h:outputText>
+				    </p:column>
+				    <p:column headerText="Comments">
+				        <h:outputText value="#{skill.comment}" />
+				    </p:column>
+				</p:dataTable>			
+					
+				<div class="ui-grid">
+				    <div class="ui-grid-col-11"><h3 style="margin-top: 0">View profile</h3></div>
+				    <div class="ui-grid-col-1">
+					<p:commandButton value="Edit" 
+					action="#{viewEditProfileController.edit()}" />
+				    </div>
+				</div>
+		</h:form>
+				</p:layoutUnit>
+    		</ui:define>    		
+    	</ui:composition>
+    </h:body>
+</html>
