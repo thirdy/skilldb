@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apd.skilldb.entity.Check;
+import com.apd.skilldb.entity.Employee;
 import com.apd.skilldb.entity.Skill;
 import com.apd.skilldb.repository.CheckRepository;
+import com.apd.skilldb.repository.EmployeeRepository;
 import com.apd.skilldb.repository.SkillRepository;
 
 @Service
@@ -18,6 +20,9 @@ public class InitDbService {
 
 	@Autowired
 	private SkillRepository skillRepository;
+
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
 	@PostConstruct
 	public void init() {
@@ -138,8 +143,21 @@ public class InitDbService {
 		skillRepository.save(new Skill("Analytics", "Adobe Analytics/Omniture/SiteCatalyst"));
 		skillRepository.save(new Skill("Social App Frameworks", "Facebook, Twitter, LinkedIn, Instagram, Weibo, QQ, and so on"));
 
-		Skill skill = skillRepository.findBySkillName("W3C").get(0);
-		System.out.println("SKILLFOUND: " +  skill.getSkillName()  + " " + skill.getId());
+//		Skill skill = skillRepository.findBySkillName("W3C").get(0);
+//		System.out.println("SKILLFOUND: " +  skill.getSkillName()  + " " + skill.getId());
+//		
+//		Employee emp = new Employee();
+//		emp.setEmployeeId("abc");
+//		employeeRepository.save(emp);
+//		
+//		System.out.println("--------------------------------------"  + employeeRepository.findAll());
+//
+//		emp = new Employee();
+//		emp.setEmployeeId("abc");
+//		emp.setEmail("asdfasdfasdfsadf");
+//		employeeRepository.save(emp);
+//		
+//		System.out.println("--------------------------------------"  + employeeRepository.findAll());
 		
 		System.out.println("*** INIT DATABASE FINISH ***");
 	}

@@ -46,7 +46,7 @@ public class ViewEditProfileController {
 	@ManagedProperty("#{viewProfileController}")
 	private ViewEditProfileController viewProfileController;
 	
-	private int employeeId;	
+	private String employeeId;	
 	
 	@PostConstruct
 	public void loadSkills(){

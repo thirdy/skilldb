@@ -28,6 +28,7 @@ public class EmployeeServiceTest {
 	 
 	 private Employee createEmployee(){
 		 Employee emp = new Employee();
+		 emp.setEmployeeId("ABC");
 		 emp.setFirstName("firstName");
 		 emp.setSkills(createEmployeeSkills(emp));
 		 emp.setLastName("lastName");
@@ -64,7 +65,7 @@ public class EmployeeServiceTest {
 		  Employee emp = createEmployee();
 		  
 		  employeeService.delete(emp);
-		  int employeeId = employeeService.add(emp);
+		  String employeeId = employeeService.add(emp);
 		  Employee empResult  = employeeService.find(employeeId);
 		  assertEquals(emp.getLastName(), empResult.getLastName());
 		  assertEquals(emp.getSkills().size(), empResult.getSkills().size());

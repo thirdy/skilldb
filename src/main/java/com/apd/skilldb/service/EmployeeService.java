@@ -18,12 +18,12 @@ public class EmployeeService {
 	@Autowired
 	EmployeeRepository employeeRepo;
 	
-	public int add(Employee employee){
+	public String add(Employee employee){
 		Employee emp =  employeeRepo.save(employee);
 		return emp.getEmployeeId();
 	}	
 	
-	public Employee find(int employeeId){
+	public Employee find(String employeeId){
 		if(logger.isDebugEnabled()){
 			logger.debug(String.format("Find Employee Id %s", employeeId));
 		}

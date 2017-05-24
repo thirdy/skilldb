@@ -17,18 +17,20 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
+@ToString
 public class Employee {
 
 	@Id
-	@GeneratedValue
-	private int employeeId;
+	private String employeeId;
 
 	//@Size(min = 1, message = "First Name cannot be empty!")
 	@Column
@@ -75,4 +77,7 @@ public class Employee {
 		if (getSkills() == null) skills = new ArrayList<>();
 		getSkills().add(employeeSkill);
 	}
+
+	@Transient
+	private String sheetName;
 }
