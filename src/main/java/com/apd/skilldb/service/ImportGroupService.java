@@ -90,13 +90,18 @@ public class ImportGroupService {
 					String level = cellVal(sRow, 3);
 					boolean certified = equalsIgnoreCase(cellVal(sRow, 3), "Yes");
 					
-					Skill skill = skillRepository.findBySkillName(skillName).get(0);
+					Skill skill = findSkill(skillName);
 					EmployeeSkill employeeSkill = new EmployeeSkill(yrsExp, level, certified);
 					employeeSkill.setSkill(skill);
 					return employeeSkill;
 				})
 				.collect(Collectors.toList());
 		return empSkills;
+	}
+
+	private Skill findSkill(String skillName) {
+		List<Skill> skills = skillRepository.findBySkillName(skillName);
+		return skills.size() == 0 ? null : skills.get(0);
 	}
 
 	private List<Row> sheetToRows(Sheet sheet) {
@@ -118,6 +123,7 @@ public class ImportGroupService {
 				.stream()
 				.map(r -> {
 					Employee e = new Employee();
+					e.setEmployeeId(cellVal(r, 0));
 					e.setFirstName(cellVal(r, 2));
 					e.setLastName(cellVal(r, 3));
 					e.setEmail(cellVal(r, 5));

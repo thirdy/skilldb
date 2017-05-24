@@ -5,29 +5,29 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
-		<p:dataTable value="#{checkListController.checks}" var="check"
+		<p:dataTable value="#{homeController.employees}" var="employee"
 			id="checkTable">
 			<p:column headerText="name">
-					#{check.name}
+					#{employee.employeeId}
 				</p:column>
 			<p:column headerText="url">
-				<a href="#{check.url}" target="_blank"> #{check.url} </a>
+				<a href="#{check.url}" target="_blank"> #{employee.email} </a>
 			</p:column>
-			<p:column headerText="operations">
-				<h:form>
-					<h:commandLink value="open"
-						action="#{checkListController.viewProfile(check)}" 
-						target="_blank"/>
-					<h:outputText value="&#160;" />
-					<h:outputText value="&#160;" />
-					<p:commandLink value="remove"
-						action="#{checkListController.remove(check)}"
-						update=":checkTable, :messages">
-						<p:confirm header="Confirmation" message="Are you sure?"
-							icon="ui-icon-alert" />
-					</p:commandLink>
-				</h:form>
-			</p:column>
+<!-- 			<p:column headerText="operations"> -->
+<!-- 				<h:form> -->
+<!-- 					<h:commandLink value="open" -->
+<!-- 						action="#{checkListController.viewProfile(check)}"  -->
+<!-- 						target="_blank"/> -->
+<!-- 					<h:outputText value="&#160;" /> -->
+<!-- 					<h:outputText value="&#160;" /> -->
+<!-- 					<p:commandLink value="remove" -->
+<!-- 						action="#{checkListController.remove(check)}" -->
+<!-- 						update=":checkTable, :messages"> -->
+<!-- 						<p:confirm header="Confirmation" message="Are you sure?" -->
+<!-- 							icon="ui-icon-alert" /> -->
+<!-- 					</p:commandLink> -->
+<!-- 				</h:form> -->
+<!-- 			</p:column> -->
 		</p:dataTable>
 
 		<br />

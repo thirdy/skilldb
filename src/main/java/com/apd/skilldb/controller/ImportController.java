@@ -14,9 +14,8 @@ import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.apd.skilldb.service.CheckService;
-import com.apd.skilldb.service.ImportService;
-import com.apd.skilldb.service.ImportService.ImportServiceException;
+import com.apd.skilldb.service.ImportGroupService;
+import com.apd.skilldb.service.ImportGroupService.ImportServiceException;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,15 +30,15 @@ public class ImportController implements Serializable {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@ManagedProperty("#{importService}")
-	private ImportService importService;
+	@ManagedProperty("#{importGroupService}")
+	private ImportGroupService importGroupService;
 
 	private UploadedFile file;
 
 	public void handleFileUpload(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
 		try {
-			importService.parseAndSave(file.getInputstream(), file.getFileName());
+			importGroupService.parseAndSave(file.getInputstream(), file.getFileName());
 		} catch (ImportServiceException e) {
 			addMessage(e.getMessage());
 		} catch (IOException e) {
