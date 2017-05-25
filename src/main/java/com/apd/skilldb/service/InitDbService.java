@@ -1,5 +1,9 @@
 package com.apd.skilldb.service;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +15,7 @@ import com.apd.skilldb.entity.Skill;
 import com.apd.skilldb.repository.CheckRepository;
 import com.apd.skilldb.repository.EmployeeRepository;
 import com.apd.skilldb.repository.SkillRepository;
+import com.apd.skilldb.service.ImportGroupService.ImportServiceException;
 
 @Service
 public class InitDbService {
@@ -23,6 +28,9 @@ public class InitDbService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private ImportGroupService importGroupService;
 
 	@PostConstruct
 	public void init() {
@@ -158,6 +166,16 @@ public class InitDbService {
 //		employeeRepository.save(emp);
 //		
 //		System.out.println("--------------------------------------"  + employeeRepository.findAll());
+		
+		String FILE_NAME = "/APD-Malaysia-Team Skillset.xlsx";
+		InputStream fileStream = this.getClass().getResourceAsStream(FILE_NAME);
+		try {
+			importGroupService.parseAndSave(fileStream, FILE_NAME);
+		} catch (ImportServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		System.out.println("*** INIT DATABASE FINISH ***");
 	}

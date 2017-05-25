@@ -74,6 +74,7 @@ public class ImportGroupService {
 					}
 					List<EmployeeSkill> empSkills = parseSkillSheet(skillSheet);
 					e.setSkills(empSkills);
+					empSkills.forEach(es -> es.setEmployee(e));
 				});
 		}
 		return employees;
@@ -85,12 +86,13 @@ public class ImportGroupService {
 		List<EmployeeSkill> empSkills = skillRows
 				.stream()
 				.map(sRow -> {
+					String skillCategory = cellVal(sRow, 0);
 					String skillName = cellVal(sRow, 1);
 					String yrsExp = cellVal(sRow, 2);
 					String level = cellVal(sRow, 3);
 					boolean certified = equalsIgnoreCase(cellVal(sRow, 3), "Yes");
 					
-					Skill skill = findSkill(skillName);
+					Skill skill = findOrSaveSkill(skillCategory, skillName);
 					EmployeeSkill employeeSkill = new EmployeeSkill(yrsExp, level, certified);
 					employeeSkill.setSkill(skill);
 					return employeeSkill;
@@ -99,9 +101,18 @@ public class ImportGroupService {
 		return empSkills;
 	}
 
-	private Skill findSkill(String skillName) {
+	private Skill findOrSaveSkill(String skillCategory, String skillName) {
+		Skill skill = null;
+		
 		List<Skill> skills = skillRepository.findBySkillName(skillName);
-		return skills.size() == 0 ? null : skills.get(0);
+		
+		if (skills.size() == 0) {
+			skill = skillRepository.save(new Skill(skillCategory, skillName));
+		} else {
+			skill = skills.get(0);
+		}
+		
+		return skill;
 	}
 
 	private List<Row> sheetToRows(Sheet sheet) {
@@ -126,8 +137,8 @@ public class ImportGroupService {
 					e.setEmployeeId(cellVal(r, 0));
 					e.setFirstName(cellVal(r, 2));
 					e.setLastName(cellVal(r, 3));
+					e.setRole(cellVal(r, 4));
 					e.setEmail(cellVal(r, 5));
-//					e.setDateHired(DateUtils.parseDate(cellVal(r, 7), String[] {""}));
 					e.setGender(cellVal(r, 8));
 					e.setCountry(cellVal(r, 9));
 					e.setDivision(cellVal(r, 10));

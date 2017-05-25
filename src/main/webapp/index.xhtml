@@ -5,46 +5,58 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
-		<p:dataTable value="#{homeController.employees}" var="employee"
-			id="checkTable">
-			<p:column headerText="name">
-					#{employee.employeeId}
-				</p:column>
-			<p:column headerText="url">
-				<a href="#{check.url}" target="_blank"> #{employee.email} </a>
-			</p:column>
-<!-- 			<p:column headerText="operations"> -->
-<!-- 				<h:form> -->
-<!-- 					<h:commandLink value="open" -->
-<!-- 						action="#{checkListController.viewProfile(check)}"  -->
-<!-- 						target="_blank"/> -->
-<!-- 					<h:outputText value="&#160;" /> -->
-<!-- 					<h:outputText value="&#160;" /> -->
-<!-- 					<p:commandLink value="remove" -->
-<!-- 						action="#{checkListController.remove(check)}" -->
-<!-- 						update=":checkTable, :messages"> -->
-<!-- 						<p:confirm header="Confirmation" message="Are you sure?" -->
-<!-- 							icon="ui-icon-alert" /> -->
-<!-- 					</p:commandLink> -->
-<!-- 				</h:form> -->
-<!-- 			</p:column> -->
-		</p:dataTable>
+	
+		<h:form>
+		
+<!-- 			<h:panelGrid columns="3" style="margin:10px 0"> -->
+<!-- 		        <p:outputLabel for="template" value="Template:" style="font-weight:bold"/> -->
+<!-- 		        <p:inputText id="template" value="#{dtColumnsView.columnTemplate}" size="50"/> -->
+<!-- 		        <p:commandButton update="cars" actionListener="#{dtColumnsView.updateColumns}" value="Update" process="@parent" icon="ui-icon-refresh" oncomplete="PF('carsTable').clearFilters()"/> -->
+<!-- 		    </h:panelGrid> -->
+		    
+		    <p:dataTable var="empSkill" value="#{homeController.employeeSkills}" style="margin-bottom:40px"  widgetVar="empSkillTable"
+		    	emptyMessage="No employees found with given criteria" filteredValue="#{homeController.filteredEmployeeSkills}">
+		    	
+		    	<f:facet name="header">
+		            <p:outputPanel>
+		                <h:outputText value="Search Profile: "/>
+		                <p:inputText id="globalFilter" onkeyup="PF('empSkillTable').filter()" style="width:350px; margin-left:5px" placeholder="Enter keyword"/>
+		            </p:outputPanel>
+		        </f:facet>
+		        
+				<p:column headerText="Name" sortBy="#{empSkill.employee.firstName}" filterBy="#{empSkill.employee.fullName}">
+		            <h:outputText value="#{empSkill.employee.fullName}" />
+		        </p:column>
+		 
+		        <p:column headerText="Role" sortBy="#{empSkill.employee.role}" filterBy="#{empSkill.employee.role}">
+		            <h:outputText value="#{empSkill.employee.role}" />
+		        </p:column>
+		 
+		        <p:column headerText="Skill" sortBy="#{empSkill.skill.skillName}" filterBy="#{empSkill.skill.skillName}">
+		            <h:outputText value="#{empSkill.skill.skillName}" />
+		        </p:column>
+		 
+		        <p:column headerText="Yrs Of Exp" sortBy="#{empSkill.yearsOfExperience}" filterBy="#{empSkill.yearsOfExperience}">
+		            <h:outputText value="#{empSkill.yearsOfExperience}" />
+		        </p:column>
+		 
+		        <p:column headerText="Level" sortBy="#{empSkill.level}" filterBy="#{empSkill.level}">
+		            <h:outputText value="#{empSkill.level}" />
+		        </p:column>
+		 
+		        <p:column headerText="Certified" sortBy="#{empSkill.certified}" filterBy="#{empSkill.certified}">
+		            <h:outputText value="#{empSkill.certified}" />
+		        </p:column>
+		 
+		        <p:column headerText="APD Office" sortBy="#{empSkill.employee.country}" filterBy="#{empSkill.employee.country}">
+		            <h:outputText value="#{empSkill.employee.country}" />
+		        </p:column>
+		        
+		    </p:dataTable>
+		
+		  
+		</h:form>
 
-		<br />
-		<!-- 		<h:form> -->
-		<!-- 			<p:commandButton value="add check" -->
-		<!-- 				action="#{checkListController.clear()}" update=":checkForm" -->
-		<!-- 				oncomplete="PF('checkDialog').show()" resetValues="true" /> -->
-		<!-- 		</h:form> -->
-
-
-		<script type="text/javascript">
-			    function handleDialogSubmit(args, dialogName) {
-			        if (!args.validationFailed) {
-			            PF(dialogName).hide();
-			        }
-			    }
-		</script>
 	</ui:define>
 </ui:composition>
 

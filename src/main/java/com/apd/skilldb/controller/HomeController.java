@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
@@ -17,9 +18,11 @@ import org.springframework.data.domain.PageRequest;
 
 import com.apd.skilldb.entity.Check;
 import com.apd.skilldb.entity.Employee;
+import com.apd.skilldb.entity.EmployeeSkill;
 import com.apd.skilldb.repository.EmployeeRepository;
 import com.apd.skilldb.service.CheckService;
 import com.apd.skilldb.service.EmployeeService;
+import com.apd.skilldb.service.EmployeeSkillService;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -27,21 +30,27 @@ import lombok.Setter;
 @Getter
 @Setter
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class HomeController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManagedProperty("#{employeeService}")
-	private EmployeeService employeeService;
+	@ManagedProperty("#{employeeSkillService}")
+	private EmployeeSkillService employeeSkillService;
 	
-	private List<Employee> employees;
+	private List<EmployeeSkill> employeeSkills;
+	private List<EmployeeSkill> filteredEmployeeSkills;
+	
+	private String searchQuery;
 	
 	@PostConstruct
 	public void loadChecks() {
-		employees = new LinkedList<>();
-		employeeService.findAll(new PageRequest(0, 10)).forEach(employees::add);
+		employeeSkills = employeeSkillService.findAll();
+//		employeeService.findAll(new PageRequest(0, 10)).forEach(employeeSkills::add);
+		
 	}
+	
+	
 	
 //	public String viewProfile(Check check) {
 //		this.check = check;

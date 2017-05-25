@@ -80,4 +80,8 @@ public class Employee {
 
 	@Transient
 	private String sheetName;
+	
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
 }
