@@ -49,7 +49,7 @@ public class EmployeeServiceTest {
 		 EmployeeSkill skill1 = new EmployeeSkill();
 		 skill1.setEmployee(emp);
 		 skill1.setLevel("advance");
-		 skill1.setCertified(false);
+		 skill1.setCertified("No");
 		 skill1.setTypeOfCertification(null);
 		 skill1.setComment("comment");
 		 Calendar c1 = GregorianCalendar.getInstance();

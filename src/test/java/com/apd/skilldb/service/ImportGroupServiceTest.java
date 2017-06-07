@@ -63,7 +63,7 @@ public class ImportGroupServiceTest {
 		assertEquals("Continuous Integration and Deployment", employeeSkill1.getSkill().getSkillCategory());
 		assertEquals("Mid Level", employeeSkill1.getLevel());
 		assertEquals("2 - 4 years", employeeSkill1.getYearsOfExperience());
-		assertEquals(false, employeeSkill1.isCertified());
+		assertEquals("No", employeeSkill1.getCertified());
 	}
 
 	@Test
@@ -86,7 +86,7 @@ public class ImportGroupServiceTest {
 		EmployeeSkill employeeSkill5 = employee5.getSkills().get(0);
 		assertEquals("Junior", employeeSkill5.getLevel());
 		assertEquals("less than a year", employeeSkill5.getYearsOfExperience());
-		assertEquals(false, employeeSkill5.isCertified());
+		assertEquals("No", employeeSkill5.getCertified());
 	}
 
 	@Test

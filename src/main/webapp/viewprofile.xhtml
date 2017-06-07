@@ -12,19 +12,13 @@
     		<ui:define name="content">
     		<p:layoutUnit style="border:0;">
 			<h:form id="profileForm">
-				<div class="ui-grid">
-				    <div class="ui-grid-col-11"><h3 style="margin-top: 0">View profile</h3></div>
+				<div class="ui-grid" style="padding-top:5px">
+				    <div class="ui-grid-col-11"><h3 style="margin-top: 0;">View profile</h3></div>
 				    <div class="ui-grid-col-1">
 					<p:commandButton value="Edit" 
 					action="#{viewEditProfileController.edit()}" />
 				    </div>
-				</div>
-				<div class="ui-grid">
-				    <div class="ui-grid-col-2">First Name</div>
-				    <div class="ui-grid-col-2">Last Name</div>
-				    <div class="ui-grid-col-2">Email Address</div>
-				    <div class="ui-grid-col-2">Manager</div>
-				</div>
+				</div>				
 			    <div class="ui-grid">
 				    <div class="ui-grid-col-2">
 				    <b>
@@ -69,14 +63,14 @@
 					</b>
 					</div>
 				</div>
-				<div class="ui-grid">
-					<div class="ui-grid-col-1">Gender</div>
-				    <div class="ui-grid-col-2">Position/Role</div>
-				    <div class="ui-grid-col-1">Date Employed</div>
-				    <div class="ui-grid-col-1">Country</div>
-				    <div class="ui-grid-col-2">Years of working experience</div>
+				<div class="ui-grid" style="font-size: 10px; font-style: italic;color: gray;">
+				    <div class="ui-grid-col-2">First Name</div>
+				    <div class="ui-grid-col-2">Last Name</div>
+				    <div class="ui-grid-col-2">Email Address</div>
+				    <div class="ui-grid-col-2">Manager</div>
 				</div>
-			    <div class="ui-grid">
+
+			    <div class="ui-grid" style="margin-top:10px;">
 			   		<div class="ui-grid-col-1">
 				    <b>
 				    <c:choose>
@@ -129,8 +123,14 @@
 					</b>
 					</div>
 				</div>
-				<br />
-				<br />
+				<div class="ui-grid" style="font-size: 10px; font-style: italic;margin-bottom:15px;color: gray;">
+					<div class="ui-grid-col-1">Gender</div>
+				    <div class="ui-grid-col-2">Position/Role</div>
+				    <div class="ui-grid-col-1">Date Employed</div>
+				    <div class="ui-grid-col-1">Country</div>
+				    <div class="ui-grid-col-2">Years of working experience</div>
+				</div>
+
 				<h3 style="margin-top: 0">Skills</h3>
 				
 				<p:dataTable var="skill" value="#{viewEditProfileController.employee.skills}">
@@ -163,14 +163,14 @@
 				    </p:column>
 				</p:dataTable>			
 					
-				<div class="ui-grid">
+				<div class="ui-grid" style="padding-top:5px">
 				    <div class="ui-grid-col-11"><h3 style="margin-top: 0">View profile</h3></div>
 				    <div class="ui-grid-col-1">
 					<p:commandButton value="Edit" 
 					action="#{viewEditProfileController.edit()}" />
 				    </div>
 				</div>
-		</h:form>
+				</h:form>
 				</p:layoutUnit>
     		</ui:define>    		
     	</ui:composition>

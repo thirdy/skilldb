@@ -20,18 +20,21 @@
 					update="profileForm, :messages" />
 				    </div>
 				</div>
+				<!--  
 				<div class="ui-grid">
 				    <div class="ui-grid-col-2">First Name</div>
 				    <div class="ui-grid-col-2">Last Name</div>
 				    <div class="ui-grid-col-2">Email Address</div>
 				    <div class="ui-grid-col-2">Manager</div>
 				</div>
+				-->
 			    <div class="ui-grid">
-				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.firstName}" size="30" /></div>
-				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.lastName}" size="30" /></div>
-				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.email}" size="30" /></div>
-				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.manager}" size="30" /></div>
+				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.firstName}" placeholder="First Name" size="30" /></div>
+				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.lastName}" placeholder="Last Name" size="30" /></div>
+				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.email}" placeholder="Email Address" size="30" /></div>
+				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.manager}" placeholder="Manager" size="30" /></div>
 				</div>
+				<!--  
 				<div class="ui-grid">
 					<div class="ui-grid-col-1">Gender</div>
 				    <div class="ui-grid-col-2">Position/Role</div>
@@ -39,7 +42,8 @@
 				    <div class="ui-grid-col-1">Country</div>
 				    <div class="ui-grid-col-2">Years of working experience</div>
 				</div>
-			    <div class="ui-grid">
+				-->
+			    <div class="ui-grid" style="margin-top:15px;margin-bottom:25px;">
 			   		<div class="ui-grid-col-1">
 					<p:selectOneMenu id="gender" value="#{viewEditProfileController.employee.gender}" style="width:125px">
 						<f:selectItem itemLabel="Gender" itemValue="" />
@@ -47,8 +51,8 @@
 						<f:selectItem itemLabel="Female" itemValue="Female" />
 				    </p:selectOneMenu>
 					</div>
-				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.role}" size="30" /></div>
-				    <div class="ui-grid-col-1"><p:calendar id="popup" value="#{viewEditProfileController.employee.dateHired}" pattern="dd-MM-yyyy" mask="true" size="10"  /></div>
+				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.role}"  placeholder="Position/Role" size="30"  /></div>
+				    <div class="ui-grid-col-1"><p:calendar id="popup" value="#{viewEditProfileController.employee.dateHired}" placeholder="Date Employed" pattern="dd-MM-yyyy" mask="true" size="12"  /></div>
 				    <div class="ui-grid-col-1">
 				    <p:selectOneMenu id="country" value="#{viewEditProfileController.employee.country}" style="width:125px">
 			            <f:selectItem itemLabel="APD Office" itemValue="" />
@@ -58,7 +62,7 @@
 			            <f:selectItem itemLabel="New Zealand" itemValue="New Zealand" />
 			        </p:selectOneMenu>
 					</div>
-				    <div class="ui-grid-col-1"><p:inputText value="#{viewEditProfileController.employee.yearsOfWorkExperience}" size="3" style="text-align:right" /></div>
+				    <div class="ui-grid-col-1"><p:inputText value="#{viewEditProfileController.employee.yearsOfWorkExperience}"  placeholder="Years of Work Experience" size="25" style="text-align:right" /></div>
 				</div>
 				
 				<h3 style="margin-top: 0">Skills</h3>
@@ -73,7 +77,7 @@
 				 
 				    <p:column headerText="Years of Experience" width="150">
 				        <p:selectOneMenu id="yearsOfExperience"  style="width:125px" value="#{skill.yearsOfExperience}" >
-				            <f:selectItem itemLabel="Years of Experience" itemValue=""  />
+				            <f:selectItem itemLabel="" itemValue=""  />
 				            <f:selectItem itemLabel="less than a year" itemValue="less than a year" />
 				            <f:selectItem itemLabel="1 - 2 years" itemValue="1 - 2 years" />
 							<f:selectItem itemLabel="2 - 4 years" itemValue="2 - 4 years" />
@@ -84,7 +88,7 @@
 				 
 				    <p:column headerText="Level" width="120">
 					    <p:selectOneMenu id="level"  style="width:125px" value="#{skill.level}">
-				            <f:selectItem itemLabel="Level" itemValue="" />
+				            <f:selectItem itemLabel="" itemValue="" />
 							<f:selectItem itemLabel="Expert" itemValue="Expert" />
 							<f:selectItem itemLabel="Senior" itemValue="Senior" />
 							<f:selectItem itemLabel="Mid Level" itemValue="Mid Level" />
@@ -93,7 +97,7 @@
 				    </p:column>
 				    <p:column headerText="Certified" width="120">
 					    <p:selectOneMenu id="certified" value="#{skill.certified}" style="width:125px">
-				            <f:selectItem itemLabel="Certified" itemValue="" />
+				            <f:selectItem itemLabel="" itemValue="" />
 				            <f:selectItem itemLabel="Yes" itemValue="Yes" />
 				            <f:selectItem itemLabel="No" itemValue="No" />
 		

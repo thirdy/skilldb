@@ -12,12 +12,10 @@ import javax.persistence.TemporalType;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
-@ToString
 public class EmployeeSkill {
 	
 	@Id
@@ -26,7 +24,7 @@ public class EmployeeSkill {
 
 	private String yearsOfExperience;
 	private String level;
-	private boolean certified;
+	private String certified;
 	private String typeOfCertification;
 	
 	@Temporal(TemporalType.DATE)
@@ -44,7 +42,7 @@ public class EmployeeSkill {
 	public EmployeeSkill() {
 	}
 	
-	public EmployeeSkill(String yearsOfExperience, String level, boolean certified) {
+	public EmployeeSkill(String yearsOfExperience, String level, String certified) {
 		this.yearsOfExperience = yearsOfExperience;
 		this.level = level;
 		this.certified = certified;
