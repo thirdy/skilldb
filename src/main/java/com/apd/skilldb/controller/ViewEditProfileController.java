@@ -70,12 +70,8 @@ public class ViewEditProfileController {
 			@SuppressWarnings("unchecked")
 			List<EmployeeSkill> selectedList = (List<EmployeeSkill>) CollectionUtils.select(employee.getSkills(), guidPredicate);
 			
-			System.out.println(">>>>>>>>>>>>>>>>>>> " + selectedList.size());
-			System.out.println(">>>>>>>>>>>>>>>>>>> ID  " + empSkill.getSkill().getId() + " : " + empSkill.getSkill().getSkillName());
 			if(selectedList.size() > 0){
-				System.out.println(">>>>>>>>>>>>>>>>>>> Level 1 " + selectedList.get(0).getSkill().getId());
 				BeanUtils.copyProperties(selectedList.get(0), editSkill);
-				System.out.println(">>>>>>>>>>>>>>>>>>> Level 2 " + editSkill.getYearsOfExperience());
 			}else{
 				BeanUtils.copyProperties(empSkill, editSkill);
 			}

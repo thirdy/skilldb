@@ -1,63 +1,91 @@
-<ui:composition template="WEB-INF/templates/layout.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
-	<ui:define name="content">
-	
-		<h:form>
-		
-<!-- 			<h:panelGrid columns="3" style="margin:10px 0"> -->
-<!-- 		        <p:outputLabel for="template" value="Template:" style="font-weight:bold"/> -->
-<!-- 		        <p:inputText id="template" value="#{dtColumnsView.columnTemplate}" size="50"/> -->
-<!-- 		        <p:commandButton update="cars" actionListener="#{dtColumnsView.updateColumns}" value="Update" process="@parent" icon="ui-icon-refresh" oncomplete="PF('carsTable').clearFilters()"/> -->
-<!-- 		    </h:panelGrid> -->
-		    
-		    <p:dataTable var="empSkill" value="#{homeController.employeeSkills}" style="margin-bottom:40px"  widgetVar="empSkillTable"
-		    	emptyMessage="No employees found with given criteria" filteredValue="#{homeController.filteredEmployeeSkills}">
-		    	
-		    	<f:facet name="header">
-		            <p:outputPanel>
-		                <h:outputText value="Search Profile: "/>
-		                <p:inputText id="globalFilter" onkeyup="PF('empSkillTable').filter()" style="width:350px; margin-left:5px" placeholder="Enter keyword"/>
-		            </p:outputPanel>
-		        </f:facet>
-		        
-				<p:column headerText="Name" sortBy="#{empSkill.employee.firstName}" filterBy="#{empSkill.employee.fullName}">
-		            <h:outputText value="#{empSkill.employee.fullName}" />
-		        </p:column>
-		 
-		        <p:column headerText="Role" sortBy="#{empSkill.employee.role}" filterBy="#{empSkill.employee.role}">
-		            <h:outputText value="#{empSkill.employee.role}" />
-		        </p:column>
-		 
-		        <p:column headerText="Skill" sortBy="#{empSkill.skill.skillName}" filterBy="#{empSkill.skill.skillName}">
-		            <h:outputText value="#{empSkill.skill.skillName}" />
-		        </p:column>
-		 
-		        <p:column headerText="Yrs Of Exp" sortBy="#{empSkill.yearsOfExperience}" filterBy="#{empSkill.yearsOfExperience}">
-		            <h:outputText value="#{empSkill.yearsOfExperience}" />
-		        </p:column>
-		 
-		        <p:column headerText="Level" sortBy="#{empSkill.level}" filterBy="#{empSkill.level}">
-		            <h:outputText value="#{empSkill.level}" />
-		        </p:column>
-		 
-		        <p:column headerText="Certified" sortBy="#{empSkill.certified}" filterBy="#{empSkill.certified}">
-		            <h:outputText value="#{empSkill.certified}" />
-		        </p:column>
-		 
-		        <p:column headerText="APD Office" sortBy="#{empSkill.employee.country}" filterBy="#{empSkill.employee.country}">
-		            <h:outputText value="#{empSkill.employee.country}" />
-		        </p:column>
-		        
-		    </p:dataTable>
-		
-		  
-		</h:form>
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:body>
+    <ui:composition template="WEB-INF/templates/common/commonLayout.xhtml">
+		<ui:define name="content">
+			<p:layoutUnit style="border:0;">		
+			<h:form>
+			   <p:focus />
+			   <div style="margin-left:10px; margin-top:15px; margin-bottom:20px; ">
+			   <p:outputPanel>
+			            <b><h:outputText value="Search Profile: "/></b>
+			            <p:inputText id="globalFilter" onkeyup="PF('empSkillTable').filter()" style="width:350px; margin-left:5px" placeholder="Name or Skills"/>
+			    </p:outputPanel>
+			    </div>
+			    <p:dataTable var="emp" value="#{homeController.employees}" style="margin-bottom:40px"  widgetVar="empSkillTable"
+			    	emptyMessage="No employees found with given criteria" filteredValue="#{homeController.filteredEmployeeSkills}" 
+			    	selectionMode="single"
+			    	selection="#{homeController.selectedEmployee}" rowKey="#{emp.employeeId}"
+			    	 >
+					
+						<p:column headerText="Name" sortBy="#{emp.firstName} #{emp.lastName}" width="300">
+				            <h:outputText value="#{emp.firstName} #{emp.lastName}" />
+				        </p:column>
+				        	<p:column headerText="Role" sortBy="#{emp.role}" width="200">
+				            <h:outputText value="#{emp.role}" />
+				        </p:column>
+				        
+				        <p:column headerText="Skill Category" sortBy="#{emp.skillCategory}" width="200">
+				            <h:outputText value="#{emp.skillCategory}" />
+				        </p:column>
+				        
+				        <p:column headerText="Skill Name" sortBy="#{emp.skillName}" width="250">
+				            <h:outputText value="#{emp.skillName}" />
+				        </p:column>				        
+				 
+				        <p:column headerText="Years of Exp" sortBy="#{emp.yearsOfExperience}" width="150">
+				            <h:outputText value="#{emp.yearsOfExperience}" />
+				        </p:column>
+				 
+				        <p:column headerText="Level" sortBy="#{emp.level}" width="100">
+				            <h:outputText value="#{emp.level}" />
+				        </p:column>
+				 
+				        <p:column headerText="Certified" sortBy="#{emp.certified}" width="95">
+				            <h:outputText value="#{emp.certified}" />
+				        </p:column>  
+				 	    <p:column headerText="APD Office" sortBy="#{emp.country}" width="150">
+				            <h:outputText value="#{emp.country}" />
+				        </p:column>
+				        <p:column style="width:32px;text-align: center">
+				        </p:column>		       
+			    </p:dataTable>
+			  
+			  <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:outputPanel id="employeeDetail" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty dtSelectionView.selectedCar}" columnClasses="label,value">
+                <f:facet name="header">
+                    <p:graphicImage name="demo/images/car/#{dtSelectionView.selectedCar.brand}-big.gif"/> 
+                </f:facet>
+ 
+                <h:outputText value="Id:" />
+                <h:outputText value="#{dtSelectionView.selectedCar.id}" />
+ 
+                <h:outputText value="Year" />
+                <h:outputText value="#{dtSelectionView.selectedCar.year}" />
+ 
+                <h:outputText value="Color:" />
+                <h:outputText value="#{dtSelectionView.selectedCar.color}" style="color:#{dtSelectionView.selectedCar.color}"/>
+ 
+                <h:outputText value="Price" />
+                <h:outputText value="$#{dtSelectionView.selectedCar.price}" />
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+			  
+			</h:form>	
+			</p:layoutUnit>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
 
-	</ui:define>
-</ui:composition>
 
 

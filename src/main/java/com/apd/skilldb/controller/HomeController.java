@@ -1,31 +1,24 @@
 package com.apd.skilldb.controller;
 
 import java.io.Serializable;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-
-import com.apd.skilldb.entity.Check;
-import com.apd.skilldb.entity.Employee;
-import com.apd.skilldb.entity.EmployeeSkill;
-import com.apd.skilldb.repository.EmployeeRepository;
-import com.apd.skilldb.service.CheckService;
-import com.apd.skilldb.service.EmployeeService;
-import com.apd.skilldb.service.EmployeeSkillService;
+import org.primefaces.model.SelectableDataModel;
+import org.springframework.beans.BeanUtils;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import com.apd.skilldb.entity.Employee;
+import com.apd.skilldb.entity.EmployeeSkill;
+import com.apd.skilldb.service.EmployeeService;
+import com.apd.skilldb.util.EmployeeData;
 
 @Getter
 @Setter
@@ -35,22 +28,43 @@ public class HomeController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManagedProperty("#{employeeSkillService}")
-	private EmployeeSkillService employeeSkillService;
-	
-	private List<EmployeeSkill> employeeSkills;
+	@ManagedProperty("#{employeeService}")
+	private EmployeeService employeeService;
+	private EmployeeData selectedEmployee;
+	private List<EmployeeData> employees;
 	private List<EmployeeSkill> filteredEmployeeSkills;
-	
+		
 	private String searchQuery;
 	
 	@PostConstruct
 	public void loadChecks() {
-		employeeSkills = employeeSkillService.findAll();
+		//employees = employeeService.findByNameOrSkill("");
+		employees = new ArrayList<EmployeeData>();
+		
+		List<Employee> tempEmployees = employeeService.findAll();
+		for(Employee emp : tempEmployees){
+			EmployeeData empData = new EmployeeData();
+			BeanUtils.copyProperties(emp, empData);
+			
+			if(emp.getSkills() != null && emp.getSkills().size() > 0){
+				for(EmployeeSkill empSkill : emp.getSkills()){
+					
+					EmployeeData empData2 = new EmployeeData();
+					BeanUtils.copyProperties(emp, empData2);
+					BeanUtils.copyProperties(empSkill, empData2);
+					BeanUtils.copyProperties(empSkill.getSkill(), empData2);
+					employees.add(empData2);
+				}
+			}else{
+				employees.add(empData);
+			}			
+		}
+		
+
 //		employeeService.findAll(new PageRequest(0, 10)).forEach(employeeSkills::add);
 		
 	}
-	
-	
+
 	
 //	public String viewProfile(Check check) {
 //		this.check = check;
@@ -77,4 +91,6 @@ public class HomeController implements Serializable {
 //		FacesContext.getCurrentInstance().addMessage
 //			(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
 //	}
+	
+	
 }

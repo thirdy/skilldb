@@ -1,5 +1,7 @@
 package com.apd.skilldb.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.apd.skilldb.entity.Employee;
 import com.apd.skilldb.entity.EmployeeSkill;
 import com.apd.skilldb.repository.EmployeeRepository;
+import org.apache.commons.collections.IteratorUtils;
 
 @Service
 public class EmployeeService {
@@ -38,12 +41,24 @@ public class EmployeeService {
 		return employeeRepo.findOne(employeeId);
 	}
 	
+	public List<Employee> findByNameOrSkill(String keyword){
+		if(logger.isDebugEnabled()){
+			logger.debug(String.format("Find Employee by keyword %s", keyword));
+		}
+		
+		return null;
+	}
+	
 	public void delete(Employee employee){
 		if(logger.isDebugEnabled()){
 			logger.debug(String.format("Delete Employee Id %s", employee.getEmployeeId()));
 		}
 
 		employeeRepo.delete(employee);
+	}
+	
+	public List<Employee> findAll() {		
+		return employeeRepo.findAll();		
 	}
 	
 }
