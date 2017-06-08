@@ -1,21 +1,17 @@
 package com.apd.skilldb.service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.apd.skilldb.entity.Employee;
 import com.apd.skilldb.entity.EmployeeSkill;
 import com.apd.skilldb.repository.EmployeeRepository;
-import org.apache.commons.collections.IteratorUtils;
 
 @Service
 public class EmployeeService {
@@ -41,12 +37,20 @@ public class EmployeeService {
 		return employeeRepo.findOne(employeeId);
 	}
 	
-	public List<Employee> findByNameOrSkill(String keyword){
+	public List<EmployeeSkill> findByNameOrSkill(String keyword){
 		if(logger.isDebugEnabled()){
 			logger.debug(String.format("Find Employee by keyword %s", keyword));
 		}
 		
-		return null;
+		return employeeRepo.findByNameOrSkill(keyword);
+	}
+	
+	public List<Employee> findByName(String keyword){
+		if(logger.isDebugEnabled()){
+			logger.debug(String.format("Find Employee by keyword %s", keyword));
+		}
+		
+		return employeeRepo.findByName(keyword);
 	}
 	
 	public void delete(Employee employee){

@@ -8,21 +8,23 @@
 	xmlns:p="http://primefaces.org/ui">
     <h:body>
     <ui:composition template="WEB-INF/templates/common/commonLayout.xhtml">
-		<ui:define name="content">
+    	
+		<ui:define name="content" >
+		<h:form id="searchForm">
 			<p:layoutUnit style="border:0;">		
-			<h:form>
-			   <p:focus />
+			   
+			   <p:focus for="filterQuery" />
 			   <div style="margin-left:10px; margin-top:15px; margin-bottom:20px; ">
 			   <p:outputPanel>
 			            <b><h:outputText value="Search Profile: "/></b>
-			            <p:inputText id="globalFilter" onkeyup="PF('empSkillTable').filter()" style="width:350px; margin-left:5px" placeholder="Name or Skills"/>
+			            <p:inputText id="filterQuery" name="filterQuery" onfocus="this.value = this.value;" style="width:350px; margin-left:5px" value="#{homeController.searchQuery}" placeholder="Name or Skills"/>
+			            <p:commandButton style="font-size:85%;width:35px"  icon="ui-icon-search" action="#{homeController.search()}"
+			            update="searchForm, :messages"></p:commandButton>
 			    </p:outputPanel>
 			    </div>
+			    	
 			    <p:dataTable var="emp" value="#{homeController.employees}" style="margin-bottom:40px"  widgetVar="empSkillTable"
-			    	emptyMessage="No employees found with given criteria" filteredValue="#{homeController.filteredEmployeeSkills}" 
-			    	selectionMode="single"
-			    	selection="#{homeController.selectedEmployee}" rowKey="#{emp.employeeId}"
-			    	 >
+			    	emptyMessage="No employees found with given criteria">
 					
 						<p:column headerText="Name" sortBy="#{emp.firstName} #{emp.lastName}" width="300">
 				            <h:outputText value="#{emp.firstName} #{emp.lastName}" />
@@ -54,34 +56,39 @@
 				            <h:outputText value="#{emp.country}" />
 				        </p:column>
 				        <p:column style="width:32px;text-align: center">
+				            <p:commandButton style="font-size:10px;width:35px" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
+				                <f:setPropertyActionListener value="#{car}" target="#{dtSelectionView.selectedCar}" />
+				            </p:commandButton>
 				        </p:column>		       
 			    </p:dataTable>
 			  
 			  <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-        <p:outputPanel id="employeeDetail" style="text-align:center;">
-            <p:panelGrid  columns="2" rendered="#{not empty dtSelectionView.selectedCar}" columnClasses="label,value">
-                <f:facet name="header">
-                    <p:graphicImage name="demo/images/car/#{dtSelectionView.selectedCar.brand}-big.gif"/> 
-                </f:facet>
- 
-                <h:outputText value="Id:" />
-                <h:outputText value="#{dtSelectionView.selectedCar.id}" />
- 
-                <h:outputText value="Year" />
-                <h:outputText value="#{dtSelectionView.selectedCar.year}" />
- 
-                <h:outputText value="Color:" />
-                <h:outputText value="#{dtSelectionView.selectedCar.color}" style="color:#{dtSelectionView.selectedCar.color}"/>
- 
-                <h:outputText value="Price" />
-                <h:outputText value="$#{dtSelectionView.selectedCar.price}" />
-            </p:panelGrid>
-        </p:outputPanel>
-    </p:dialog>
+		        <p:outputPanel id="employeeDetail" style="text-align:center;">
+		            <p:panelGrid  columns="2" rendered="#{not empty dtSelectionView.selectedCar}" columnClasses="label,value">
+		                <f:facet name="header">
+		                    <p:graphicImage name="demo/images/car/#{dtSelectionView.selectedCar.brand}-big.gif"/> 
+		                </f:facet>
+		 
+		                <h:outputText value="Id:" />
+		                <h:outputText value="#{dtSelectionView.selectedCar.id}" />
+		 
+		                <h:outputText value="Year" />
+		                <h:outputText value="#{dtSelectionView.selectedCar.year}" />
+		 
+		                <h:outputText value="Color:" />
+		                <h:outputText value="#{dtSelectionView.selectedCar.color}" style="color:#{dtSelectionView.selectedCar.color}"/>
+		 
+		                <h:outputText value="Price" />
+		                <h:outputText value="$#{dtSelectionView.selectedCar.price}" />
+		            </p:panelGrid>
+		        </p:outputPanel>
+		    </p:dialog>
 			  
-			</h:form>	
+			
 			</p:layoutUnit>
+			</h:form>
 		</ui:define>
+		
 	</ui:composition>
 </h:body>
 </html>

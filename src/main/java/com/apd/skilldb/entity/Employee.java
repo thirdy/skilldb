@@ -8,10 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,40 +21,42 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Employee.findByNameOrSkill", query = "select empSkill from Employee emp, EmployeeSkill empSkill"
+    		 + " where (emp.employeeId = empSkill.employee.employeeId) and "
+    		 + "(emp.firstName like ?1 or emp.lastName like ?1 or empSkill.skill.skillCategory like ?1 or empSkill.skill.skillName like ?1)"),
+
+	@NamedQuery(name = "Employee.findByName", query = "select emp from Employee emp"
+		 + " where (emp.firstName like ?1 or emp.lastName like ?1 )")})
+
 @Getter
 @Setter
 @ToString
 public class Employee {
+	
 
 	@Id
 	private String employeeId;
 
-	//@Size(min = 1, message = "First Name cannot be empty!")
 	@Column
 	private String firstName;
 
-	//@Size(min = 1, message = "last Name cannot be empty!")
 	@Column
 	private String lastName;
 
-	//@Size(min = 1, message = "manager cannot be empty!")
 	@Column
 	private String manager;
 
-	//@Size(min = 1, message = "Date Hired cannot be empty!")
 	@Column
 	@Temporal(TemporalType.DATE)
 	private Date dateHired;
 
-	//@Size(min = 1, message = "Role cannot be empty!")
 	@Column
 	private String role;
 
-	//@Size(min = 1, message = "Years of work experience cannot be empty!")
 	@Column
 	private String yearsOfWorkExperience;	
 
-	//@Size(min = 1, message = "Office Location cannot be empty!")
 	@Column
 	private String country;
 
