@@ -82,6 +82,9 @@ public class HomeController implements Serializable {
 		for(Employee emp : tempEmployees){
 			EmployeeData empData = new EmployeeData();
 			BeanUtils.copyProperties(emp, empData);
+			empData.setSkillCategory("-");
+			empData.setSkillName("-");
+			empData.setYearsOfExperience("-");
 			/*
 			if(emp.getSkills() != null && emp.getSkills().size() > 0){
 				for(EmployeeSkill empSkill : emp.getSkills()){

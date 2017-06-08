@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.apd.skilldb.entity.Employee;
@@ -62,7 +63,7 @@ public class EmployeeService {
 	}
 	
 	public List<Employee> findAll() {		
-		return employeeRepo.findAll();		
+		return employeeRepo.findAll(new Sort(Sort.Direction.ASC, "firstName", "lastName"));		
 	}
 	
 }

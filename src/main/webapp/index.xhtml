@@ -24,7 +24,7 @@
 			    </div>
 			    	
 			    <p:dataTable var="emp" value="#{homeController.employees}" style="margin-bottom:40px"  widgetVar="empSkillTable"
-			    	emptyMessage="No employees found with given criteria">
+			    	emptyMessage="Zero employees found with given criteria" >
 					
 						<p:column headerText="Name" sortBy="#{emp.firstName} #{emp.lastName}" width="300">
 				            <h:outputText value="#{emp.firstName} #{emp.lastName}" />
