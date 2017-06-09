@@ -1,14 +1,9 @@
 package com.apd.skilldb.util;
 
 import java.util.Date;
-import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import org.primefaces.model.SelectableDataModel;
-
-import com.apd.skilldb.service.EmployeeService;
 
 @Getter
 @Setter

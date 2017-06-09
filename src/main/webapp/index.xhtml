@@ -10,14 +10,14 @@
     <ui:composition template="WEB-INF/templates/common/commonLayout.xhtml">
     	
 		<ui:define name="content" >
-		<h:form id="searchForm">
+		<h:form id="searchForm" style="min-height: 600px;">
 			<p:layoutUnit style="border:0;">		
 			   
 			   <p:focus for="filterQuery" />
 			   <div style="margin-left:10px; margin-top:15px; margin-bottom:20px; ">
 			   <p:outputPanel>
 			            <b><h:outputText value="Search Profile: "/></b>
-			            <p:inputText id="filterQuery" name="filterQuery" onfocus="this.value = this.value;" style="width:350px; margin-left:5px" value="#{homeController.searchQuery}" placeholder="Name or Skills"/>
+			            <p:inputText id="filterQuery" name="filterQuery" onfocus="this.value = this.value;" style="width:350px; margin-left:5px" value="#{homeController.searchQuery}" placeholder="Name or Skill"/>
 			            <p:commandButton style="font-size:85%;width:35px"  icon="ui-icon-search" action="#{homeController.search()}"
 			            update="searchForm, :messages"></p:commandButton>
 			    </p:outputPanel>
@@ -56,40 +56,22 @@
 				            <h:outputText value="#{emp.country}" />
 				        </p:column>
 				        <p:column style="width:32px;text-align: center">
-				            <p:commandButton style="font-size:10px;width:35px" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
-				                <f:setPropertyActionListener value="#{car}" target="#{dtSelectionView.selectedCar}" />
+				            <p:commandButton ajax="false" style="font-size:10px;width:35px" icon="ui-icon-search" title="View" onclick="this.form.target='_blank'"
+				             action="#{homeController.viewDetail(emp.employeeId)}">				              
 				            </p:commandButton>
 				        </p:column>		       
-			    </p:dataTable>
-			  
-			  <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-		        <p:outputPanel id="employeeDetail" style="text-align:center;">
-		            <p:panelGrid  columns="2" rendered="#{not empty dtSelectionView.selectedCar}" columnClasses="label,value">
-		                <f:facet name="header">
-		                    <p:graphicImage name="demo/images/car/#{dtSelectionView.selectedCar.brand}-big.gif"/> 
-		                </f:facet>
-		 
-		                <h:outputText value="Id:" />
-		                <h:outputText value="#{dtSelectionView.selectedCar.id}" />
-		 
-		                <h:outputText value="Year" />
-		                <h:outputText value="#{dtSelectionView.selectedCar.year}" />
-		 
-		                <h:outputText value="Color:" />
-		                <h:outputText value="#{dtSelectionView.selectedCar.color}" style="color:#{dtSelectionView.selectedCar.color}"/>
-		 
-		                <h:outputText value="Price" />
-		                <h:outputText value="$#{dtSelectionView.selectedCar.price}" />
-		            </p:panelGrid>
-		        </p:outputPanel>
-		    </p:dialog>
-			  
-			
+			    </p:dataTable>			
 			</p:layoutUnit>
 			</h:form>
 		</ui:define>
 		
 	</ui:composition>
+	
+	<script type="text/javascript">    
+function popupwindow(url, title) {      
+    window.open(url , title, "toolbar=no, scrollbars=yes, resizable=yes, top=170, left=170, width=800, height=600");        
+}    
+</script>
 </h:body>
 </html>
 

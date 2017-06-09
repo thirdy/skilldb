@@ -1,5 +1,7 @@
 package com.apd.skilldb.controller;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +26,7 @@ import com.apd.skilldb.entity.EmployeeSkill;
 import com.apd.skilldb.entity.Skill;
 import com.apd.skilldb.service.EmployeeService;
 import com.apd.skilldb.service.SkillService;
+import com.apd.skilldb.util.ExportUtil;
 
 /**
  * @author alepasana
@@ -87,9 +92,9 @@ public class ViewEditProfileController {
 		return employee;
 	}
 	
-	public String edit(){		
-		
+	public String edit(){			
 		initializeEditSkills();	
+		
 		return "editprofile?faces-redirect=true";
 	}
 			
@@ -109,4 +114,30 @@ public class ViewEditProfileController {
 	}
 	
 	
+	public String export() {
+	    try {
+
+	        String filename = employee.getFirstName() + "-" + employee.getLastName() + "_profile.csv";
+
+	        FacesContext fc = FacesContext.getCurrentInstance();
+	        HttpServletResponse response = (HttpServletResponse) fc.getExternalContext().getResponse();
+
+	        response.reset();
+	        response.setContentType("text/comma-separated-values");
+	        response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
+
+	        OutputStream output = response.getOutputStream();
+	        ExportUtil.exportProfile(employee, output);
+
+	        output.flush();
+	        output.close();
+
+	        fc.responseComplete();
+
+	    } catch (IOException e) {
+	    	e.printStackTrace();
+	    }
+	    
+	    return "";
+	}	
 }

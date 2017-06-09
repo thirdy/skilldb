@@ -33,6 +33,10 @@ public class HomeController implements Serializable {
 
 	@ManagedProperty("#{employeeService}")
 	private EmployeeService employeeService;
+	
+	@ManagedProperty("#{viewEditProfileController}")
+	private ViewEditProfileController viewEditProfileController;
+	
 	private List<EmployeeData> employees;
 
 	private String searchQuery;
@@ -101,6 +105,12 @@ public class HomeController implements Serializable {
 			*/
 			employees.add(empData);
 		}
+	}
+	
+	public String viewDetail(String employeeId) {
+		viewEditProfileController.setEmployeeId(employeeId);
+		
+		return "viewprofile?faces-redirect=true&closable=true";	
 	}
 
 	/*

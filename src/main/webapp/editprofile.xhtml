@@ -29,10 +29,10 @@
 				</div>
 				-->
 			    <div class="ui-grid">
-				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.firstName}" placeholder="First Name" size="30" /></div>
-				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.lastName}" placeholder="Last Name" size="30" /></div>
-				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.email}" placeholder="Email Address" size="30" /></div>
-				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.manager}" placeholder="Manager" size="30" /></div>
+				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.firstName}" placeholder="First Name" size="28" /></div>
+				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.lastName}" placeholder="Last Name" size="28" /></div>
+				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.email}" placeholder="Email Address" size="28" /></div>
+				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.manager}" placeholder="Manager" size="28" /></div>
 				</div>
 				<!--  
 				<div class="ui-grid">
@@ -76,7 +76,7 @@
 				    </p:column>
 				 
 				    <p:column headerText="Years of Experience" width="150">
-				        <p:selectOneMenu id="yearsOfExperience"  style="width:125px" value="#{skill.yearsOfExperience}" >
+				        <p:selectOneMenu id="yearsOfExperience"  style="width:145px" value="#{skill.yearsOfExperience}">
 				            <f:selectItem itemLabel="" itemValue=""  />
 				            <f:selectItem itemLabel="less than a year" itemValue="less than a year" />
 				            <f:selectItem itemLabel="1 - 2 years" itemValue="1 - 2 years" />
@@ -107,7 +107,7 @@
 				        <p:inputText value="#{skill.typeOfCertification}" size="25" />
 				    </p:column>
 				    <p:column headerText="Date of Certification" width="118">
-				        <p:calendar id="certificationDate" value="#{skill.dateOfCertification}" pattern="dd-MM-yyyy" mask="true" size="10"  />
+				        <p:calendar id="certificationDate" value="#{skill.dateOfCertification}" pattern="dd-MM-yyyy" mask="true" size="9"  />
 				    </p:column>
 				    <p:column headerText="Comments">
 				        <p:inputText value="#{skill.comment}"  size="25"  />
