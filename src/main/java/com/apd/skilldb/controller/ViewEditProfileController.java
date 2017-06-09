@@ -87,7 +87,9 @@ public class ViewEditProfileController {
 	}
 	
 	public Employee getEmployee(){
-		employee = employeeService.find(employeeId);
+		if(employee == null || !employee.getEmployeeId().equalsIgnoreCase(employeeId)){
+			employee = employeeService.find(employeeId);
+		}
 				
 		return employee;
 	}

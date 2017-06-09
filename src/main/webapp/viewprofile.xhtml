@@ -135,7 +135,7 @@
 
 				<h3 style="margin-top: 0">Skills</h3>
 				
-				<p:dataTable var="skill" value="#{viewEditProfileController.employee.skills}">
+				<p:dataTable var="skill" value="#{viewEditProfileController.employee.skills}"  widgetVar="empSkillTable">
 				    <p:column headerText="Skill Category" width="230" sortBy="#{skill.skill.skillCategory}">
 				        <h:outputText value="#{skill.skill.skillCategory}" />
 				    </p:column>
@@ -151,7 +151,7 @@
 				    <p:column headerText="Level" width="100" sortBy="#{skill.level}">
 				        <h:outputText value="#{skill.level}" />
 				    </p:column>
-				    <p:column headerText="Certified" width="100" sortBy="#{skill.certified}">
+				    <p:column headerText="Certified" width="100">
 				        <h:outputText value="#{skill.certified}" />
 				    </p:column>
 				    <p:column headerText="Type of Certification">
