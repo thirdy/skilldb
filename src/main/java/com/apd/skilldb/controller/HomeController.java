@@ -114,7 +114,7 @@ public class HomeController implements Serializable {
 	}
 	
 	public String viewDetail(String employeeId) {
-		viewEditProfileController.setEmployeeId(employeeId);
+		viewEditProfileController.setEmployeeId(employeeId, "true");
 		
 		return "viewprofile?faces-redirect=true&closable=true";	
 	}

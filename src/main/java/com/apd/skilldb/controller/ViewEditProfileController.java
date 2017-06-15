@@ -49,6 +49,7 @@ public class ViewEditProfileController {
 	private EmployeeService employeeService;
 	
 	private String employeeId;	
+	private String closable;
 	
 	@PostConstruct
 	public void loadSkills(){
@@ -71,9 +72,9 @@ public class ViewEditProfileController {
 			EmployeeSkill empSkill = allSkills.get(i);
 			editSkill = new EmployeeSkill();
 			
-			Predicate guidPredicate = HibernateUtils.attributePredicateFactory(EmployeeSkill.class, "skill.id", empSkill.getSkill().getId());
+			Predicate predicate = HibernateUtils.attributePredicateFactory(EmployeeSkill.class, "skill.id", empSkill.getSkill().getId());
 			@SuppressWarnings("unchecked")
-			List<EmployeeSkill> selectedList = (List<EmployeeSkill>) CollectionUtils.select(employee.getSkills(), guidPredicate);
+			List<EmployeeSkill> selectedList = (List<EmployeeSkill>) CollectionUtils.select(employee.getSkills(), predicate);
 			
 			if(selectedList.size() > 0){
 				BeanUtils.copyProperties(selectedList.get(0), editSkill);
@@ -96,8 +97,7 @@ public class ViewEditProfileController {
 	
 	public String edit(){			
 		initializeEditSkills();	
-		
-		return "editprofile?faces-redirect=true";
+		return "editprofile?faces-redirect=true&closable=" + closable;
 	}
 			
 	public String save(){		
@@ -112,9 +112,13 @@ public class ViewEditProfileController {
 		employee.setSkills(empSkills);		
 		employeeService.add(employee);		
 		
-		return "viewprofile?faces-redirect=true";
+		return "viewprofile?faces-redirect=true&closable=" + closable;
 	}
 	
+	
+	public String cancelEdit(){				
+		return "viewprofile?faces-redirect=true&closable=" + closable;
+	}
 	
 	public String export() {
 	    try {
@@ -142,4 +146,10 @@ public class ViewEditProfileController {
 	    
 	    return "";
 	}	
+	
+	public void setEmployeeId(String employeeId, String closable){
+		this.employeeId = employeeId;
+		this.closable = closable;
+	}
+	
 }

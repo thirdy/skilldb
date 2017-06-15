@@ -42,12 +42,12 @@ public class HibernateUtils {
                      && clazz.isInstance(o)
                      && value != null) {
                      
-                  if (value.getClass() !=  valueFromObject.getClass()) { // check if not comparing incompatible data types
+                  if (value == null || value.getClass() !=  valueFromObject.getClass()) { // check if not comparing incompatible data types
                      throw new IllegalArgumentException("Attempt to compare incombatible types. argument ["+value.getClass()
                            +"], method result ["+valueFromObject.getClass()+"]");
                   }
                   
-                  if (value.equals(valueFromObject)) { 
+                  if (value != null && value.equals(valueFromObject)) { 
                      same = true;
                   }
                   

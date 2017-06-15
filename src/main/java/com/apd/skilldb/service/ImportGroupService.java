@@ -90,9 +90,10 @@ public class ImportGroupService {
 					String yrsExp = cellVal(sRow, 2);
 					String level = cellVal(sRow, 3);
 					String certified = cellVal(sRow, 4);
+					String type = cellVal(sRow, 5);
 					
 					Skill skill = findSkill(skillName);
-					EmployeeSkill employeeSkill = new EmployeeSkill(yrsExp, level, certified);
+					EmployeeSkill employeeSkill = new EmployeeSkill(yrsExp, level, certified, type);
 					employeeSkill.setSkill(skill);
 					return employeeSkill;
 				})
