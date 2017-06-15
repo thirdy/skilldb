@@ -118,6 +118,14 @@ public class HomeController implements Serializable {
 		
 		return "viewprofile?faces-redirect=true&closable=true";	
 	}
+	
+	public int getSize(){
+		if(employees == null){
+			return 0;
+		}
+		
+		return employees.size();
+	}
 
 	/*
 	 * alternative solution
