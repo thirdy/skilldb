@@ -22,10 +22,10 @@ public class ExportUtil {
 		// skills		
 		if(employee.getSkills() != null){
 			output.write(("\nList of Skills").getBytes());
-			output.write(("\nSkill Category, Skill Name, Years of Experience, Level, Certified, Type of Certification, Date of certification, Comments").getBytes());
+			output.write(("\nSkill Category, Skill Name, Years of Experience, Level, Certified, Type of Certification, Date of certification, Comments\n").getBytes());
 			for(EmployeeSkill empSkill: employee.getSkills()){
-				output.write((empSkill.getSkill().getSkillCategory() + ",").getBytes());
-				output.write((empSkill.getSkill().getSkillName() + ",").getBytes());
+				output.write(("\"" + (empSkill.getSkill() != null ? empSkill.getSkill().getSkillCategory() : "null") + "\",").getBytes());
+				output.write(("\"" + (empSkill.getSkill() != null ? empSkill.getSkill().getSkillName() : "null") + "\",").getBytes());
 				output.write((empSkill.getYearsOfExperience() + ",").getBytes());
 				output.write((empSkill.getLevel() + ",").getBytes());
 				output.write((empSkill.getCertified()+ ",").getBytes());
