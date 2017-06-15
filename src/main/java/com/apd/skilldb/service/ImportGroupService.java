@@ -73,6 +73,7 @@ public class ImportGroupService {
 						logger.error("Failed to find Skill Sheet: " + e.getSheetName());
 					}
 					List<EmployeeSkill> empSkills = parseSkillSheet(skillSheet);
+					empSkills.forEach((v)->{ v.setEmployee(e);});
 					e.setSkills(empSkills);
 				});
 		}
@@ -126,6 +127,7 @@ public class ImportGroupService {
 					e.setEmployeeId(cellVal(r, 0));
 					e.setFirstName(cellVal(r, 2));
 					e.setLastName(cellVal(r, 3));
+					e.setRole(cellVal(r, 4));
 					e.setEmail(cellVal(r, 5));
 //					e.setDateHired(DateUtils.parseDate(cellVal(r, 7), String[] {""}));
 					e.setGender(cellVal(r, 8));
