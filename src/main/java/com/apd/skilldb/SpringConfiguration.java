@@ -30,8 +30,11 @@ public class SpringConfiguration {
 		entityManagerFactory.setDataSource(dataSource);
 		Properties jpaProperties = new Properties();
 		jpaProperties.put("hibernate.hbm2ddl.auto", "create-drop");
-//		jpaProperties.put("hibernate.show_sql", "true");
-		// jpaProperties.put("hibernate.format_sql", "true");
+		jpaProperties.put("hibernate.show_sql", "true");
+		jpaProperties.put("hibernate.format_sql", "true");
+		jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+		jpaProperties.put("hibernate.globally_quoted_identifiers", "true");
+		
 		entityManagerFactory.setJpaProperties(jpaProperties);
 		entityManagerFactory.setPackagesToScan("com.apd.skilldb.entity");
 		entityManagerFactory
@@ -51,10 +54,21 @@ public class SpringConfiguration {
 	@Bean
 	public DataSource dataSource() {
 		HikariDataSource dataSource = new HikariDataSource();
-//		dataSource.setJdbcUrl("jdbc:hsqldb:file:skillsdb");
+		
+		dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/apdskillsdb");
+		dataSource.setUsername("root");
+		dataSource.setPassword("root");  
+		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		/*
+		dataSource.addDataSourceProperty("cachePrepStmts", "true");
+		dataSource.addDataSourceProperty("prepStmtCacheSize", "250");
+		dataSource.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+		*/
+		/*
 		dataSource.setJdbcUrl("jdbc:hsqldb:mem:test");
 		dataSource.setUsername("sa");
 		dataSource.setPassword("");
+		*/
 		return dataSource;
 	}
 
