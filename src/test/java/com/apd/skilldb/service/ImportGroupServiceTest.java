@@ -63,7 +63,7 @@ public class ImportGroupServiceTest {
 		assertEquals("Continuous Integration and Deployment", employeeSkill1.getSkill().getSkillCategory());
 		assertEquals("Mid Level", employeeSkill1.getLevel());
 		assertEquals("2 - 4 years", employeeSkill1.getYearsOfExperience());
-		assertEquals("No", employeeSkill1.getCertified());
+		assertEquals("", employeeSkill1.getCertified());
 	}
 
 	@Test
