@@ -136,7 +136,7 @@
 
 				<h3 style="margin-top: 0">Skills</h3>
 				
-				<p:dataTable var="skill" value="#{viewEditProfileController.employee.skills}"  widgetVar="empSkillTable">
+				<p:dataTable var="skill" value="#{viewEditProfileController.employee.skills}"  widgetVar="empSkillTable" emptyMessage="No skill(s) found">
 				    <p:column headerText="Skill Category" width="230" sortBy="#{skill.skill.skillCategory}">
 				        <h:outputText value="#{skill.skill.skillCategory}" />
 				    </p:column>
