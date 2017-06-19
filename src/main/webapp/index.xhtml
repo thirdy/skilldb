@@ -15,16 +15,62 @@
 			   
 			   <p:focus for="filterQuery" />
 			   <div style="margin-left:10px; margin-top:15px; margin-bottom:20px; ">
+	
 			   <p:outputPanel>
+		            <style>		   
+			   		    /* enable absolute positioning */
+						.inner-addon {
+						  position: relative;
+						}
+						
+						/* style glyph */
+						.inner-addon .glyphicon {
+						  position: absolute;
+						  padding: 10px;
+						  pointer-events: none;
+						}
+						@font-face {
+						  font-family: 'Glyphicons Halflings';
+						  src: url('fonts/glyphicons-halflings-regular.eot');
+						  src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('fonts/glyphicons-halflings-regular.woff') format('woff'), url('fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+						}
+						.glyphicon {
+						  position: relative;
+						  top: 1px;
+						  display: inline-block;
+						  font-family: 'Glyphicons Halflings';
+						  font-style: normal;
+						  font-weight: normal;
+						  line-height: 1;
+						  -webkit-font-smoothing: antialiased;
+						  -moz-osx-font-smoothing: grayscale;
+						}
+						.glyphicon-search:before{content:"\e003";}
+						/* align glyph */
+						.left-addon .glyphicon  { left: 335px;}
+						
+						/* add padding  */
+						.left-addon input  { padding-left:  10px; }
+						.right-addon input { padding-right: 10px; }
+			    </style>
+			    
+			   <table border="0"><tr><td>
 			            <b><h:outputText value="Search Profile: "/></b>
-			            <p:inputText id="filterQuery" name="filterQuery" onfocus="this.value = this.value;" style="width:350px; margin-left:5px" value="#{homeController.searchQuery}" placeholder="Name or Skill"/>
-			            <p:commandButton style="font-size:85%;width:35px"  icon="ui-icon-search" action="#{homeController.search()}"
+			    </td><td>
+			            <div class="inner-addon left-addon">
+			            <i class="glyphicon glyphicon-search"></i>
+			            <p:inputText id="filterQuery" name="filterQuery"  styleClass="form-control" onfocus="this.value = this.value;" style="width:350px; margin-left:5px" value="#{homeController.searchQuery}" placeholder="Name or Skill"/>
+			            </div>
+			            </td>
+			            <td>
+			            <p:commandButton style="font-size:85%;width:35px; visibility:hidden;"  icon="ui-icon-search" action="#{homeController.search()}"
 			            update="searchForm, :messages"></p:commandButton>
+				            </td></tr></table>
 			    </p:outputPanel>
 			    </div>
 			    	
 			    <p:dataTable var="emp" value="#{homeController.employees}" style="margin-bottom:40px"  widgetVar="empSkillTable"
-			    	emptyMessage="Zero employees found with given criteria" >
+			    	emptyMessage="" >
 					
 						<p:column headerText="Name" sortBy="#{emp.firstName} #{emp.lastName}" width="300">
 				            <h:outputText value="#{emp.firstName} #{emp.lastName}" />
@@ -60,7 +106,8 @@
 				             action="#{homeController.viewDetail(emp.employeeId)}">				              
 				            </p:commandButton>
 				        </p:column>		       
-			    </p:dataTable>			
+			    </p:dataTable>	
+			    <h5 style="margin-left:10px">#{homeController.size} record(s) found.</h5>
 			</p:layoutUnit>
 			</h:form>
 		</ui:define>

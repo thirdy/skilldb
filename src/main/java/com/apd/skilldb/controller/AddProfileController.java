@@ -71,7 +71,7 @@ public class AddProfileController{
 		
 		employeeService.add(employee);
 		
-		viewEditProfileController.setEmployeeId(employee.getEmployeeId());
+		viewEditProfileController.setEmployeeId(employee.getEmployeeId(), "false");
 		
 		return "viewprofile?faces-redirect=true";
 	}

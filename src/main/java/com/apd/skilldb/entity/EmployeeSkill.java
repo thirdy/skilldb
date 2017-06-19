@@ -42,9 +42,10 @@ public class EmployeeSkill {
 	public EmployeeSkill() {
 	}
 	
-	public EmployeeSkill(String yearsOfExperience, String level, String certified) {
+	public EmployeeSkill(String yearsOfExperience, String level, String certified, String typeOfCertification) {
 		this.yearsOfExperience = yearsOfExperience;
 		this.level = level;
 		this.certified = certified;
+		this.typeOfCertification = typeOfCertification;
 	}
 }

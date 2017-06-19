@@ -52,9 +52,15 @@ public class HomeController implements Serializable {
 	public String search() {
 		if(!StringUtils.isBlank(searchQuery)){
 			employees = new ArrayList<EmployeeData>();
-
+			String q = null;
+			if(!(searchQuery.trim().startsWith("\"") && searchQuery.trim().endsWith("\""))){
+				q = "%" + searchQuery + "%";
+			}else{
+				q = searchQuery.substring(1).substring(0, searchQuery.length() - 2);
+			}
+					
 			// search employee with empty skills
-			List<Employee> tempEmployees = employeeService.findByName("%" + searchQuery + "%");
+			List<Employee> tempEmployees = employeeService.findByName(q);
 			for(Employee emp: tempEmployees){
 				if(emp.getSkills() == null || emp.getSkills().size() == 0){
 					EmployeeData empData = new EmployeeData();
@@ -65,7 +71,7 @@ public class HomeController implements Serializable {
 			}			
 			
 			// search employees with skills
-			List<EmployeeSkill> tempEmployeeSkills = employeeService.findByNameOrSkill("%" + searchQuery + "%");
+			List<EmployeeSkill> tempEmployeeSkills = employeeService.findByNameOrSkill(q);
 			for(EmployeeSkill empSkill: tempEmployeeSkills){
 				EmployeeData empData = new EmployeeData();
 				BeanUtils.copyProperties(empSkill.getEmployee(), empData);
@@ -108,9 +114,17 @@ public class HomeController implements Serializable {
 	}
 	
 	public String viewDetail(String employeeId) {
-		viewEditProfileController.setEmployeeId(employeeId);
+		viewEditProfileController.setEmployeeId(employeeId, "true");
 		
 		return "viewprofile?faces-redirect=true&closable=true";	
+	}
+	
+	public int getSize(){
+		if(employees == null){
+			return 0;
+		}
+		
+		return employees.size();
 	}
 
 	/*

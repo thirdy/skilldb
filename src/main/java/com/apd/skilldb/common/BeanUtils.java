@@ -102,8 +102,10 @@ public class BeanUtils {
                     	goOn = true;
                     	
                     }else{
-                    	Method method = klass.getDeclaredMethod(methodName, paramTypes);    					
-    					methodResult = method.invoke(bean, args);
+                    	Method method = klass.getDeclaredMethod(methodName, paramTypes);    
+                    	if(bean != null){
+                    		methodResult = method.invoke(bean, args);
+                    	}
     					goOn = false;
                     }
 

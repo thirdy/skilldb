@@ -24,10 +24,10 @@ import lombok.ToString;
 @NamedQueries({
     @NamedQuery(name = "Employee.findByNameOrSkill", query = "select empSkill from Employee emp, EmployeeSkill empSkill"
     		 + " where (emp.employeeId = empSkill.employee.employeeId) and "
-    		 + "(emp.firstName like ?1 or emp.lastName like ?1 or empSkill.skill.skillCategory like ?1 or empSkill.skill.skillName like ?1)"),
+    		 + "(emp.firstName like ?1 or emp.lastName like ?1 or concat(emp.firstName, ' ', emp.lastName) LIKE ?1 or empSkill.skill.skillCategory like ?1 or empSkill.skill.skillName like ?1)"),
 
 	@NamedQuery(name = "Employee.findByName", query = "select emp from Employee emp"
-		 + " where (emp.firstName like ?1 or emp.lastName like ?1 )")})
+		 + " where (emp.firstName like ?1 or emp.lastName like ?1 or concat(emp.firstName, ' ', emp.lastName) LIKE ?1)")})
 
 @Getter
 @Setter
