@@ -74,6 +74,7 @@ public class ImportGroupService {
 					}
 					List<EmployeeSkill> empSkills = parseSkillSheet(skillSheet);
 					e.setSkills(empSkills);
+					empSkills.forEach(es -> es.setEmployee(e));
 				});
 		}
 		return employees;
@@ -126,6 +127,7 @@ public class ImportGroupService {
 					e.setEmployeeId(cellVal(r, 0));
 					e.setFirstName(cellVal(r, 2));
 					e.setLastName(cellVal(r, 3));
+					e.setRole(cellVal(r, 4));
 					e.setEmail(cellVal(r, 5));
 //					e.setDateHired(DateUtils.parseDate(cellVal(r, 7), String[] {""}));
 					e.setGender(cellVal(r, 8));
