@@ -24,14 +24,14 @@ public class ExportUtil {
 			output.write(("\nList of Skills").getBytes());
 			output.write(("\nSkill Category, Skill Name, Years of Experience, Level, Certified, Type of Certification, Date of certification, Comments\n").getBytes());
 			for(EmployeeSkill empSkill: employee.getSkills()){
-				output.write(("\"" + (empSkill.getSkill() != null ? empSkill.getSkill().getSkillCategory() : "null") + "\",").getBytes());
-				output.write(("\"" + (empSkill.getSkill() != null ? empSkill.getSkill().getSkillName() : "null") + "\",").getBytes());
+				output.write(("\"" + (empSkill.getSkill() != null ? empSkill.getSkill().getSkillCategory() : "") + "\",").getBytes());
+				output.write(("\"" + (empSkill.getSkill() != null ? empSkill.getSkill().getSkillName() : "") + "\",").getBytes());
 				output.write((empSkill.getYearsOfExperience() + ",").getBytes());
 				output.write((empSkill.getLevel() + ",").getBytes());
-				output.write((empSkill.getCertified()+ ",").getBytes());
-				output.write((empSkill.getTypeOfCertification()+ ",").getBytes());
-				output.write((empSkill.getDateOfCertification() + ",").getBytes());
-				output.write((empSkill.getComment() + ",").getBytes());
+				output.write(((empSkill.getCertified() != null ? empSkill.getCertified() : "") + ",").getBytes());
+				output.write(((empSkill.getTypeOfCertification() != null ? empSkill.getTypeOfCertification() : "") + ",").getBytes());
+				output.write(((empSkill.getDateOfCertification() != null ? empSkill.getDateOfCertification() : "") + ",").getBytes());
+				output.write(((empSkill.getComment() != null ? empSkill.getComment() : "") + ",").getBytes());
 				output.write(("\n").getBytes());
 			}
 		}

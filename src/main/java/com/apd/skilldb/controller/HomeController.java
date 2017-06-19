@@ -53,16 +53,18 @@ public class HomeController implements Serializable {
 		if(!StringUtils.isBlank(searchQuery)){
 			employees = new ArrayList<EmployeeData>();
 			String q = null;
+			boolean isSpecificQuery = false; 
 			if(!(searchQuery.trim().startsWith("\"") && searchQuery.trim().endsWith("\""))){
 				q = "%" + searchQuery + "%";
 			}else{
 				q = searchQuery.substring(1).substring(0, searchQuery.length() - 2);
+				isSpecificQuery = true;
 			}
 					
 			// search employee with empty skills
 			List<Employee> tempEmployees = employeeService.findByName(q);
 			for(Employee emp: tempEmployees){
-				if(emp.getSkills() == null || emp.getSkills().size() == 0){
+				if(emp.getSkills() == null || emp.getSkills().size() == 0 || (isSpecificQuery)){
 					EmployeeData empData = new EmployeeData();
 					BeanUtils.copyProperties(emp, empData);
 					
@@ -90,26 +92,28 @@ public class HomeController implements Serializable {
 	private void mapToEmployeeData(List<Employee> tempEmployees){
 		employees = new ArrayList<EmployeeData>();
 		for(Employee emp : tempEmployees){
-			EmployeeData empData = new EmployeeData();
-			BeanUtils.copyProperties(emp, empData);
-			empData.setSkillCategory("-");
-			empData.setSkillName("-");
-			empData.setYearsOfExperience("-");
-			/*
-			if(emp.getSkills() != null && emp.getSkills().size() > 0){
-				for(EmployeeSkill empSkill : emp.getSkills()){
-
-					EmployeeData empData2 = new EmployeeData();
-					BeanUtils.copyProperties(emp, empData2);
-					BeanUtils.copyProperties(empSkill, empData2);
-					BeanUtils.copyProperties(empSkill.getSkill(), empData2);
-					employees.add(empData2);
-				}
-			}else{
+			if(emp.getIsActive() == 1){
+				EmployeeData empData = new EmployeeData();
+				BeanUtils.copyProperties(emp, empData);
+				empData.setSkillCategory("-");
+				empData.setSkillName("-");
+				empData.setYearsOfExperience("-");
+				/*
+				if(emp.getSkills() != null && emp.getSkills().size() > 0){
+					for(EmployeeSkill empSkill : emp.getSkills()){
+	
+						EmployeeData empData2 = new EmployeeData();
+						BeanUtils.copyProperties(emp, empData2);
+						BeanUtils.copyProperties(empSkill, empData2);
+						BeanUtils.copyProperties(empSkill.getSkill(), empData2);
+						employees.add(empData2);
+					}
+				}else{
+					employees.add(empData);
+				}	
+					 */
 				employees.add(empData);
-			}	
-			*/
-			employees.add(empData);
+			}
 		}
 	}
 	

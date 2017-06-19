@@ -65,7 +65,7 @@ public class EmployeeServiceTest {
 		  Employee emp = createEmployee();
 		  
 		  employeeService.delete(emp);
-		  String employeeId = employeeService.add(emp);
+		  String employeeId = employeeService.save(emp);
 		  Employee empResult  = employeeService.find(employeeId);
 		  assertEquals(emp.getLastName(), empResult.getLastName());
 		  assertEquals(emp.getSkills().size(), empResult.getSkills().size());

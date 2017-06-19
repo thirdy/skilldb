@@ -23,7 +23,7 @@ import lombok.ToString;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Employee.findByNameOrSkill", query = "select empSkill from Employee emp, EmployeeSkill empSkill"
-    		 + " where (emp.employeeId = empSkill.employee.employeeId) and "
+    		 + " where ((emp.employeeId = empSkill.employee.employeeId) and emp.isActive=1) and"
     		 + "(emp.firstName like ?1 or emp.lastName like ?1 or concat(emp.firstName, ' ', emp.lastName) LIKE ?1 or empSkill.skill.skillCategory like ?1 or empSkill.skill.skillName like ?1)"),
 
 	@NamedQuery(name = "Employee.findByName", query = "select emp from Employee emp"
@@ -68,6 +68,9 @@ public class Employee {
 
 	@Column
 	private String gender;
+	
+	@Column
+	private Integer isActive = 1;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "employee", cascade = CascadeType.ALL)	
 	private List<EmployeeSkill> skills;

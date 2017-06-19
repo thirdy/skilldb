@@ -110,13 +110,27 @@ public class ViewEditProfileController {
 		}
 		
 		employee.setSkills(empSkills);		
-		employeeService.add(employee);		
+		employeeService.save(employee);		
 		
 		return "viewprofile?faces-redirect=true&closable=" + closable;
 	}
 	
 	
 	public String cancelEdit(){				
+		return "viewprofile?faces-redirect=true&closable=" + closable;
+	}
+	
+	public String deactivate(){		
+		employee.setIsActive(0);
+		employeeService.save(employee);
+		
+		return "viewprofile?faces-redirect=true&closable=" + closable;
+	}
+	
+	public String activate(){		
+		employee.setIsActive(1);
+		employeeService.save(employee);
+		
 		return "viewprofile?faces-redirect=true&closable=" + closable;
 	}
 	

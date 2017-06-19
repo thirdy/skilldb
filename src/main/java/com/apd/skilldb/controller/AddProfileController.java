@@ -69,7 +69,7 @@ public class AddProfileController{
 		employee.setSkills(empSkills);		
 		employee.setEmployeeId(getEmployeeId(employee.getEmail()));
 		
-		employeeService.add(employee);
+		employeeService.save(employee);
 		
 		viewEditProfileController.setEmployeeId(employee.getEmployeeId(), "false");
 		

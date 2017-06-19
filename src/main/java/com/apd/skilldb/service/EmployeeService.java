@@ -25,7 +25,7 @@ public class EmployeeService {
 		return employeeRepo.findAll(pageable);
 	}
 	
-	public String add(Employee employee){
+	public String save(Employee employee){
 		Employee emp =  employeeRepo.save(employee);
 		return emp.getEmployeeId();
 	}	

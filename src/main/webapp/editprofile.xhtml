@@ -15,6 +15,8 @@
 				<div class="ui-grid" style="padding-top:5px">
 				    <div class="ui-grid-col-9"><h3 style="margin-top: 0">Edit profile</h3></div>
 				    <div class="ui-grid-col-3" style="text-align:right; padding-right:20px">
+				    <p:commandButton value="Deactivate" action="#{viewEditProfileController.deactivate()}" rendered="#{viewEditProfileController.employee.isActive == 1}" />
+				    <p:commandButton value="Activate" action="#{viewEditProfileController.activate()}" rendered="#{viewEditProfileController.employee.isActive == 0}" />
 				    <p:commandButton value="Save" action="#{viewEditProfileController.save()}" 	update="profileForm, :messages" />
 				    <p:commandButton value="Cancel" action="#{viewEditProfileController.cancelEdit()}" />
 				    </div>
@@ -117,6 +119,8 @@
 				<div class="ui-grid">
 				    <div class="ui-grid-col-9"><h3 style="margin-top: 0">Edit profile</h3></div>
 				    <div class="ui-grid-col-3" style="text-align:right; padding-right:20px">
+				    <p:commandButton value="Deactivate" action="#{viewEditProfileController.deactivate()}" rendered="#{viewEditProfileController.employee.isActive == 1}" />
+				    <p:commandButton value="Activate" action="#{viewEditProfileController.activate()}" rendered="#{viewEditProfileController.employee.isActive == 0}" />
 				    <p:commandButton value="Save" action="#{viewEditProfileController.save()}" 	update="profileForm, :messages" />
 				    <p:commandButton value="Cancel" action="#{viewEditProfileController.cancelEdit()}" />
 				    </div>
