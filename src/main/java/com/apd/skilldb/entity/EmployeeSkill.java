@@ -2,18 +2,26 @@ package com.apd.skilldb.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+
+@NamedQueries({
+	@NamedQuery(name = "EmployeeSkill.delete", query = "delete  from EmployeeSkill empSkill"
+		 + " where empSkill.employee.employeeId = ?1")})
 @Getter
 @Setter
 public class EmployeeSkill {
@@ -31,13 +39,16 @@ public class EmployeeSkill {
 	private Date dateOfCertification;
 	private String comment;	
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "employeeId")
 	private Employee employee;
 	
-	@ManyToOne
+	@ManyToOne//(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "skillId")
 	private Skill skill;
+	
+	@Transient
+	private Boolean isNewSkill; 
 	
 	public EmployeeSkill() {
 	}

@@ -18,13 +18,13 @@
 				    <div class="ui-grid-col-9"><h3 style="margin-top: 0">Add profile</h3></div>
 				    <div class="ui-grid-col-3" style="text-align:right; padding-right:20px">
 				    <p:commandButton value="Save" style="width:90px" action="#{addProfileController.save()}" update="profileForm, :messages" />
-				    <p:commandButton value="Cancel"  onclick="window.location='index.xhtml'" />
+				    <p:commandButton value="Cancel"  onclick="window.location='index.xhtml'" type="button" />
 				    </div>
 				</div>
 			    <div class="ui-grid">
 				    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.firstName}" placeholder="First Name" size="28" /></div>
-				    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.lastName}" placeholder="Last Name" size="28" /></div>
-				    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.email}" placeholder="Email Address" size="28" required="true" id="emailAddress" /></div>
+				    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.lastName}" placeholder="Last Name" size="28" required="true" id="lastName" requiredMessage="Last Name is required" /></div>
+				    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.email}" placeholder="Email Address" size="28" required="true" id="emailAddress" requiredMessage="Email Address is required" /></div>
 				    <div class="ui-grid-col-2"><p:inputText value="#{addProfileController.employee.manager}" placeholder="Manager" size="28" /></div>
 				</div>
 			    <div class="ui-grid" style="margin-top:15px;margin-bottom:25px;">
@@ -50,13 +50,21 @@
 				</div>
 				
 				<h3 style="margin-top: 0">Skills</h3>
-	          	<p:dataTable var="skill" value="#{addProfileController.skills}">
-				    <p:column headerText="Skill Category" width="230">
+	          	<p:dataTable var="skill" value="#{addProfileController.skills}" id="skillsList">
+				    <p:column headerText="Skill Category" width="230" rendered="#{skill.skill.skillCategory != null}">
 				        <h:outputText value="#{skill.skill.skillCategory}" />
 				    </p:column>
+				    
+				    <p:column headerText="Skill Category" width="230" rendered="#{skill.skill.skillCategory == null}">
+				        <h:inputText value="#{skill.skill.skillCategory}" />
+				    </p:column>
 				 
-				    <p:column headerText="Name" width="400">
+				    <p:column headerText="Name" width="400" rendered="#{skill.skill.skillName != null}" >
 				        <h:outputText value="#{skill.skill.skillName}" />
+				    </p:column>
+				    
+				    <p:column headerText="Name" width="400" rendered="#{skill.skill.skillName == null}">
+				        <h:inputText value="#{skill.skill.skillName}" />
 				    </p:column>
 				 
 				    <p:column headerText="Years of Experience" width="150">
@@ -96,12 +104,14 @@
 				        <p:inputText value="#{skill.comment}"  size="25"  />
 				    </p:column>
 				</p:dataTable>	
+				<table align="right" style="margin-bottom: 25px;margin-right: 20px"><tr><td><p:commandButton value="New Skill"  action="#{addProfileController.newSkill()}" update="profileForm, :messages" ajax="false"  /></td></tr>
+				</table>
 				<br />
 				<div class="ui-grid">
 				    <div class="ui-grid-col-9"><h3 style="margin-top: 0">Add profile</h3></div>
 				    <div class="ui-grid-col-3" style="text-align:right; padding-right:20px">
 				    <p:commandButton value="Save" action="#{addProfileController.save()}" update="profileForm, :messages" />
-					<p:commandButton value="Cancel"  onclick="window.location='index.xhtml'" />
+					<p:commandButton value="Cancel"  onclick="window.location='index.xhtml'" type="button"  />
 				    </div>
 				</div>		
 			</h:form>

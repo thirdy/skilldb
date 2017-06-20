@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -41,6 +42,7 @@ public class ViewEditProfileController {
 	private Employee employee;
 	private List<EmployeeSkill> allSkills;
 	private List<EmployeeSkill> skills;
+	private boolean isDeactivatedProfileMessageAdded = false;
 	
 	@ManagedProperty("#{skillService}")
 	private SkillService skillService;
@@ -90,12 +92,23 @@ public class ViewEditProfileController {
 	public Employee getEmployee(){
 		if(employee == null || !employee.getEmployeeId().equalsIgnoreCase(employeeId)){
 			employee = employeeService.find(employeeId);
+		}	
+		
+		if(employee.getIsActive() == 0 && !isDeactivatedProfileMessageAdded){
+			addMessage("This profile has been deactivated and will no longer appear in the search skills page.");
+			isDeactivatedProfileMessageAdded = true;
 		}
-				
+			
 		return employee;
 	}
 	
-	public String edit(){			
+	private void addMessage(String message) {
+		FacesContext.getCurrentInstance().addMessage
+			(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
+	}
+	
+	public String edit(){	
+		loadSkills();
 		initializeEditSkills();	
 		return "editprofile?faces-redirect=true&closable=" + closable;
 	}
@@ -105,12 +118,17 @@ public class ViewEditProfileController {
 		
 		for(EmployeeSkill empSkill : skills){
 			if(StringUtils.isNotBlank(empSkill.getYearsOfExperience()) || StringUtils.isNotBlank(empSkill.getLevel())){
+				
+				if(empSkill.getIsNewSkill() != null &&  empSkill.getIsNewSkill()){
+					Skill newSkill = skillService.save(empSkill.getSkill());
+					empSkill.getSkill().setId(newSkill.getId());
+				}
 				empSkills.add(empSkill);
 			}
 		}
 		
 		employee.setSkills(empSkills);		
-		employeeService.save(employee);		
+		employeeService.save(employee);	
 		
 		return "viewprofile?faces-redirect=true&closable=" + closable;
 	}
@@ -123,7 +141,8 @@ public class ViewEditProfileController {
 	public String deactivate(){		
 		employee.setIsActive(0);
 		employeeService.save(employee);
-		
+		isDeactivatedProfileMessageAdded = false;
+				
 		return "viewprofile?faces-redirect=true&closable=" + closable;
 	}
 	
@@ -164,6 +183,19 @@ public class ViewEditProfileController {
 	public void setEmployeeId(String employeeId, String closable){
 		this.employeeId = employeeId;
 		this.closable = closable;
+	}
+	
+	
+	public String newSkill(){
+		EmployeeSkill empSkill = new EmployeeSkill();
+		empSkill.setEmployee(employee);
+		empSkill.setIsNewSkill(true);
+		
+		Skill skill = new Skill();
+		empSkill.setSkill(skill);
+		skills.add(empSkill);
+
+		return "editprofile?faces-redirect=false&closable=" + closable;
 	}
 	
 }

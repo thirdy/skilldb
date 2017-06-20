@@ -12,6 +12,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.Setter;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -26,9 +28,8 @@ import com.apd.skilldb.entity.Employee;
 import com.apd.skilldb.entity.EmployeeSkill;
 import com.apd.skilldb.entity.Skill;
 import com.apd.skilldb.repository.EmployeeRepository;
+import com.apd.skilldb.repository.EmployeeSkillRepository;
 import com.apd.skilldb.repository.SkillRepository;
-
-import lombok.Setter;
 
 /**
  * Imports from the xlsx file that contains multiple employees.
@@ -44,14 +45,24 @@ public class ImportGroupService {
 	
 	@Autowired
 	private SkillRepository skillRepository;
+	
+	@Autowired
+	private EmployeeSkillRepository employeeSkillRepository;
 
 	public void parseAndSave(InputStream inputStream, String fileName) throws ImportServiceException {
 		try {
 			logger.info("Importing file: " + fileName);
 			List<Employee> employees = parse(inputStream);
-			for (Employee employee : employees) {
-				employeeRepository.save(employee);
-			}
+
+			employees.iterator().forEachRemaining(employee->{
+
+				if(employeeRepository.exists(employee.getEmployeeId())){	
+					Employee emp = employeeRepository.getOne(employee.getEmployeeId());
+					employeeRepository.delete(emp);
+				}
+				
+				employeeRepository.save(employee);					
+			});
 		} catch (IOException e) {
 			throw new ImportServiceException(fileName, e);
 		}
@@ -73,7 +84,7 @@ public class ImportGroupService {
 						logger.error("Failed to find Skill Sheet: " + e.getSheetName());
 					}
 					List<EmployeeSkill> empSkills = parseSkillSheet(skillSheet);
-					//empSkills.forEach((v)->{ v.setEmployee(e);});
+
 					e.setSkills(empSkills);
 					empSkills.forEach(es -> es.setEmployee(e));
 				});
@@ -87,13 +98,14 @@ public class ImportGroupService {
 		List<EmployeeSkill> empSkills = skillRows
 				.stream()
 				.map(sRow -> {
+					String skillCategory = cellVal(sRow, 0);
 					String skillName = cellVal(sRow, 1);
 					String yrsExp = cellVal(sRow, 2);
 					String level = cellVal(sRow, 3);
 					String certified = cellVal(sRow, 4);
 					String type = cellVal(sRow, 5);
 					
-					Skill skill = findSkill(skillName);
+					Skill skill = findOrInsertSkill(skillCategory.trim(), skillName.trim());
 					EmployeeSkill employeeSkill = new EmployeeSkill(yrsExp, level, certified, type);
 					employeeSkill.setSkill(skill);
 					return employeeSkill;
@@ -102,9 +114,13 @@ public class ImportGroupService {
 		return empSkills;
 	}
 
-	private Skill findSkill(String skillName) {
+	private Skill findOrInsertSkill(String skillCategory, String skillName) {
 		List<Skill> skills = skillRepository.findBySkillName(skillName);
-		return skills.size() == 0 ? null : skills.get(0);
+		if(skills.size() == 0){			
+			return skillRepository.save(new Skill(skillCategory, skillName));
+		}
+		
+		return skills.get(0);
 	}
 
 	private List<Row> sheetToRows(Sheet sheet) {
@@ -126,7 +142,7 @@ public class ImportGroupService {
 				.stream()
 				.map(r -> {
 					Employee e = new Employee();
-					e.setEmployeeId(cellVal(r, 0));
+					e.setEmployeeId(cellVal(r, 0).trim());
 					e.setFirstName(cellVal(r, 2));
 					e.setLastName(cellVal(r, 3));
 					e.setRole(cellVal(r, 4));

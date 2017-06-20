@@ -27,6 +27,15 @@ public class SkillService {
 		
 		return skills;	
 	}	
+	
+	public Skill save(Skill skill){
+		List<Skill> skills = skillRepo.findBySkillName(skill.getSkillName().trim());
+
+		if(skills != null && skills.size() > 0)
+			return skills.get(0);
+
+		return skillRepo.save(skill);
+	}
 
 	private Sort sortByCategoryAndNameAsc() {
 		return new Sort(Sort.Direction.ASC, "skillCategory", "skillName");

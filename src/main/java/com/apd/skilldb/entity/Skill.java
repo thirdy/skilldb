@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
@@ -14,6 +16,11 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
+
+@NamedQueries({
+	@NamedQuery(name = "Skill.findBySkillName", query = "select skill from Skill skill"
+		 + " where skill.skillName = ?1")})
+		 
 @Getter
 @Setter
 @ToString
