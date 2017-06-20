@@ -55,12 +55,11 @@ public class ImportGroupService {
 			List<Employee> employees = parse(inputStream);
 
 			employees.iterator().forEachRemaining(employee->{
-
-				if(employeeRepository.exists(employee.getEmployeeId())){	
-					Employee emp = employeeRepository.getOne(employee.getEmployeeId());
-					employeeRepository.delete(emp);
+				Employee existingEmp = employeeRepository.findById(employee.getEmployeeId());
+				if(existingEmp != null){	
+					employeeRepository.delete(existingEmp);
 				}
-				
+
 				employeeRepository.save(employee);					
 			});
 		} catch (IOException e) {
@@ -84,9 +83,9 @@ public class ImportGroupService {
 						logger.error("Failed to find Skill Sheet: " + e.getSheetName());
 					}
 					List<EmployeeSkill> empSkills = parseSkillSheet(skillSheet);
-
-					e.setSkills(empSkills);
 					empSkills.forEach(es -> es.setEmployee(e));
+					e.setSkills(empSkills);
+					
 				});
 		}
 		return employees;
