@@ -1,58 +1,26 @@
 package com.apd.skilldb.service;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.apd.skilldb.entity.Check;
-import com.apd.skilldb.entity.Employee;
 import com.apd.skilldb.entity.Skill;
-import com.apd.skilldb.repository.CheckRepository;
-import com.apd.skilldb.repository.EmployeeRepository;
 import com.apd.skilldb.repository.SkillRepository;
-import com.apd.skilldb.service.ImportGroupService.ImportServiceException;
 
 @Service
 public class InitDbService {
-
-	@Autowired
-	private CheckRepository checkRepository;
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private SkillRepository skillRepository;
 
-	@Autowired
-	private EmployeeRepository employeeRepository;
-	
-	@Autowired
-	private ImportGroupService importGroupService;
-
 	@PostConstruct
 	public void init() {
-		System.out.println("*** INIT DATABASE START ***");
-		{
-			Check check = new Check();
-			check.setName("example");
-			check.setUrl("http://www.example.com");
-			checkRepository.save(check);
-		}
-		{
-			Check check = new Check();
-			check.setName("sitemonitoring");
-			check.setUrl("http://sitemonitoring.sourceforge.net");
-			checkRepository.save(check);
-		}
-		{
-			Check check = new Check();
-			check.setName("javavids");
-			check.setUrl("http://www.javavids.com");
-			checkRepository.save(check);
-		}
+		logger.info("*** INIT DATABASE START ***");
 		
 		skillRepository.save(new Skill("Containers and Microservices", "Docker"));
 		skillRepository.save(new Skill("Containers and Microservices", "Cloud Foundry"));
@@ -151,32 +119,6 @@ public class InitDbService {
 		skillRepository.save(new Skill("Analytics", "Adobe Analytics/Omniture/SiteCatalyst"));
 		skillRepository.save(new Skill("Social App Frameworks", "Facebook, Twitter, LinkedIn, Instagram, Weibo, QQ, and so on"));
 
-//		Skill skill = skillRepository.findBySkillName("W3C").get(0);
-//		System.out.println("SKILLFOUND: " +  skill.getSkillName()  + " " + skill.getId());
-//		
-//		Employee emp = new Employee();
-//		emp.setEmployeeId("abc");
-//		employeeRepository.save(emp);
-//		
-//		System.out.println("--------------------------------------"  + employeeRepository.findAll());
-//
-//		emp = new Employee();
-//		emp.setEmployeeId("abc");
-//		emp.setEmail("asdfasdfasdfsadf");
-//		employeeRepository.save(emp);
-//		
-//		System.out.println("--------------------------------------"  + employeeRepository.findAll());
-		
-		String FILE_NAME = "/APD-Malaysia-Team Skillset.xlsx";
-		InputStream fileStream = this.getClass().getResourceAsStream(FILE_NAME);
-		try {
-			importGroupService.parseAndSave(fileStream, FILE_NAME);
-		} catch (ImportServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		System.out.println("*** INIT DATABASE FINISH ***");
+		logger.info("*** INIT DATABASE FINISH ***");
 	}
 }
