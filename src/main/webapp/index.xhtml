@@ -101,7 +101,7 @@
 				 	    <p:column headerText="APD Office" sortBy="#{emp.country}" width="150">
 				            <h:outputText value="#{emp.country}" />
 				        </p:column>
-				        <p:column style="width:32px;text-align: center">#{emp.employeeId}
+				        <p:column style="width:32px;text-align: center">
 				            <p:commandButton ajax="false" style="font-size:10px;width:35px" icon="ui-icon-search" title="View" onclick="this.form.target='_blank'"
 				             action="#{homeController.viewDetail()}">			
 				             <f:param name="employeeId" value="#{emp.employeeId}" />	              
