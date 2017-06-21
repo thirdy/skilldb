@@ -13,7 +13,7 @@
 		<h:form id="searchForm" style="min-height: 600px;">
 			<p:layoutUnit style="border:0;">		
 			   
-			   <p:focus for="filterQuery" />
+			   <p:focus for="searchQuery" />
 			   <div style="margin-left:10px; margin-top:15px; margin-bottom:20px; ">
 	
 			   <p:outputPanel>
@@ -59,11 +59,11 @@
 			    </td><td>
 			            <div class="inner-addon left-addon">
 			            <i class="glyphicon glyphicon-search"></i>
-			            <p:inputText id="filterQuery" name="filterQuery"  styleClass="form-control" onfocus="this.value = this.value;" style="width:350px; margin-left:5px" value="#{homeController.searchQuery}" placeholder="Name or Skill"/>
+			            <p:inputText id="searchQuery" name="searchQuery"  styleClass="form-control" onfocus="this.value = this.value;" style="width:350px; margin-left:5px" value="#{homeController.searchQuery}" placeholder="Name or Skill"/>
 			            </div>
 			            </td>
 			            <td>
-			            <p:commandButton style="font-size:85%;width:35px; visibility:hidden;"  icon="ui-icon-search" action="#{homeController.search()}"
+			            <p:commandButton style="font-size:85%;width:35px; visibility:hidden;" icon="ui-icon-search" action="#{homeController.search()}"
 			            update="searchForm, :messages"></p:commandButton>
 				            </td></tr></table>
 			    </p:outputPanel>
