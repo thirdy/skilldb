@@ -85,10 +85,8 @@ public class AddProfileController{
 
 			viewEditProfileController.setEmployeeId(employee.getEmployeeId(), "false");
 
-			// reset session data
-			employee = new Employee();
-			loadSkills();
-			
+			// remove bean from session
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("addProfileController");
 			return "viewprofile?faces-redirect=true";
 		}
 
