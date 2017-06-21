@@ -3,13 +3,11 @@ package com.apd.skilldb.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.SessionScoped;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +22,7 @@ import com.apd.skilldb.util.EmployeeData;
 
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 @Getter
 @Setter
 public class HomeController implements Serializable {
@@ -103,9 +101,9 @@ public class HomeController implements Serializable {
 		}
 	}
 	
-	public String viewDetail() {
-		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		String employeeId = params.get("employeeId");
+	public String viewDetail(String employeeId ) {
+		//Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		//String employeeId = params.get("employeeId");
 		
         viewEditProfileController.setEmployeeId(employeeId, "true");		
 		return "viewprofile?faces-redirect=true&closable=true";	

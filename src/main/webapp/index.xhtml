@@ -52,6 +52,14 @@
 						/* add padding  */
 						.left-addon input  { padding-left:  10px; }
 						.right-addon input { padding-right: 10px; }
+						
+						.profileList tbody tr { 
+						    background: white;
+						}
+						
+						.profileList tbody tr:hover { 
+						    background: #E8F5FE; 
+						}
 			    </style>
 			    
 			   <table border="0"><tr><td>
@@ -70,7 +78,7 @@
 			    </div>
 			    	
 			    <p:dataTable var="emp" value="#{homeController.employees}" style="margin-bottom:40px"  widgetVar="empSkillTable"
-			    	emptyMessage="" >
+			    	emptyMessage="" styleClass="profileList" >
 					
 						<p:column headerText="Name" sortBy="#{emp.firstName} #{emp.lastName}" width="300">
 				            <h:outputText value="#{emp.firstName} #{emp.lastName}" />
@@ -103,8 +111,7 @@
 				        </p:column>
 				        <p:column style="width:32px;text-align: center">
 				            <p:commandButton ajax="false" style="font-size:10px;width:35px" icon="ui-icon-search" title="View" onclick="this.form.target='_blank'"
-				             action="#{homeController.viewDetail()}">			
-				             <f:param name="employeeId" value="#{emp.employeeId}" />	              
+				             action="#{homeController.viewDetail(emp.employeeId)}">		             
 				            </p:commandButton>
 				        </p:column>		       
 			    </p:dataTable>	
