@@ -75,6 +75,10 @@ public class Employee {
 	
 	@Column
 	private Integer isActive = 1;
+	
+	@Column
+	@Temporal(TemporalType.DATE)
+	private Date dateModified;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "employee", cascade = CascadeType.ALL)	
 	private List<EmployeeSkill> skills;

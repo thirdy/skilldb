@@ -3,6 +3,7 @@ package com.apd.skilldb.controller;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -127,7 +128,8 @@ public class ViewEditProfileController {
 			}
 		}
 		
-		employee.setSkills(empSkills);		
+		employee.setSkills(empSkills);	
+		employee.setDateModified(new Date());
 		employeeService.save(employee);	
 		
 		return "viewprofile?faces-redirect=true&closable=" + closable;
@@ -140,6 +142,7 @@ public class ViewEditProfileController {
 	
 	public String deactivate(){		
 		employee.setIsActive(0);
+		employee.setDateModified(new Date());
 		employeeService.save(employee);
 		isDeactivatedProfileMessageAdded = false;
 				
@@ -148,6 +151,7 @@ public class ViewEditProfileController {
 	
 	public String activate(){		
 		employee.setIsActive(1);
+		employee.setDateModified(new Date());
 		employeeService.save(employee);
 		
 		return "viewprofile?faces-redirect=true&closable=" + closable;
