@@ -1,0 +1,90 @@
+.ui-widget, .ui-widget .ui-widget {
+    font-size: 90%;
+}
+
+ /* enable absolute positioning */
+.inner-addon {
+  position: relative;
+}
+
+#main-menu-container a{
+	font-weight: bold;
+}
+
+/* style glyph */
+
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  
+}
+.inner-addon .glyphicon.glyphicon-search {
+	cursor: pointer;
+  z-index: 9;
+  top: -3px;
+  pointer-events: auto!important;
+}
+#searchFrom .inner-addon.left-addon input {
+	padding-right: 28px;
+}
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../../resources/fonts/glyphicons-halflings-regular.eot');
+  src: url('../../resources/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../../resources/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../../resources/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../../resources/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../../resources/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.glyphicon-search:before{content:"\e003";}
+/* align glyph */
+.left-addon .glyphicon  { left: 335px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  10px; }
+.right-addon input { padding-right: 10px; }
+
+.profileList tbody tr { 
+    background: white;
+}
+
+.profileList tbody tr:hover { 
+    background: #E8F5FE; 
+}
+
+
+.view-profile {
+	max-width: 60%;
+}		
+.mdl-list__item-sub-title {
+	font-size:12px!important;
+}
+.mdl-list__item--two-line .mdl-list__item-primary-content{
+	max-width:30%;
+	height:auto;
+}
+
+.profile-personal-info{
+	font-family: sans-serif;
+	font-weight: 600;
+	font-size: 16px;
+}
+.profile-personal-info span{
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 18px;
+    color: rgba(0,0,0,.54);
+    display: block;
+    padding: 0;
+}
+
+
+
