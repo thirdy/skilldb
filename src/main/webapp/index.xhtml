@@ -17,63 +17,19 @@
 			   <div style="margin-left:10px; margin-top:15px; margin-bottom:20px; ">
 	
 			   <p:outputPanel>
-		            <style>		   
-			   		    /* enable absolute positioning */
-						.inner-addon {
-						  position: relative;
-						}
-						
-						/* style glyph */
-						.inner-addon .glyphicon {
-						  position: absolute;
-						  padding: 10px;
-						  pointer-events: none;
-						}
-						@font-face {
-						  font-family: 'Glyphicons Halflings';
-						  src: url('fonts/glyphicons-halflings-regular.eot');
-						  src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('fonts/glyphicons-halflings-regular.woff') format('woff'), url('fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
-						}
-						.glyphicon {
-						  position: relative;
-						  top: 1px;
-						  display: inline-block;
-						  font-family: 'Glyphicons Halflings';
-						  font-style: normal;
-						  font-weight: normal;
-						  line-height: 1;
-						  -webkit-font-smoothing: antialiased;
-						  -moz-osx-font-smoothing: grayscale;
-						}
-						.glyphicon-search:before{content:"\e003";}
-						/* align glyph */
-						.left-addon .glyphicon  { left: 335px;}
-						
-						/* add padding  */
-						.left-addon input  { padding-left:  10px; }
-						.right-addon input { padding-right: 10px; }
-						
-						.profileList tbody tr { 
-						    background: white;
-						}
-						
-						.profileList tbody tr:hover { 
-						    background: #E8F5FE; 
-						}
-			    </style>
 			    
 			   <table border="0"><tr><td>
-			            <b><h:outputText value="Search Profile: "/></b>
+			     <b><h:outputText value="Search Profile: "/></b>
 			    </td><td>
 			            <div class="inner-addon left-addon">
-			            <i class="glyphicon glyphicon-search"></i>
-			            <p:inputText id="searchQuery" name="searchQuery"  styleClass="form-control" onfocus="this.value = this.value;" style="width:350px; margin-left:5px" value="#{homeController.searchQuery}" placeholder="Name or Skill"/>
+			            <i class="glyphicon glyphicon-search" onclick="PrimeFaces.ab({s:'searchForm:searchBtn',u:'searchForm messages'});return false;"></i>
+			            <p:inputText id="searchQuery" name="searchQuery"  styleClass="form-control"  onfocus="this.value = this.value;" style="width:350px; margin-left:5px" value="#{homeController.searchQuery}" placeholder="Name or Skill"/>
 			            </div>
 			            </td>
 			            <td>
-			            <p:commandButton style="font-size:85%;width:35px; visibility:hidden;" icon="ui-icon-search" action="#{homeController.search()}"
+			            <p:commandButton style="font-size:85%;width:35px; visibility:hidden;" id="searchBtn" class="searchBtn" icon="ui-icon-search" action="#{homeController.search()}"
 			            update="searchForm, :messages"></p:commandButton>
-				            </td></tr></table>
+				        </td></tr></table>
 			    </p:outputPanel>
 			    </div>
 			    	

@@ -10,10 +10,13 @@
 	    <ui:composition>
 			<p:layoutUnit styleClass="ui-layout-pane" style="margin-bottom:4px">
 				
+				<h:outputStylesheet name="css/default.css" />
+				<h:outputScript name="js/default.js" />
+				
 				<div id="header-container" style="background-color:#000000; vertical-align: top;color:#FFFFFF;height: 70px; padding-left: 10px">
-					<table cellpadding="0" cellspacing="0" border="0" style="margin-left: 10px"><tr><td><img src="images/apd-logo_03.png" /></td><td><h3 style="; vertical-align: middle;margin-left: 10px"> APD Skills DB</h3></td></tr></table>
+					<table cellpadding="0" cellspacing="0" border="0" style="margin-left: 10px"><tr><td><img src="resources/images/apd-logo_03.png" /></td><td><h3 style="; vertical-align: middle;margin-left: 10px"> APD Skills DB</h3></td></tr></table>
 				</div>
-				<div id="menu-container" style="margin-bottom:10px;">
+				<div id="main-menu-container" style="margin-bottom:10px;">
 					<h:form rendered="#{param['closable'] != 'true'}">
 						<p:menubar>
 							<p:menuitem value="Home" url="/index.xhtml" />

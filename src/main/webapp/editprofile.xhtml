@@ -9,6 +9,8 @@
     <h:body>
     	<ui:composition template="WEB-INF/templates/common/commonLayout.xhtml">
     		<ui:define name="content">
+    		
+    		
     		<p:layoutUnit style="border:0;">
 			<h:form id="profileForm">
 				<p:focus />
@@ -21,33 +23,63 @@
 				    <p:commandButton value="Cancel" action="#{viewEditProfileController.cancelEdit()}" />
 				    </div>
 				</div>
-			    <div class="ui-grid">
-				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.firstName}" placeholder="First Name" size="28" /></div>
-				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.lastName}" placeholder="Last Name" size="28" required="true" id="lastName" requiredMessage="Last Name is required" /></div>
-				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.email}" placeholder="Email Address" size="28" required="true" id="emailAddress" requiredMessage="Email Address is required" /></div>
-				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.manager}" placeholder="Manager" size="28" /></div>
-				</div>
-			    <div class="ui-grid" style="margin-top:15px;margin-bottom:25px;">
-			   		<div class="ui-grid-col-1">
-					<p:selectOneMenu id="gender" value="#{viewEditProfileController.employee.gender}" style="width:125px">
+				
+				<table border="0" cellspacing="10" width="70%" class="profile-personal-info">
+				  <tr>
+				  	<td width="25%">
+				    <p:inputText value="#{viewEditProfileController.employee.firstName}" size="28" />
+				    <br />
+				    <span>First Name</span>		  	
+				  	</td >
+				  	<td width="25%">
+				    <p:inputText value="#{viewEditProfileController.employee.lastName}" size="28" required="true" id="lastName" requiredMessage="Last Name is required" />			  	
+				  	<br />
+				  	<span>Last Name</span>
+				  	</td>
+				  	<td width="25%">
+				    <p:inputText value="#{viewEditProfileController.employee.email}" size="28" required="true" id="emailAddress" requiredMessage="Email Address is required" />			  	
+				  	<br />
+				  	<span>Email</span>
+				  	</td>
+				  	<td width="25%">
+				    <p:inputText value="#{viewEditProfileController.employee.manager}" size="28" />	
+				    <br />
+				    <span>Manager</span>	  	
+				  	</td>
+				  </tr>
+				  <tr>
+				  	<td>
+				    <p:selectOneMenu id="gender" value="#{viewEditProfileController.employee.gender}" style="width:125px">
 						<f:selectItem itemLabel="Gender" itemValue="" />
-						<f:selectItem itemLabel="Male" itemValue="Male" />
-						<f:selectItem itemLabel="Female" itemValue="Female" />
+						<f:selectItem itemLabel="Male" itemValue="M" />
+						<f:selectItem itemLabel="Female" itemValue="F" />
 				    </p:selectOneMenu>
-					</div>
-				    <div class="ui-grid-col-2"><p:inputText value="#{viewEditProfileController.employee.role}"  placeholder="Position/Role" size="28"  /></div>
-				    <div class="ui-grid-col-1"><p:calendar id="popup" value="#{viewEditProfileController.employee.dateHired}" placeholder="Date Employed" pattern="dd-MM-yyyy" mask="true" size="12"  /></div>
-				    <div class="ui-grid-col-1">
+				    <br />
+				    <span>Gender</span>
+				  	</td>
+				  	<td>
+				    <p:inputText value="#{viewEditProfileController.employee.role}" size="28" />
+				    <br />	
+				    <span>Role/ Position</span>	  	
+				  	</td>
+				  	<td>
+				    <p:calendar id="popup" value="#{viewEditProfileController.employee.dateHired}"  pattern="dd-MM-yyyy" mask="true" size="12"  />
+				    <span>Date Hired</span>  	
+				  	</td>
+				  	<td>
 				    <p:selectOneMenu id="country" value="#{viewEditProfileController.employee.country}" style="width:125px">
 			            <f:selectItem itemLabel="APD Office" itemValue="" />
 			            <f:selectItem itemLabel="Australia" itemValue="Australia" />
 			            <f:selectItem itemLabel="Philippines" itemValue="Philippines" />
 			            <f:selectItem itemLabel="Malaysia" itemValue="Malaysia" />
 			            <f:selectItem itemLabel="New Zealand" itemValue="New Zealand" />
-			        </p:selectOneMenu>
-					</div>
-				    <div class="ui-grid-col-1"><p:inputText value="#{viewEditProfileController.employee.yearsOfWorkExperience}"  placeholder="Years of Work Experience" size="25" style="text-align:right" /></div>
-				</div>
+			            <f:selectItem itemLabel="China" itemValue="China" />			            
+			        </p:selectOneMenu>		
+				    <br />	
+				    <span>Country</span>  	
+				  	</td>
+				  </tr>
+				 </table>
 				
 				<h3 style="margin-top: 0">Skills</h3>
 	          	<p:dataTable var="skill" value="#{viewEditProfileController.skills}">
@@ -55,8 +87,8 @@
 				        <h:outputText value="#{skill.skill.skillCategory}" />
 				    </p:column>
 				    
-				    <p:column headerText="Skill Category" width="230" rendered="#{skill.skill.skillCategory == null}">
-				        <h:inputText value="#{skill.skill.skillCategory}" />
+					<p:column headerText="Skill Category" width="230" rendered="#{skill.skill.skillCategory == null}">
+				        <h:inputText value="#{skill.skill.skillCategory}" required="true" requiredMessage="Skill Category is required" />
 				    </p:column>
 				 
 				    <p:column headerText="Name" width="400" rendered="#{skill.skill.skillName != null}" >
@@ -64,7 +96,7 @@
 				    </p:column>
 				    
 				    <p:column headerText="Name" width="400" rendered="#{skill.skill.skillName == null}">
-				        <h:inputText value="#{skill.skill.skillName}" />
+				        <h:inputText value="#{skill.skill.skillName}" required="true" requiredMessage="Skill Name is required" />
 				    </p:column>
 				 
 				    <p:column headerText="Years of Experience" width="150">

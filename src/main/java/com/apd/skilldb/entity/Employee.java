@@ -22,8 +22,6 @@ import lombok.ToString;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name = "Employee.findById", query = "select emp from Employee emp"
-			 + " where (emp.employeeId = ?1)"),
     @NamedQuery(name = "Employee.findByNameOrSkill", query = "select empSkill from Employee emp, EmployeeSkill empSkill"
     		 + " where ((emp.employeeId = empSkill.employee.employeeId) and emp.isActive=1) and"
     		 + "(emp.firstName like ?1 or emp.lastName like ?1 or concat(emp.firstName, ' ', emp.lastName) LIKE ?1 or empSkill.skill.skillCategory like ?1 or empSkill.skill.skillName like ?1)"),

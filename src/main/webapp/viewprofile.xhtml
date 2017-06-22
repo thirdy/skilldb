@@ -10,8 +10,10 @@
     <h:body>
     	<ui:composition template="WEB-INF/templates/common/commonLayout.xhtml">
     		<ui:define name="content">
+    		
     		<p:layoutUnit style="border:0;">
 			<h:form id="profileForm" style="min-height: 600px;">
+		
 				<div class="ui-grid" style="padding-top:5px">
 				    <div class="ui-grid-col-9"><h3 style="margin-top: 0;">View profile</h3></div>
 				    <div class="ui-grid-col-3" style="text-align:right; padding-right:20px">
@@ -21,119 +23,94 @@
 											    
 				    <p:commandButton value="Close"  onclick="window.close()" rendered="#{param['closable'] == 'true'}" />
 				    </div>
-				</div>				
-			    <div class="ui-grid">
-				    <div class="ui-grid-col-2">
-				    <b>
+				</div>	
+				 <table border="0" cellspacing="10" width="70%" class="profile-personal-info">
+				  <tr>
+				  	<td width="25%">
 				    <c:choose>
 				    	<c:when test="#{viewEditProfileController.employee.firstName != null and viewEditProfileController.employee.firstName != ''}">
 					    <h:outputText value="#{viewEditProfileController.employee.firstName}" />  
 					    </c:when>
-					    <c:otherwise>-</c:otherwise>
-				    </c:choose>
-					</b>	
-				    
-				    </div>
-				    <div class="ui-grid-col-2">
-				    <b>
+					    <c:otherwise>( )</c:otherwise>
+				    </c:choose>	
+				    <br />
+				    <span>First Name</span>		  	
+				  	</td >
+				  	<td width="25%">
 				    <c:choose>
 				    	<c:when test="#{viewEditProfileController.employee.lastName != null and viewEditProfileController.employee.lastName != ''}">
 					    <h:outputText value="#{viewEditProfileController.employee.lastName}" />  
 					    </c:when>
-					    <c:otherwise>-</c:otherwise>
-				    </c:choose>
-					</b>			    
-				    
-				    </div>
-				    <div class="ui-grid-col-2">
-				    <b>
+					    <c:otherwise>( )</c:otherwise>
+				    </c:choose>				  	
+				  	<br />
+				  	<span>Last Name</span>
+				  	</td>
+				  	<td width="25%">
 				    <c:choose>
 				    	<c:when test="#{viewEditProfileController.employee.email != null and viewEditProfileController.employee.email != ''}">
 					    <h:outputText value="#{viewEditProfileController.employee.email}" />  
 					    </c:when>
-					    <c:otherwise>-</c:otherwise>
-				    </c:choose>
-					</b>
-				    </div>
-				    <div class="ui-grid-col-2">
-			        <b>
+					    <c:otherwise>( )</c:otherwise>
+				    </c:choose>				  	
+				  	<br />
+				  	<span>Email</span>
+				  	</td>
+				  	<td width="25%">
 				    <c:choose>
 				    	<c:when test="#{viewEditProfileController.employee.manager != null and viewEditProfileController.employee.manager != ''}">
 					    <h:outputText value="#{viewEditProfileController.employee.manager}" />  
 					    </c:when>
-					    <c:otherwise>-</c:otherwise>
-				    </c:choose>
-					</b>
-					</div>
-				</div>
-				<div class="ui-grid" style="font-size: 10px; font-style: italic;color: gray;">
-				    <div class="ui-grid-col-2">First Name</div>
-				    <div class="ui-grid-col-2">Last Name</div>
-				    <div class="ui-grid-col-2">Email Address</div>
-				    <div class="ui-grid-col-2">Manager</div>
-				</div>
-
-			    <div class="ui-grid" style="margin-top:10px;">
-			   		<div class="ui-grid-col-1">
-				    <b>
+					    <c:otherwise>( )</c:otherwise>
+				    </c:choose>		
+				    <br />
+				    <span>Manager</span>	  	
+				  	</td>
+				  </tr>
+				  <tr>
+				  	<td>
 				    <c:choose>
 				    	<c:when test="#{viewEditProfileController.employee.gender != null and viewEditProfileController.employee.gender != ''}">
 					    <h:outputText value="#{viewEditProfileController.employee.gender}" />  
 					    </c:when>
-					    <c:otherwise>-</c:otherwise>
+					    <c:otherwise>( )</c:otherwise>
 				    </c:choose>
-					</b>			
-					</div>
-				    <div class="ui-grid-col-2">
-				    <b>
+				    <br />
+				    <span>Gender</span>
+				  	</td>
+				  	<td>
 				    <c:choose>
 				    	<c:when test="#{viewEditProfileController.employee.role != null and viewEditProfileController.employee.role != ''}">
 					    <h:outputText value="#{viewEditProfileController.employee.role}" />  
 					    </c:when>
-					    <c:otherwise>-</c:otherwise>
-				    </c:choose>
-					</b>	    
-				    </div>
-				    <div class="ui-grid-col-1">
-				    <b>
+					    <c:otherwise>( )</c:otherwise>
+				    </c:choose>	
+				    <br />	
+				    <span>Role/ Position</span>	  	
+				  	</td>
+				  	<td>
 				    <c:choose>
 				    	<c:when test="#{viewEditProfileController.employee.dateHired != null and viewEditProfileController.employee.dateHired != ''}">
 					    <h:outputText value="#{viewEditProfileController.employee.dateHired}">
 					    <f:convertDateTime pattern="dd-MM-yyyy" /></h:outputText>				    
 					    </c:when>
-					    <c:otherwise>-</c:otherwise>
+					    <c:otherwise>( )</c:otherwise>
 				    </c:choose>
-				    </b>
-				    </div>
-				    <div class="ui-grid-col-1">
-				    <b>
+				    <br />	
+				    <span>Date Hired</span>  	
+				  	</td>
+				  	<td>
 				    <c:choose>
 				    	<c:when test="#{viewEditProfileController.employee.country  != null and viewEditProfileController.employee.country != ''}">
 					    <h:outputText value="#{viewEditProfileController.employee.country}" />  
 					    </c:when>
-					    <c:otherwise>-</c:otherwise>
-				    </c:choose>
-					</b>
-					</div>
-				    <div class="ui-grid-col-1">
-				    <b>
-				    <c:choose>
-				    	<c:when test="#{viewEditProfileController.employee.yearsOfWorkExperience != null and viewEditProfileController.employee.yearsOfWorkExperience != ''}">
-					    <h:outputText value="#{viewEditProfileController.employee.yearsOfWorkExperience}" />  
-					    </c:when>
-					    <c:otherwise>-</c:otherwise>
-				    </c:choose>
-					</b>
-					</div>
-				</div>
-				<div class="ui-grid" style="font-size: 10px; font-style: italic;margin-bottom:15px;color: gray;">
-					<div class="ui-grid-col-1">Gender</div>
-				    <div class="ui-grid-col-2">Position/Role</div>
-				    <div class="ui-grid-col-1">Date Employed</div>
-				    <div class="ui-grid-col-1">Country</div>
-				    <div class="ui-grid-col-2">Years of working experience</div>
-				</div>
-
+					    <c:otherwise>( )</c:otherwise>
+				    </c:choose>		
+				    <br />	
+				    <span>Country</span>  	
+				  	</td>
+				  </tr>
+				 </table>
 				<h3 style="margin-top: 0">Skills</h3>
 				
 				<p:dataTable var="skill" value="#{viewEditProfileController.employee.skills}"  widgetVar="empSkillTable" emptyMessage="No skill(s) found">

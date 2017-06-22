@@ -2,7 +2,6 @@ package com.apd.skilldb.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -39,11 +38,11 @@ public class EmployeeSkill {
 	private Date dateOfCertification;
 	private String comment;	
 	
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne 
 	@JoinColumn(name = "employeeId")
 	private Employee employee;
 	
-	@ManyToOne//(cascade = {CascadeType.ALL})
+	@ManyToOne
 	@JoinColumn(name = "skillId")
 	private Skill skill;
 	

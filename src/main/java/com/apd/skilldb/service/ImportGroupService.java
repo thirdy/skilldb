@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 import lombok.Setter;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -55,12 +56,13 @@ public class ImportGroupService {
 			List<Employee> employees = parse(inputStream);
 
 			employees.iterator().forEachRemaining(employee->{
-				Employee existingEmp = employeeRepository.findById(employee.getEmployeeId());
+				Employee existingEmp = employeeRepository.findOne(employee.getEmployeeId());
 				if(existingEmp != null){	
-					employeeRepository.delete(existingEmp);
+					employeeRepository.deleteByEmployeeId(existingEmp.getEmployeeId());
 				}
 
-				employeeRepository.save(employee);					
+				employeeRepository.save(employee);	
+
 			});
 		} catch (IOException e) {
 			throw new ImportServiceException(fileName, e);
@@ -142,11 +144,18 @@ public class ImportGroupService {
 				.map(r -> {
 					Employee e = new Employee();
 					e.setEmployeeId(cellVal(r, 0).trim());
+					e.setManager(cellVal(r, 1));
 					e.setFirstName(cellVal(r, 2));
 					e.setLastName(cellVal(r, 3));
 					e.setRole(cellVal(r, 4));
 					e.setEmail(cellVal(r, 5));
-//					e.setDateHired(DateUtils.parseDate(cellVal(r, 7), String[] {""}));
+					
+					try {
+						e.setDateHired(DateUtils.parseDate(cellVal(r, 7), new String[] {"dd/MM/yyyy"}));
+					} catch (Exception e1) {
+						logger.error("Error parsing date ", e1);
+					}
+					
 					e.setGender(cellVal(r, 8));
 					e.setCountry(cellVal(r, 9));
 					e.setDivision(cellVal(r, 10));

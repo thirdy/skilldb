@@ -21,6 +21,10 @@ import com.apd.skilldb.service.EmployeeService;
 import com.apd.skilldb.util.EmployeeData;
 
 
+/**
+ * @author alepasana
+ *
+ */
 @ManagedBean
 @SessionScoped
 @Getter
@@ -102,9 +106,6 @@ public class HomeController implements Serializable {
 	}
 	
 	public String viewDetail(String employeeId ) {
-		//Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		//String employeeId = params.get("employeeId");
-		
         viewEditProfileController.setEmployeeId(employeeId, "true");		
 		return "viewprofile?faces-redirect=true&closable=true";	
 	}
@@ -115,5 +116,12 @@ public class HomeController implements Serializable {
 		}
 		
 		return employees.size();
+	}
+	
+	
+	public List<EmployeeData> getEmployees(){
+		loadDefault();
+		
+		return employees;		
 	}
 }
