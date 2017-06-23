@@ -114,31 +114,31 @@
 				<h3 style="margin-top: 0">Skills</h3>
 				
 				<p:dataTable var="skill" value="#{viewEditProfileController.employee.skills}"  widgetVar="empSkillTable" emptyMessage="No skill(s) found">
-				    <p:column headerText="Skill Category" width="230" sortBy="#{skill.skill.skillCategory}">
+				    <p:column headerText="Skill Category" width="14%" sortBy="#{skill.skill.skillCategory}">
 				        <h:outputText value="#{skill.skill.skillCategory}" />
 				    </p:column>
 				 
-				    <p:column headerText="Skill Name" width="400" sortBy="#{skill.skill.skillName}">
+				    <p:column headerText="Skill Name" width="18%" sortBy="#{skill.skill.skillName}">
 				        <h:outputText value="#{skill.skill.skillName}" />
 				    </p:column>
 				 
-				    <p:column headerText="Years of Experience" width="150" sortBy="#{skill.yearsOfExperience}">
+				    <p:column headerText="Years of Experience" width="10%" sortBy="#{skill.yearsOfExperience}">
 				        <h:outputText value="#{skill.yearsOfExperience}" />
 				    </p:column>
 				 
-				    <p:column headerText="Level" width="100" sortBy="#{skill.level}">
+				    <p:column headerText="Level" width="8%" sortBy="#{skill.level}">
 				        <h:outputText value="#{skill.level}" />
 				    </p:column>
-				    <p:column headerText="Certified" width="100">
+				    <p:column headerText="Certified" width="8%">
 				        <h:outputText value="#{skill.certified}" />
 				    </p:column>
-				    <p:column headerText="Type of Certification">
+				    <p:column headerText="Type of Certification" width="12%">
 				        <h:outputText value="#{skill.typeOfCertification}" />
 				    </p:column>
-				    <p:column headerText="Date of Certification" width="100">
+				    <p:column headerText="Date of Certification" width="8%">
 				        <h:outputText value="#{skill.dateOfCertification}"><f:convertDateTime pattern="dd-MM-yyyy" /></h:outputText>
 				    </p:column>
-				    <p:column headerText="Comments">
+				    <p:column headerText="Comments" width="12%">
 				        <h:outputText value="#{skill.comment}" />
 				    </p:column>
 				</p:dataTable>			

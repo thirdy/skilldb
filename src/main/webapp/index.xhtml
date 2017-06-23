@@ -36,36 +36,36 @@
 			    <p:dataTable var="emp" value="#{homeController.employees}" style="margin-bottom:40px"  widgetVar="empSkillTable"
 			    	emptyMessage="" styleClass="profileList" >
 					
-						<p:column headerText="Name" sortBy="#{emp.firstName} #{emp.lastName}" width="300">
+						<p:column headerText="Name" sortBy="#{emp.firstName} #{emp.lastName}" width="12%">
 				            <h:outputText value="#{emp.firstName} #{emp.lastName}" />
 				        </p:column>
-				        	<p:column headerText="Role" sortBy="#{emp.role}" width="200">
+				        	<p:column headerText="Role" sortBy="#{emp.role}" width="12%">
 				            <h:outputText value="#{emp.role}" />
 				        </p:column>
 				        
-				        <p:column headerText="Skill Category" sortBy="#{emp.skillCategory}" width="200">
+				        <p:column headerText="Skill Category" sortBy="#{emp.skillCategory}" width="14%">
 				            <h:outputText value="#{emp.skillCategory}" />
 				        </p:column>
 				        
-				        <p:column headerText="Skill Name" sortBy="#{emp.skillName}" width="250">
+				        <p:column headerText="Skill Name" sortBy="#{emp.skillName}" width="14%">
 				            <h:outputText value="#{emp.skillName}" />
 				        </p:column>				        
 				 
-				        <p:column headerText="Years of Exp" sortBy="#{emp.yearsOfExperience}" width="150">
+				        <p:column headerText="Years of Exp" sortBy="#{emp.yearsOfExperience}" width="6%">
 				            <h:outputText value="#{emp.yearsOfExperience}" />
 				        </p:column>
 				 
-				        <p:column headerText="Level" sortBy="#{emp.level}" width="100">
+				        <p:column headerText="Level" sortBy="#{emp.level}" width="6%">
 				            <h:outputText value="#{emp.level}" />
 				        </p:column>
 				 
-				        <p:column headerText="Certified" sortBy="#{emp.certified}" width="95">
+				        <p:column headerText="Certified" sortBy="#{emp.certified}" width="5%">
 				            <h:outputText value="#{emp.certified}" />
 				        </p:column>  
-				 	    <p:column headerText="APD Office" sortBy="#{emp.country}" width="150">
+				 	    <p:column headerText="APD Office" sortBy="#{emp.country}" width="5%">
 				            <h:outputText value="#{emp.country}" />
 				        </p:column>
-				        <p:column style="width:32px;text-align: center">
+				        <p:column style="text-align: center" width="2%">
 				            <p:commandButton ajax="false" style="font-size:10px;width:35px" icon="ui-icon-search" title="View" onclick="this.form.target='_blank'"
 				             action="#{homeController.viewDetail(emp.employeeId)}">		             
 				            </p:commandButton>
