@@ -13,8 +13,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 
 import com.apd.skilldb.entity.Employee;
@@ -34,8 +32,6 @@ import com.apd.skilldb.util.EmployeeData;
 public class HomeController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@ManagedProperty("#{employeeService}")
 	private EmployeeService employeeService;
@@ -45,9 +41,6 @@ public class HomeController implements Serializable {
 	
 	private List<EmployeeData> employees;
 	private String searchQuery;
-	
-	private int prevViewId = 0;
-	private int currViewId = 0;
 
 	@PostConstruct
 	public void loadDefault() {
@@ -123,18 +116,5 @@ public class HomeController implements Serializable {
 		}
 		
 		return employees.size();
-	}
-	
-	
-	public List<EmployeeData> getEmployees(){
-		if (prevViewId != currViewId) {
-			loadDefault();
-			currViewId++;
-		}
-		return employees;		
-	}
-	
-	public void pageReady() {
-		prevViewId++;
 	}
 }

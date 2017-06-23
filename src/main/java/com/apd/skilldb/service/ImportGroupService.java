@@ -141,6 +141,7 @@ public class ImportGroupService {
 		
 		List<Employee> employees = rows
 				.stream()
+				.filter(r -> cellVal(r, 12).trim().length() > 0)
 				.map(r -> {
 					Employee e = new Employee();
 					e.setEmployeeId(cellVal(r, 0).trim());

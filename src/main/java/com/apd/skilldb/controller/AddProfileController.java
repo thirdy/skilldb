@@ -14,6 +14,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.validator.EmailValidator;
+import org.apache.commons.validator.Validator;
 
 import com.apd.skilldb.entity.Employee;
 import com.apd.skilldb.entity.EmployeeSkill;
@@ -58,39 +60,46 @@ public class AddProfileController{
 		}
 	}
 		
-	public String save(){	
+	public String save(){			
+		
+		EmailValidator emailValidator = EmailValidator.getInstance();
+		if(emailValidator.isValid(employee.getEmail())){
 
-		Employee existingEmployee = employeeService.find(getEmployeeId(employee.getEmail()));
+			Employee existingEmployee = employeeService.find(getEmployeeId(employee.getEmail()));
 
-		if(existingEmployee == null){
+			if(existingEmployee == null){
 
-			List<EmployeeSkill> empSkills = new ArrayList<EmployeeSkill>();
+				List<EmployeeSkill> empSkills = new ArrayList<EmployeeSkill>();
 
-			for(EmployeeSkill empSkill : skills){
-				if(StringUtils.isNotBlank(empSkill.getYearsOfExperience()) || StringUtils.isNotBlank(empSkill.getLevel())){			
+				for(EmployeeSkill empSkill : skills){
+					if(StringUtils.isNotBlank(empSkill.getYearsOfExperience()) || StringUtils.isNotBlank(empSkill.getLevel())){			
 
-					if(empSkill.getIsNewSkill()){
-						Skill newSkill = skillService.save(empSkill.getSkill());
-						empSkill.getSkill().setId(newSkill.getId());
-					}
-					
-					empSkills.add(empSkill);
-				}			
+						if(empSkill.getIsNewSkill() != null && empSkill.getIsNewSkill()){
+							Skill newSkill = skillService.save(empSkill.getSkill());
+							empSkill.getSkill().setId(newSkill.getId());
+						}
+
+						empSkills.add(empSkill);
+					}			
+				}
+
+				employee.setSkills(empSkills);		
+				employee.setEmployeeId(getEmployeeId(employee.getEmail()));
+
+				employeeService.save(employee);
+
+				viewEditProfileController.setEmployeeId(employee.getEmployeeId(), "false");
+
+				// remove bean from session
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("addProfileController");
+				return "viewprofile?faces-redirect=true";
 			}
 
-			employee.setSkills(empSkills);		
-			employee.setEmployeeId(getEmployeeId(employee.getEmail()));
-
-			employeeService.save(employee);
-
-			viewEditProfileController.setEmployeeId(employee.getEmployeeId(), "false");
-
-			// remove bean from session
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("addProfileController");
-			return "viewprofile?faces-redirect=true";
+			addMessage("Profile associated to this email address '"+ employee.getEmail() +"' is already exist.");
+			
+		}else{
+			addMessage("Invalid email address.");
 		}
-
-		addMessage("Profile associated to this email address '"+ employee.getEmail() +"' is already exist.");
 		
 		return "addprofile?faces-redirect=false";
 	}
