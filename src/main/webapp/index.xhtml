@@ -73,12 +73,18 @@
 			    </p:dataTable>	
 			    <h5 style="margin-left:10px">#{homeController.size} record(s) found.</h5>
 			</p:layoutUnit>
+			<p:remoteCommand name="pageReady" actionListener="#{homeController.pageReady}" />
 			</h:form>
+			<script type="text/javascript">
+				$(document).ready(function(){	
+					pageReady();
+				});
+			</script>
 		</ui:define>
 		
 	</ui:composition>
 	
-	<script type="text/javascript">    
+	<script type="text/javascript">
 function popupwindow(url, title) {      
     window.open(url , title, "toolbar=no, scrollbars=yes, resizable=yes, top=170, left=170, width=800, height=600");        
 }    
