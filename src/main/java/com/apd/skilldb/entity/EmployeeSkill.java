@@ -13,6 +13,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import com.apd.skilldb.util.OverrideSkillSort;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +25,7 @@ import lombok.Setter;
 		 + " where empSkill.employee.employeeId = ?1")})
 @Getter
 @Setter
-public class EmployeeSkill {
+public class EmployeeSkill extends OverrideSkillSort{
 	
 	@Id
 	@GeneratedValue

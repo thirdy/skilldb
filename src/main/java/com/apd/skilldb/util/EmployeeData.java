@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class EmployeeData{
+public class EmployeeData extends OverrideSkillSort{
 
 	private String employeeId;
 	private String firstName;
@@ -22,6 +22,7 @@ public class EmployeeData{
 	private String gender;
 	
 	private String yearsOfExperience;
+
 	private String level;
 	private String certified;
 	private String typeOfCertification;
@@ -29,5 +30,7 @@ public class EmployeeData{
 	private String comment;	
 	
 	private String skillCategory;
-	private String skillName;		
+	private String skillName;	
+	
+
 }

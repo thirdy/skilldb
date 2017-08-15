@@ -27,6 +27,7 @@ public class InitDbService {
 	@PostConstruct
 	public void init() {
 		logger.info("*** INIT DATABASE START ***");
+		
 		try{
 			skillRepository.save(new Skill("Containers and Microservices", "Docker"));
 			skillRepository.save(new Skill("Containers and Microservices", "Cloud Foundry"));

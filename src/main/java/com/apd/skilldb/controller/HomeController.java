@@ -116,5 +116,18 @@ public class HomeController implements Serializable {
 		}
 		
 		return employees.size();
+	}	
+	
+	/*
+	 * Custom sort
+	public MethodExpression getOrdina() {
+	    FacesContext context = FacesContext.getCurrentInstance();
+	    return context.getApplication().getExpressionFactory().createMethodExpression(context.getELContext(), "#{homeController.ordina}", Integer.class, new Class[]{Object.class, Object.class});
 	}
+	
+	public int customSort(Object val1, Object val2) {
+
+        return 0;
+    }
+    */
 }
